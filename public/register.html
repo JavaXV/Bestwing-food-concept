@@ -1,0 +1,259 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <!-- Character encoding -->
+    <meta charset="utf-8">
+
+
+    <!-- Responsive design -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+
+    <!-- Page title -->
+    <title>Register</title>
+
+
+    <!-- Bootstrap 5.3.3 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Main container -->
+    <div class="container py-5">
+
+
+        <!-- Center the registration card -->
+        <div class="row justify-content-center">
+
+
+            <!-- Registration card width -->
+            <div class="col-lg-7">
+
+
+                <!-- Card -->
+                <div class="card p-4 p-md-5">
+
+
+                    <!-- Page heading -->
+                    <h2 class="brand">
+                        Create Account
+                    </h2>
+
+
+                    <!-- Registration fee information -->
+                    <p class="muted">
+
+                        Registration fee:
+                        ₦5,000.
+
+                        Payment can be made by
+                        Paystack or manual bank payment.
+
+                    </p>
+
+
+                    <!-- Message area -->
+                    <div id="msg"></div>
+
+
+                    <!-- Registration form -->
+                    <form id="registerForm">
+
+
+                        <!-- Form row -->
+                        <div class="row g-3">
+
+
+                            <!-- Full name -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Full name
+                                </label>
+
+                                <input
+                                    name="full_name"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Email
+                                </label>
+
+                                <input
+                                    name="email"
+                                    type="email"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- Phone number -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Phone number
+                                </label>
+
+                                <input
+                                    name="phone_number"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- Gender -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Gender
+                                </label>
+
+                                <select
+                                    name="gender"
+                                    class="form-select"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- Referral -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Referral
+                                </label>
+
+                                <input
+                                    name="referral"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+
+                            <!-- Password -->
+                            <div class="col-md-6">
+
+                                <label
+                                    class="form-label"
+                                >
+                                    Password
+                                </label>
+
+                                <input
+                                    name="password"
+                                    type="password"
+                                    minlength="6"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- Register button -->
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 mt-4"
+                        >
+
+                            Register
+
+                        </button>
+
+
+                    </form>
+
+
+                    <!-- Login link -->
+                    <div class="text-center mt-3">
+
+                        Already registered?
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Registration JavaScript -->
+    <script src="js/register.js"></script>
+
+
+</body>
+
+</html>

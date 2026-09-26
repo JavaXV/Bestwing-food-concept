@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Payment Verification
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+<div
+    class="container"
+    style="max-width: 500px; margin-top: 100px;"
+>
+
+    <div class="card shadow border-0">
+
+        <div class="card-body text-center p-5">
+
+            <div id="paymentStatus">
+
+                <div
+                    class="spinner-border text-primary mb-3"
+                ></div>
+
+                <h4>
+                    Verifying Payment...
+                </h4>
+
+                <p class="text-muted">
+                    Please wait while we confirm your payment.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| VERIFY FUNDING PAYMENT
+|--------------------------------------------------------------------------
+|
+| IMPORTANT:
+|
+| This page is opened by Paystack after payment.
+|
+| Therefore DO NOT send JWT Authorization here.
+|
+| The backend identifies the payment using the
+| Paystack reference stored in the payments table.
+|
+|--------------------------------------------------------------------------
+*/
+
+async function verifyPayment() {
+
+    const statusBox =
+        document.getElementById(
+            "paymentStatus"
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | GET PAYSTACK REFERENCE
+    |--------------------------------------------------------------------------
+    */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const reference =
+        params.get("reference") ||
+        params.get("trxref");
+
+
+    console.log(
+        "PAYSTACK REFERENCE:",
+        reference
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK REFERENCE
+    |--------------------------------------------------------------------------
+    */
+
+    if (!reference) {
+
+        statusBox.innerHTML = `
+
+            <div class="text-danger">
+
+                <div
+                    style="font-size:60px;"
+                >
+                    ✕
+                </div>
+
+                <h4>
+                    Payment Reference Missing
+                </h4>
+
+                <p>
+                    We could not find the Paystack
+                    payment reference.
+                </p>
+
+                <a
+                    href="/dashboard.html"
+                    class="btn btn-primary"
+                >
+                    Return to Dashboard
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | VERIFY PAYMENT
+    |--------------------------------------------------------------------------
+    |
+    | NO Authorization header here.
+    |
+    |--------------------------------------------------------------------------
+    */
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/payments/fund/verify/" +
+                encodeURIComponent(
+                    reference
+                ),
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK SERVER RESPONSE TYPE
+        |--------------------------------------------------------------------------
+        */
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if (
+            !contentType.includes(
+                "application/json"
+            )
+        ) {
+
+            const text =
+                await response.text();
+
+
+            console.error(
+                "SERVER RETURNED:",
+                text
+            );
+
+
+            throw new Error(
+                "Payment server returned an invalid response."
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "PAYMENT VERIFICATION RESULT:",
+            result
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PAYMENT SUCCESS
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            response.ok &&
+            result.success
+        ) {
+
+            const amount =
+                Number(
+                    result.amount || 0
+                );
+
+
+            const balance =
+                Number(
+                    result.balance || 0
+                );
+
+
+            const accountno =
+                result.accountno ||
+                "";
+
+
+            statusBox.innerHTML = `
+
+                <div class="text-success">
+
+                    <div
+                        style="
+                            font-size:70px;
+                            font-weight:bold;
+                        "
+                    >
+                        ✓
+                    </div>
+
+                    <h4>
+                        Payment Successful
+                    </h4>
+
+                    <p class="text-muted">
+                        Your virtual account has
+                        been credited successfully.
+                    </p>
+
+
+                    <hr>
+
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            Virtual Account
+                        </small>
+
+                        <h5>
+                            ${accountno}
+                        </h5>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            Amount Added
+                        </small>
+
+                        <h5>
+                            ₦${amount.toLocaleString(
+                                "en-NG",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }
+                            )}
+                        </h5>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            New Account Balance
+                        </small>
+
+                        <h5>
+                            ₦${balance.toLocaleString(
+                                "en-NG",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }
+                            )}
+                        </h5>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            Reference
+                        </small>
+
+                        <div>
+                            <strong>
+                                ${result.reference || reference}
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="/dashboard.html"
+                        class="btn btn-success w-100"
+                    >
+                        Return to Dashboard
+                    </a>
+
+                </div>
+
+            `;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SAVE UPDATED ACCOUNT INFORMATION
+            |--------------------------------------------------------------------------
+            */
+
+            if (accountno) {
+
+                localStorage.setItem(
+                    "lastFundedAccountNo",
+                    accountno
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PAYMENT FAILED
+        |--------------------------------------------------------------------------
+        */
+
+        statusBox.innerHTML = `
+
+            <div class="text-danger">
+
+                <div
+                    style="
+                        font-size:70px;
+                        font-weight:bold;
+                    "
+                >
+                    ✕
+                </div>
+
+                <h4>
+                    Payment Verification Failed
+                </h4>
+
+                <p>
+                    ${
+                        result.message ||
+                        "We could not verify this payment."
+                    }
+                </p>
+
+
+                <p class="small text-muted">
+
+                    Reference:
+                    ${reference}
+
+                </p>
+
+
+                <a
+                    href="/dashboard.html"
+                    class="btn btn-primary"
+                >
+                    Return to Dashboard
+                </a>
+
+            </div>
+
+        `;
+
+
+    } catch (error) {
+
+        console.error(
+            "PAYMENT VERIFICATION ERROR:",
+            error
+        );
+
+
+        statusBox.innerHTML = `
+
+            <div class="text-danger">
+
+                <div
+                    style="
+                        font-size:60px;
+                        font-weight:bold;
+                    "
+                >
+                    ✕
+                </div>
+
+                <h4>
+                    Payment Verification Failed
+                </h4>
+
+                <p>
+                    ${error.message}
+                </p>
+
+                <button
+                    onclick="verifyPayment()"
+                    class="btn btn-primary"
+                >
+                    Try Again
+                </button>
+
+                <a
+                    href="/dashboard.html"
+                    class="btn btn-secondary ms-2"
+                >
+                    Dashboard
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| START VERIFICATION
+|--------------------------------------------------------------------------
+*/
+
+verifyPayment();
+
+</script>
+
+</body>
+
+</html>

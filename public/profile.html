@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bestwing Global - My Profile</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets/logos.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --sidebar: #080D1E;
+            --sidebar-2: #080D1E;
+
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --info: #0891b2;
+
+            --bg: #f4f7fb;
+            --card: #ffffff;
+
+            --text: #182230;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --shadow:
+                0 8px 28px rgba(15, 23, 42, .07);
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 365px;
+            height: 100vh;
+
+            background: var(--sidebar);
+
+            z-index: 1000;
+
+            color: white;
+
+            transition: .3s ease;
+
+            overflow-y: auto;
+        }
+
+
+        .sidebar-logo {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.15);
+        }
+
+
+        .logo-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #fff;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .sidebar-menu {
+
+            padding: 28px 7px;
+        }
+
+
+        .menu-item {
+
+            height: 54px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 28px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            border-radius: 4px;
+
+            margin-bottom: 5px;
+
+            transition: .2s ease;
+        }
+
+
+        .menu-item:hover {
+
+            background:
+                rgba(255,255,255,.12);
+        }
+
+
+        .menu-icon {
+
+            width: 28px;
+
+            font-size: 15px;
+        }
+
+
+        .menu-arrow {
+
+            margin-left: auto;
+
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           MOBILE HEADER
+        ===================================================== */
+
+        .mobile-header {
+
+            display: none;
+
+            height: 60px;
+
+            background: var(--sidebar);
+
+            color: #fff;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 18px;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 1100;
+        }
+
+
+        .mobile-menu-btn {
+
+            border: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 25px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           OVERLAY
+        ===================================================== */
+
+        .sidebar-overlay {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,.5);
+
+            z-index: 900;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+
+            margin-left: 365px;
+
+            min-height: 100vh;
+
+            transition: .3s ease;
+        }
+
+
+        /* =====================================================
+           TABS
+        ===================================================== */
+
+        .profile-tabs {
+
+            height: 75px;
+
+            background: white;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border-bottom:
+                1px solid #bbb;
+
+            box-shadow:
+                0 2px 4px
+                rgba(0,0,0,.12);
+        }
+
+
+        .tab {
+
+            position: relative;
+
+            border: none;
+
+            background: white;
+
+            color: #292929;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .tab:hover {
+
+            background: #fafafa;
+        }
+
+
+        .tab.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 28%;
+            right: 28%;
+
+            bottom: -1px;
+
+            height: 3px;
+
+            background:
+                var(--primary);
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page-container {
+
+            padding:
+                24px
+                36px
+                50px;
+        }
+
+
+        /* =====================================================
+           PAYMENT ALERT
+        ===================================================== */
+
+        .payment-alert {
+
+            background: #f9d7da;
+
+            border:
+                1px solid
+                #f3b7bd;
+
+            min-height: 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 10px 14px;
+
+            color: #8d2029;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+
+            border-radius: 2px;
+        }
+
+
+        .pay-btn {
+
+            border: none;
+
+            background:
+                var(--success);
+
+            color: #fff;
+
+            padding:
+                7px
+                13px;
+
+            border-radius: 3px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-left: 7px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .tab-content {
+
+            display: none;
+
+            animation:
+                fadeIn
+                .25s
+                ease;
+        }
+
+
+        .tab-content.active {
+
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-card {
+
+            width: 100%;
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                220px
+                1fr;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+            gap: 20px;
+        }
+
+
+        .form-label {
+
+            color: #444;
+
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        .form-control,
+        .form-select {
+
+            width: 100%;
+
+            height: 38px;
+
+            border:
+                1px solid
+                #cbd1d8;
+
+            background: #fff;
+
+            padding:
+                8px
+                10px;
+
+            font-size: 13px;
+
+            color: #3d4248;
+
+            border-radius: 2px;
+
+            outline: none;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0
+                2px
+                rgba(37,99,235,.08);
+        }
+
+
+        .short-input {
+
+            max-width: 220px;
+        }
+
+
+        .phone-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            border:
+                1px solid
+                #cbd1d8;
+
+            background: #fff;
+
+            height: 38px;
+
+            border-radius: 2px;
+
+            overflow: hidden;
+        }
+
+
+        .phone-country {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 0 10px;
+
+            border-right:
+                1px solid #ddd;
+
+            height: 100%;
+
+            color: #444;
+
+            font-size: 12px;
+        }
+
+
+        .ng-flag {
+
+            width: 14px;
+            height: 12px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    #008751 0 33%,
+                    white 33% 66%,
+                    #008751 66%
+                );
+        }
+
+
+        .phone-input {
+
+            border: none;
+
+            outline: none;
+
+            flex: 1;
+
+            height: 100%;
+
+            padding:
+                0
+                10px;
+
+            font-size: 13px;
+        }
+
+
+        .form-button-row {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 28px;
+        }
+
+
+        .primary-btn {
+
+            background:
+                var(--primary);
+
+            color: white;
+
+            border: none;
+
+            padding:
+                12px
+                20px;
+
+            border-radius: 3px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+
+        .primary-btn:hover {
+
+            background:
+                var(--primary-dark);
+        }
+
+
+        /* =====================================================
+           ACCOUNT TABLE
+        ===================================================== */
+
+        .table-toolbar {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin: 18px 0;
+
+            gap: 20px;
+        }
+
+
+        .entries-control {
+
+            font-size: 12px;
+
+            color: #555;
+        }
+
+
+        .entries-control select {
+
+            width: 55px;
+
+            height: 30px;
+
+            border:
+                1px solid
+                #cbd1d8;
+
+            margin:
+                0
+                5px;
+
+            font-size: 12px;
+        }
+
+
+        .search-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            font-size: 12px;
+        }
+
+
+        .search-input {
+
+            width: 200px;
+
+            height: 30px;
+
+            border:
+                1px solid
+                #cbd1d8;
+
+            padding:
+                5px
+                8px;
+
+            outline: none;
+        }
+
+
+        .add-account-wrapper {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-bottom: -5px;
+        }
+
+
+        .add-account {
+
+            background:
+                var(--primary);
+
+            color: white;
+
+            border: none;
+
+            padding:
+                8px
+                13px;
+
+            border-radius: 3px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+
+        .table-card {
+
+            background: #fff;
+
+            overflow-x: auto;
+
+            border-radius: 4px;
+        }
+
+
+        .accounts-table {
+
+            width: 100%;
+
+            min-width: 1200px;
+
+            border-collapse: collapse;
+
+            font-size: 11px;
+        }
+
+
+        .accounts-table th {
+
+            background: #fff;
+
+            color: #222;
+
+            text-align: left;
+
+            font-weight: 700;
+
+            padding:
+                14px
+                9px;
+
+            border-bottom:
+                1px solid #eee;
+
+            white-space: nowrap;
+        }
+
+
+        .accounts-table td {
+
+            padding:
+                14px
+                9px;
+
+            border-bottom:
+                1px solid #f0f0f0;
+
+            white-space: nowrap;
+
+            color: #555;
+        }
+
+
+        .accounts-table tbody tr:nth-child(odd) {
+
+            background:
+                #f8fafc;
+        }
+
+
+        .account-type {
+
+            color:
+                #009de0;
+
+            font-weight: 600;
+        }
+
+
+        .balance {
+
+            color:
+                var(--success);
+
+            font-weight: 700;
+        }
+
+
+        .status-active {
+
+            color:
+                var(--success);
+
+            font-weight: 700;
+        }
+
+
+        .status-inactive {
+
+            color:
+                var(--danger);
+
+            font-weight: 700;
+        }
+
+
+        .action-buttons {
+
+            display: flex;
+
+            gap: 4px;
+        }
+
+
+        .small-btn {
+
+            border: none;
+
+            color: white;
+
+            padding:
+                5px
+                7px;
+
+            font-size: 9px;
+
+            border-radius: 2px;
+
+            cursor: pointer;
+        }
+
+
+        .btn-green {
+
+            background:
+                #198754;
+        }
+
+
+        .btn-gray {
+
+            background:
+                #6c757d;
+        }
+
+
+        .btn-red {
+
+            background:
+                #dc3545;
+        }
+
+
+        .table-footer {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 10px;
+
+            color: #666;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           NEXT OF KIN
+        ===================================================== */
+
+        .kin-section {
+
+            max-width: 1000px;
+        }
+
+
+        .section-title {
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            margin-bottom: 22px;
+
+            color: #333;
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #222;
+
+            color: white;
+
+            padding:
+                13px
+                18px;
+
+            border-radius: 4px;
+
+            font-size: 13px;
+
+            opacity: 0;
+
+            transform:
+                translateY(20px);
+
+            pointer-events: none;
+
+            transition: .3s ease;
+
+            z-index: 3000;
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+
+                width: 280px;
+            }
+
+
+            .main {
+
+                margin-left: 280px;
+            }
+
+
+            .form-row {
+
+                grid-template-columns:
+                    160px
+                    1fr;
+            }
+
+
+            .page-container {
+
+                padding: 20px;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            body {
+
+                background: #fff;
+            }
+
+
+            .mobile-header {
+
+                display: flex;
+            }
+
+
+            .sidebar {
+
+                width: 280px;
+
+                transform:
+                    translateX(-100%);
+
+                top: 0;
+
+                padding-top: 60px;
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .sidebar-overlay.show {
+
+                display: block;
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                padding-top: 60px;
+            }
+
+
+            .profile-tabs {
+
+                height: auto;
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .tab {
+
+                min-height: 55px;
+
+                border-bottom:
+                    1px solid #eee;
+            }
+
+
+            .page-container {
+
+                padding: 15px;
+            }
+
+
+            .payment-alert {
+
+                align-items:
+                    flex-start;
+
+                flex-wrap: wrap;
+
+                line-height: 1.5;
+            }
+
+
+            .form-row {
+
+                display: block;
+
+                margin-bottom: 18px;
+            }
+
+
+            .form-label {
+
+                display: block;
+
+                margin-bottom: 7px;
+            }
+
+
+            .short-input {
+
+                max-width: none;
+            }
+
+
+            .form-button-row {
+
+                justify-content:
+                    stretch;
+            }
+
+
+            .primary-btn {
+
+                width: 100%;
+            }
+
+
+            .table-toolbar {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+
+            .search-wrapper {
+
+                justify-content:
+                    space-between;
+            }
+
+
+            .search-input {
+
+                width: 100%;
+            }
+
+
+            .add-account {
+
+                width: 100%;
+
+                padding: 11px;
+            }
+
+
+            .table-footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+                gap: 12px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            .sidebar {
+
+                width: 85%;
+            }
+
+
+            .page-container {
+
+                padding: 12px;
+            }
+
+
+            .payment-alert {
+
+                font-size: 11px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MOBILE HEADER
+===================================================== -->
+
+<header class="mobile-header">
+
+    <div class="logo-wrapper">
+
+        <img
+            src="assets/log.png"
+            height="45"
+            width="45"
+        >
+
+        BESTWING GLOBAL SERVICE
+
+    </div>
+
+
+    <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+    >
+
+        <i class="bi bi-list"></i>
+
+    </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     SIDEBAR OVERLAY
+===================================================== -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-logo">
+
+        <div class="logo-wrapper">
+
+            <img
+                src="assets/log.png"
+                height="60"
+                width="60"
+            >
+
+            BESTWING GLOBAL SERVICE
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a
+            href="dashboard.html"
+            class="menu-item"
+        >
+
+            <i class="bi bi-grid menu-icon"></i>
+
+            <span>Dashboard</span>
+
+            <i class="bi bi-chevron-right menu-arrow"></i>
+
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         PROFILE TABS
+    ================================================== -->
+
+    <div class="profile-tabs">
+
+        <button
+            class="tab active"
+            data-tab="personal"
+        >
+
+            Personal Information
+
+        </button>
+
+
+        <button
+            class="tab"
+            data-tab="accounts"
+        >
+
+            List Of Accounts
+
+        </button>
+
+
+        <button
+            class="tab"
+            data-tab="nextofkin"
+        >
+
+            Next Of Kin Information
+
+        </button>
+
+    </div>
+
+
+
+    <div class="page-container">
+
+
+        <!-- =================================================
+             PAYMENT NOTICE
+        ================================================== -->
+<!-- 
+        <div
+            class="payment-alert"
+            id="paymentAlert"
+        >
+
+            <strong>N.B:</strong>
+
+            <span>
+                Your account information is loaded from your
+                Bestwing profile.
+            </span>
+
+            <button
+                class="pay-btn"
+                onclick="payNow()"
+            >
+
+                Pay Now
+
+            </button>
+
+        </div>
+
+ -->
+
+        <!-- =================================================
+             PERSONAL INFORMATION
+        ================================================== -->
+
+        <section
+            class="tab-content active"
+            id="personal"
+        >
+
+            <form
+                class="form-card"
+                id="personalForm"
+            >
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Full Name:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        class="form-control"
+                    >
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Email:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                    >
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Phone Number:
+                    </label>
+
+                    <div class="phone-wrapper">
+
+                        <div class="phone-country">
+
+                            <span class="ng-flag"></span>
+
+                            <span>+234</span>
+
+                        </div>
+
+                        <input
+                            type="tel"
+                            id="phoneNumber"
+                            class="phone-input"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Address:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="address"
+                        class="form-control"
+                    >
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Gender:
+                    </label>
+
+                    <select
+                        id="gender"
+                        class="form-select short-input"
+                    >
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        NIN:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nin"
+                        class="form-control"
+                        disabled
+                    >
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        BVN:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bvn"
+                        class="form-control"
+                        disabled
+                    >
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <label class="form-label">
+                        Referral ID:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="referral"
+                        class="form-control"
+                        disabled
+                    >
+
+                </div>
+
+
+
+                <div class="form-button-row">
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+
+                        Save &amp; Continue
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LIST OF ACCOUNTS
+        ================================================== -->
+
+        <section
+            class="tab-content"
+            id="accounts"
+        >
+
+
+            <!-- <div class="add-account-wrapper">
+
+                <button
+                    class="add-account"
+                    onclick="addAccount()"
+                >
+
+                    <i class="bi bi-plus"></i>
+
+                    Add Account
+
+                </button>
+
+            </div>
+
+ -->
+
+            <div class="table-toolbar">
+
+
+                <div class="entries-control">
+
+                    Show
+
+                    <select id="entriesSelect">
+
+                        <option value="10">
+                            10
+                        </option>
+
+                        <option value="25">
+                            25
+                        </option>
+
+                        <option value="50">
+                            50
+                        </option>
+
+                    </select>
+
+                    entries
+
+                </div>
+
+
+
+                <div class="search-wrapper">
+
+                    <label for="accountSearch">
+                        Search:
+                    </label>
+
+                    <input
+                        type="search"
+                        id="accountSearch"
+                        class="search-input"
+                        placeholder="Search account..."
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-card">
+
+                <table class="accounts-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>S/N</th>
+
+                            <th>Account ID</th>
+
+                            <th>Account Name</th>
+
+                            <th>Account Type</th>
+
+                            <th>Balance</th>
+
+                            <th>Status</th>
+
+                            <th>Thrift Week Paid</th>
+
+                            <th>Total Thrift Paid</th>
+
+                            <th>Default Weeks</th>
+
+                            <th>Created On</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="accountTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="11"
+                                style="text-align:center;padding:30px;"
+                            >
+
+                                Loading accounts...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+
+                <div class="table-footer">
+
+                    <span id="tableInfo">
+                        Loading...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NEXT OF KIN
+        ================================================== -->
+
+        <section
+            class="tab-content"
+            id="nextofkin"
+        >
+
+            <div class="kin-section">
+
+
+                <form id="kinForm">
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Full Name:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="kinFullName"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Phone Number:
+                        </label>
+
+                        <div class="phone-wrapper">
+
+                            <div class="phone-country">
+
+                                <span class="ng-flag"></span>
+
+                                <span>+234</span>
+
+                            </div>
+
+                            <input
+                                type="tel"
+                                id="kinPhone"
+                                class="phone-input"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Address:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="kinAddress"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Occupation:
+                        </label>
+
+                        <input
+                            type="text"
+                            id="kinOccupation"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Date of Birth:
+                        </label>
+
+                        <input
+                            type="date"
+                            id="kinDob"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+                        <label class="form-label">
+                            Gender:
+                        </label>
+
+                        <select
+                            id="kinGender"
+                            class="form-select short-input"
+                        >
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-button-row">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+
+                            Update &amp; Continue
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_BASE = "/api";
+
+
+/* =========================================================
+   GET TOKEN
+========================================================= */
+
+function getToken() {
+
+    return (
+        localStorage.getItem("token") ||
+        localStorage.getItem("jwt") ||
+        localStorage.getItem("authToken") ||
+        sessionStorage.getItem("token") ||
+        sessionStorage.getItem("jwt") ||
+        null
+    );
+}
+
+
+/* =========================================================
+   AUTH HEADERS
+========================================================= */
+
+function authHeaders() {
+
+    const token = getToken();
+
+    return {
+
+        "Content-Type":
+            "application/json",
+
+        "Authorization":
+            token
+                ? `Bearer ${token}`
+                : ""
+    };
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+}
+
+
+/* =========================================================
+   TAB NAVIGATION
+========================================================= */
+
+const tabs =
+    document.querySelectorAll(".tab");
+
+const tabContents =
+    document.querySelectorAll(".tab-content");
+
+
+tabs.forEach(tab => {
+
+    tab.addEventListener(
+        "click",
+        function () {
+
+            const target =
+                this.dataset.tab;
+
+
+            tabs.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+            tabContents.forEach(content => {
+
+                content.classList.remove("active");
+
+            });
+
+
+            this.classList.add("active");
+
+
+            document
+                .getElementById(target)
+                .classList.add("active");
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+const mobileMenuBtn =
+    document.getElementById(
+        "mobileMenuBtn"
+    );
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+const sidebarOverlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+mobileMenuBtn.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.toggle("open");
+
+        sidebarOverlay.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+sidebarOverlay.addEventListener(
+    "click",
+    () => {
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+        sidebarOverlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
+
+async function loadProfile() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE}/user/profile`,
+                {
+                    method: "GET",
+                    headers: authHeaders()
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load profile."
+            );
+        }
+
+
+        const user =
+            data.user || {};
+
+        const kin =
+            data.next_of_kin || {};
+
+
+        /* =================================================
+           PERSONAL INFORMATION
+        ================================================= */
+
+        document.getElementById(
+            "fullName"
+        ).value =
+            user.full_name || "";
+
+
+        document.getElementById(
+            "email"
+        ).value =
+            user.email || "";
+
+
+        document.getElementById(
+            "phoneNumber"
+        ).value =
+            user.phone_number || "";
+
+
+        document.getElementById(
+            "address"
+        ).value =
+            user.address || "";
+
+
+        document.getElementById(
+            "gender"
+        ).value =
+            user.gender || "";
+
+
+        document.getElementById(
+            "nin"
+        ).value =
+            user.nin || "";
+
+
+        document.getElementById(
+            "bvn"
+        ).value =
+            user.bvn || "";
+
+
+        document.getElementById(
+            "referral"
+        ).value =
+            user.referral || "";
+
+
+        /* =================================================
+           NEXT OF KIN
+        ================================================= */
+
+        document.getElementById(
+            "kinFullName"
+        ).value =
+            kin.full_name || "";
+
+
+        document.getElementById(
+            "kinPhone"
+        ).value =
+            kin.phone || "";
+
+
+        document.getElementById(
+            "kinAddress"
+        ).value =
+            kin.address || "";
+
+
+        document.getElementById(
+            "kinOccupation"
+        ).value =
+            kin.occupation || "";
+
+
+        document.getElementById(
+            "kinDob"
+        ).value =
+            formatDateForInput(
+                kin.dob
+            );
+
+
+        document.getElementById(
+            "kinGender"
+        ).value =
+            kin.gender || "";
+
+
+        /* =================================================
+           ACCOUNTS
+        ================================================= */
+
+        renderAccounts(
+            data.accounts || []
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "PROFILE LOAD ERROR:",
+            error
+        );
+
+        showToast(
+            error.message ||
+            "Unable to load profile."
+        );
+    }
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDateForInput(dateValue) {
+
+    if (!dateValue) {
+        return "";
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (Number.isNaN(date.getTime())) {
+
+        return "";
+    }
+
+
+    return date
+        .toISOString()
+        .split("T")[0];
+}
+
+
+/* =========================================================
+   FORMAT CURRENCY
+========================================================= */
+
+function formatMoney(amount) {
+
+    return new Intl.NumberFormat(
+        "en-NG",
+        {
+            style: "currency",
+            currency: "NGN",
+            minimumFractionDigits: 0
+        }
+    ).format(
+        Number(amount || 0)
+    );
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+        return "-";
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (Number.isNaN(date.getTime())) {
+
+        return "-";
+    }
+
+
+    return date.toLocaleDateString(
+        "en-NG",
+        {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }
+    );
+}
+
+
+/* =========================================================
+   RENDER ACCOUNTS
+========================================================= */
+
+function renderAccounts(accounts) {
+
+    const tbody =
+        document.getElementById(
+            "accountTableBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if (!accounts.length) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="11"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                    "
+                >
+
+                    No virtual account found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        document.getElementById(
+            "tableInfo"
+        ).textContent =
+            "Showing 0 entries";
+
+
+        return;
+    }
+
+
+    accounts.forEach(
+        (account, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            const status =
+                String(
+                    account.status || ""
+                ).toLowerCase();
+
+
+            const statusClass =
+                status === "active"
+                    ? "status-active"
+                    : "status-inactive";
+
+
+            row.dataset.accountno =
+                account.accountno || "";
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+
+                <td>
+                    <strong>
+                        ${escapeHtml(
+                            account.accountno || "-"
+                        )}
+                    </strong>
+                </td>
+
+
+                <td>
+                    ${escapeHtml(
+                        account.account_name || "-"
+                    )}
+                </td>
+
+
+                <td class="account-type">
+                    ${escapeHtml(
+                        account.account_type || "others"
+                    )}
+                </td>
+
+
+                <td class="balance">
+                    ${formatMoney(
+                        account.balance
+                    )}
+                </td>
+
+
+                <td class="${statusClass}">
+                    ${escapeHtml(
+                        account.status || "-"
+                    )}
+                </td>
+
+
+                <td>
+                    ${Number(
+                        account.thrift_week_paid || 0
+                    )}
+                </td>
+
+
+                <td>
+                    ${formatMoney(
+                        account.thrift_total_paid
+                    )}
+                </td>
+
+
+                <td>
+                    ${Number(
+                        account.default_weeks || 0
+                    )}
+                </td>
+
+
+                <td>
+                    ${formatDate(
+                        account.created_at
+                    )}
+                </td>
+
+
+                <td>
+
+                    <div class="action-buttons">
+
+
+                        <button
+                            class="small-btn btn-green"
+                            onclick="viewReferral(
+                                '${escapeJs(account.accountno || "")}'
+                            )"
+                        >
+
+                            View Referral
+
+                        </button>
+
+
+                        <button
+                            class="small-btn btn-gray"
+                            onclick="weeklyHistory(
+                                '${escapeJs(account.accountno || "")}'
+                            )"
+                        >
+
+                            Weekly History
+
+                        </button>
+
+
+                        <button
+                            class="small-btn btn-red"
+                            onclick="switchAccount(
+                                '${escapeJs(account.accountno || "")}'
+                            )"
+                        >
+
+                            Switch Account
+
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        }
+    );
+
+
+    document.getElementById(
+        "tableInfo"
+    ).textContent =
+        `Showing 1 to ${accounts.length} of ${accounts.length} entries`;
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   JAVASCRIPT STRING ESCAPE
+========================================================= */
+
+function escapeJs(value) {
+
+    return String(value)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+}
+
+
+/* =========================================================
+   SAVE PERSONAL INFORMATION
+========================================================= */
+
+document
+    .getElementById("personalForm")
+    .addEventListener(
+        "submit",
+        async function (e) {
+
+            e.preventDefault();
+
+
+            try {
+
+                const body = {
+
+                    full_name:
+                        document.getElementById(
+                            "fullName"
+                        ).value.trim(),
+
+                    email:
+                        document.getElementById(
+                            "email"
+                        ).value.trim(),
+
+                    phone_number:
+                        document.getElementById(
+                            "phoneNumber"
+                        ).value.trim(),
+
+                    gender:
+                        document.getElementById(
+                            "gender"
+                        ).value,
+
+                    address:
+                        document.getElementById(
+                            "address"
+                        ).value.trim()
+                };
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/user/profile`,
+                        {
+                            method: "PUT",
+
+                            headers:
+                                authHeaders(),
+
+                            body:
+                                JSON.stringify(body)
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to update profile."
+                    );
+                }
+
+
+                showToast(
+                    "Personal information saved successfully."
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "PROFILE UPDATE ERROR:",
+                    error
+                );
+
+                showToast(
+                    error.message ||
+                    "Unable to update profile."
+                );
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   SAVE NEXT OF KIN
+========================================================= */
+
+document
+    .getElementById("kinForm")
+    .addEventListener(
+        "submit",
+        async function (e) {
+
+            e.preventDefault();
+
+
+            try {
+
+                const body = {
+
+                    full_name:
+                        document.getElementById(
+                            "kinFullName"
+                        ).value.trim(),
+
+                    phone:
+                        document.getElementById(
+                            "kinPhone"
+                        ).value.trim(),
+
+                    address:
+                        document.getElementById(
+                            "kinAddress"
+                        ).value.trim(),
+
+                    occupation:
+                        document.getElementById(
+                            "kinOccupation"
+                        ).value.trim(),
+
+                    dob:
+                        document.getElementById(
+                            "kinDob"
+                        ).value || null,
+
+                    gender:
+                        document.getElementById(
+                            "kinGender"
+                        ).value
+                };
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/user/next-of-kin`,
+                        {
+                            method: "PUT",
+
+                            headers:
+                                authHeaders(),
+
+                            body:
+                                JSON.stringify(body)
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to update next of kin."
+                    );
+                }
+
+
+                showToast(
+                    "Next of kin information updated successfully."
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "NEXT OF KIN ERROR:",
+                    error
+                );
+
+                showToast(
+                    error.message ||
+                    "Unable to update next of kin."
+                );
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   SEARCH ACCOUNTS
+========================================================= */
+
+document
+    .getElementById("accountSearch")
+    .addEventListener(
+        "input",
+        function () {
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const rows =
+                document.querySelectorAll(
+                    "#accountTableBody tr"
+                );
+
+
+            let visible = 0;
+
+
+            rows.forEach(row => {
+
+                const text =
+                    row.textContent
+                        .toLowerCase();
+
+
+                if (
+                    text.includes(search)
+                ) {
+
+                    row.style.display = "";
+
+                    visible++;
+
+                } else {
+
+                    row.style.display =
+                        "none";
+                }
+
+            });
+
+
+            document.getElementById(
+                "tableInfo"
+            ).textContent =
+                `Showing ${visible} entries`;
+        }
+    );
+
+
+/* =========================================================
+   ACCOUNT ACTIONS
+========================================================= */
+
+function viewReferral(accountno) {
+
+    showToast(
+        `Referral information for ${accountno}`
+    );
+}
+
+
+function weeklyHistory(accountno) {
+
+    window.location.href =
+        `weekly-history.html?accountno=${encodeURIComponent(accountno)}`;
+}
+
+
+function switchAccount(accountno) {
+
+    const confirmed =
+        confirm(
+            `Do you want to switch to account ${accountno}?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    /*
+     * Store the selected account number.
+     * Your dashboard/thrift pages can use this.
+     */
+
+    localStorage.setItem(
+        "selectedAccountNo",
+        accountno
+    );
+
+
+    showToast(
+        `Switched to account ${accountno}`
+    );
+}
+
+
+function addAccount() {
+
+    window.location.href =
+        "add-account.html";
+}
+
+
+function payNow() {
+
+    window.location.href =
+        "payment.html";
+}
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function (e) {
+
+        if (e.key === "Escape") {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            sidebarOverlay.classList.remove(
+                "show"
+            );
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOAD PROFILE ON PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadProfile();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

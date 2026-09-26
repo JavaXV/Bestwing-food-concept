@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="assets/logos.png"
+>
+
+<title>Bestwing Collect - Sign In</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffffff;
+    }
+
+    .login-page {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .image-side {
+        width: 25%;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        background: #f5f5f5;
+    }
+
+    .side-image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center center;
+        filter: brightness(0.62);
+    }
+
+    .side-logo {
+        position: absolute;
+        z-index: 5;
+        top: 40px;
+        left: 35px;
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .divider {
+        width: 5%;
+        min-height: 100vh;
+        background: #806d82;
+    }
+
+    .form-side {
+        width: 70%;
+        min-height: 100vh;
+        background: #ffffff;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 40px 30px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 472px;
+        margin-top: -20px;
+    }
+
+    h1 {
+        margin: 0 0 14px;
+        color: #270042;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .intro {
+        margin: 0 0 27px;
+        color: #b5b2b5;
+        font-size: 15px;
+        line-height: 1.35;
+        font-weight: 600;
+    }
+
+    .field {
+        position: relative;
+        margin-bottom: 27px;
+    }
+
+    .field input {
+        width: 100%;
+        height: 50px;
+
+        padding: 21px 22px 5px;
+
+        border: 2px solid #198754;
+        border-radius: 5px;
+
+        outline: none;
+
+        font-size: 14px;
+        color: #333333;
+
+        background: #ffffff;
+    }
+
+    .field input:focus {
+        border-color: #006400;
+    }
+
+    .field label {
+        position: absolute;
+
+        top: 13px;
+        left: 22px;
+
+        color: #198754;
+
+        font-size: 11px;
+
+        pointer-events: none;
+    }
+
+    .password-field input {
+        padding-right: 75px;
+    }
+
+    .show-password {
+        position: absolute;
+
+        top: 14px;
+        right: 21px;
+
+        border: none;
+
+        background: transparent;
+
+        color: #aaaaaa;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        cursor: pointer;
+    }
+
+    .forgot {
+        display: block;
+
+        margin-top: -10px;
+        margin-bottom: 19px;
+
+        text-align: right;
+
+        color: #7416a1;
+
+        font-size: 14px;
+        font-style: italic;
+
+        text-decoration: none;
+    }
+
+    .forgot:hover {
+        text-decoration: underline;
+    }
+
+    .sign-in {
+        width: 100%;
+        height: 52px;
+
+        border: none;
+        border-radius: 6px;
+
+        background: linear-gradient(
+            90deg,
+            #a768c5,
+            #ca6db9
+        );
+
+        color: #ffffff;
+
+        font-size: 14px;
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+    }
+
+    .sign-in:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+    .sign-in:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .signup {
+        margin-top: 18px;
+
+        text-align: center;
+
+        color: #b6b3b6;
+
+        font-size: 14px;
+    }
+
+    .signup a {
+        color: #7514a4;
+        text-decoration: none;
+    }
+
+    .signup a:hover {
+        text-decoration: underline;
+    }
+
+    .message {
+        display: none;
+
+        margin-bottom: 15px;
+
+        padding: 11px 14px;
+
+        border-radius: 5px;
+
+        font-size: 13px;
+
+        text-align: center;
+    }
+
+    .message.error {
+        display: block;
+
+        background: #fff0f0;
+
+        color: #d90000;
+
+        border: 1px solid #ffcccc;
+    }
+
+    .message.success {
+        display: block;
+
+        background: #effaf3;
+
+        color: #198754;
+
+        border: 1px solid #b7e4c7;
+    }
+
+    @media (max-width: 1000px) {
+
+        .image-side {
+            width: 30%;
+        }
+
+        .divider {
+            width: 3%;
+        }
+
+        .form-side {
+            width: 67%;
+            padding: 35px 25px;
+        }
+
+        .side-logo {
+            width: 125px;
+            left: 22px;
+        }
+
+    }
+
+    @media (max-width: 650px) {
+
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .login-page {
+            display: block;
+
+            width: 100%;
+            min-height: 100vh;
+
+            overflow: visible;
+        }
+
+        .image-side {
+            width: 100%;
+
+            height: 220px;
+            min-height: 220px;
+            max-height: 220px;
+        }
+
+        .side-image {
+            width: 100%;
+            height: 220px;
+
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .side-logo {
+            top: 20px;
+            left: 20px;
+
+            width: 120px;
+            max-width: 38%;
+        }
+
+        .divider {
+            display: none;
+        }
+
+        .form-side {
+            width: 100%;
+
+            min-height: calc(100vh - 220px);
+
+            padding: 35px 20px 45px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 100%;
+
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 27px;
+
+            line-height: 1.2;
+
+            margin-bottom: 12px;
+        }
+
+        .intro {
+            font-size: 14px;
+
+            line-height: 1.45;
+
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .field input {
+            height: 54px;
+
+            font-size: 15px;
+
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .field label {
+            left: 18px;
+
+            font-size: 11px;
+        }
+
+        .password-field input {
+            padding-right: 70px;
+        }
+
+        .show-password {
+            right: 16px;
+            top: 16px;
+
+            font-size: 13px;
+        }
+
+        .forgot {
+            font-size: 13px;
+
+            margin-top: -4px;
+
+            margin-bottom: 18px;
+        }
+
+        .sign-in {
+            height: 54px;
+
+            font-size: 15px;
+
+            border-radius: 7px;
+        }
+
+        .signup {
+            font-size: 13px;
+
+            margin-top: 17px;
+        }
+
+        .message {
+            font-size: 12px;
+        }
+
+    }
+
+    @media (max-width: 400px) {
+
+        .image-side,
+        .side-image {
+            height: 190px;
+
+            min-height: 190px;
+            max-height: 190px;
+        }
+
+        .form-side {
+            min-height: calc(100vh - 190px);
+
+            padding: 28px 16px 40px;
+        }
+
+        .side-logo {
+            width: 105px;
+
+            top: 17px;
+            left: 16px;
+        }
+
+        h1 {
+            font-size: 25px;
+        }
+
+        .intro {
+            font-size: 13px;
+        }
+
+        .field input {
+            height: 52px;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+
+    <section class="image-side">
+
+        <img
+            src="assets/standing.png"
+            alt="Bestwing Global Service Collect"
+            class="side-image"
+        >
+
+        <img
+            src="assets/logos.png"
+            alt="Bestwing Global Service Collect"
+            class="side-logo"
+        >
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <section class="form-side">
+
+        <div class="login-container">
+
+
+            <h1>
+                Sign In
+            </h1>
+
+
+            <p class="intro">
+
+                Your phone number and password are confidential
+
+                <br>
+
+                Never disclose them to anyone
+
+            </p>
+
+
+            <div
+                id="message"
+                class="message"
+            >
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <div class="field">
+
+                    <label for="phone_number">
+                        Phone Number *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone_number"
+                        name="phone_number"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field password-field">
+
+                    <label for="password">
+                        Enter Your Password *
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        id="showPassword"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="sign-in"
+                    id="loginButton"
+                >
+                    Sign In
+                </button>
+
+
+                <div class="signup">
+
+                    Don't have an account?
+
+                    <a href="/signup.html">
+                        Sign Up
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PASSWORD SHOW / HIDE
+    |--------------------------------------------------------------------------
+    */
+
+    const passwordInput =
+        document.getElementById("password");
+
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+
+    showPassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                passwordInput.type === "password"
+            ) {
+
+                passwordInput.type = "text";
+
+                showPassword.textContent =
+                    "Hide";
+
+            } else {
+
+                passwordInput.type = "password";
+
+                showPassword.textContent =
+                    "Show";
+
+            }
+
+        }
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGIN FORM
+    |--------------------------------------------------------------------------
+    */
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+
+    const message =
+        document.getElementById("message");
+
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | GET PHONE NUMBER
+            |--------------------------------------------------------------------------
+            */
+
+            const phoneNumber =
+                document
+                    .getElementById("phone_number")
+                    .value
+                    .trim();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | GET PASSWORD
+            |--------------------------------------------------------------------------
+            */
+
+            const password =
+                passwordInput
+                    .value
+                    .trim();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | VALIDATION
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                phoneNumber === "" ||
+                password === ""
+            ) {
+
+                message.textContent =
+                    "Please enter your phone number and password.";
+
+                message.className =
+                    "message error";
+
+                return;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | DISABLE LOGIN BUTTON
+            |--------------------------------------------------------------------------
+            */
+
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "Signing In...";
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CLEAR PREVIOUS MESSAGE
+            |--------------------------------------------------------------------------
+            */
+
+            message.textContent = "";
+
+            message.className =
+                "message";
+
+
+            try {
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SEND LOGIN REQUEST
+                |--------------------------------------------------------------------------
+                */
+
+                const response =
+                    await fetch(
+                        "/api/auth/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    phone_number:
+                                        phoneNumber,
+
+                                    password:
+                                        password
+                                })
+                        }
+                    );
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | GET SERVER RESPONSE
+                |--------------------------------------------------------------------------
+                */
+
+                const data =
+                    await response
+                        .json()
+                        .catch(
+                            function () {
+
+                                return {
+                                    success: false,
+
+                                    message:
+                                        "Invalid server response"
+                                };
+
+                            }
+                        );
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | PAYMENT REQUIRED
+                |--------------------------------------------------------------------------
+                | IMPORTANT:
+                | This MUST come BEFORE the general
+                | !response.ok error handling.
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    response.status === 403 &&
+                    data.payment_required === true
+                ) {
+
+                    message.innerHTML = `
+                        <div style="
+                            padding: 15px;
+                            background: #fff3cd;
+                            color: #856404;
+                            border: 1px solid #ffe69c;
+                            border-radius: 6px;
+                            margin-bottom: 15px;
+                            font-size: 14px;
+                            line-height: 1.5;
+                        ">
+                            ${data.message}
+                        </div>
+                    `;
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | REDIRECT TO PAYMENT PAGE
+                    |--------------------------------------------------------------------------
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                data.payment_url ||
+                                "/payment.html";
+
+                        },
+                        2000
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | GENERAL LOGIN ERROR
+                |--------------------------------------------------------------------------
+                */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Login failed"
+                    );
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | CHECK SUCCESS
+                |--------------------------------------------------------------------------
+                */
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Login failed"
+                    );
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SAVE JWT TOKEN
+                |--------------------------------------------------------------------------
+                */
+
+                localStorage.setItem(
+                    "token",
+                    data.token
+                );
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SAVE USER INFORMATION
+                |--------------------------------------------------------------------------
+                */
+
+                if (data.user) {
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(data.user)
+                    );
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SHOW SUCCESS MESSAGE
+                |--------------------------------------------------------------------------
+                */
+
+                message.textContent =
+                    "Login successful. Redirecting...";
+
+                message.className =
+                    "message success";
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | REDIRECT TO DASHBOARD
+                |--------------------------------------------------------------------------
+                */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "/dashboard.html";
+
+                    },
+                    500
+                );
+
+
+            } catch (error) {
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SHOW ACTUAL SERVER ERROR
+                |--------------------------------------------------------------------------
+                */
+
+                message.textContent =
+                    error.message ||
+                    "Unable to login";
+
+                message.className =
+                    "message error";
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | ENABLE BUTTON AGAIN
+                |--------------------------------------------------------------------------
+                */
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "Sign In";
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

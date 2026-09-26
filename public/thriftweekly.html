@@ -1,0 +1,3253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>ThriftWeekly</title>
+
+
+<!-- =====================================================
+     BOOTSTRAP ICONS
+===================================================== -->
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root {
+
+    --primary: #0f1733;
+
+    --primary-light: #1c2852;
+
+    --danger: #d90018;
+
+    --danger-dark: #b80014;
+
+    --success: #07952b;
+
+    --text: #252525;
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #fff8f8;
+
+    color: var(--text);
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    width: 365px;
+
+    height: 100vh;
+
+    background: var(--primary);
+
+    z-index: 1000;
+
+    color: white;
+
+    transition: all .3s ease;
+
+}
+
+
+.sidebar-logo {
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.35);
+
+}
+
+
+.logo-wrapper {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.sidebar-menu {
+
+    padding: 28px 7px;
+
+}
+
+
+.menu-item {
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 28px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-radius: 4px;
+
+    margin-bottom: 5px;
+
+    transition: .2s ease;
+
+    cursor: pointer;
+
+}
+
+
+.menu-item:hover {
+
+    background:
+        rgba(255,255,255,.12);
+
+}
+
+
+.menu-item.active {
+
+    background:
+        var(--primary-light);
+
+}
+
+
+.menu-icon {
+
+    width: 28px;
+
+    font-size: 15px;
+
+}
+
+
+.menu-arrow {
+
+    margin-left: auto;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    z-index: 999;
+
+}
+
+
+.overlay.active {
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left: 365px;
+
+    min-height: 100vh;
+
+    transition: .3s ease;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    min-height: 92px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px 40px;
+
+    box-shadow:
+        0 2px 7px
+        rgba(0,0,0,.25);
+
+    position: relative;
+
+    z-index: 10;
+
+}
+
+
+.welcome-title {
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+
+}
+
+
+.account-info {
+
+    font-size: 12px;
+
+    color: #999;
+
+}
+
+
+.primary {
+
+    color: var(--danger);
+
+}
+
+
+/* =====================================================
+   USER SECTION
+===================================================== */
+
+.user-section {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.user-photo {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+
+.user-name {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.user-account {
+
+    display: block;
+
+    color: #aaa;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.toggle {
+
+    width: 45px;
+
+    height: 23px;
+
+    border-radius: 20px;
+
+    background: #aaa;
+
+    position: relative;
+
+    cursor: pointer;
+
+    margin-right: 3px;
+
+}
+
+
+.toggle-ball {
+
+    width: 21px;
+
+    height: 21px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    top: 1px;
+
+    left: 1px;
+
+    transition: .25s ease;
+
+}
+
+
+.toggle.active {
+
+    background: var(--danger);
+
+}
+
+
+.toggle.active .toggle-ball {
+
+    left: 23px;
+
+}
+
+
+/* =====================================================
+   PAGE CONTENT
+===================================================== */
+
+.content {
+
+    padding: 35px 42px 60px;
+
+}
+
+
+.page-title {
+
+    font-size: 28px;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.table-card {
+
+    background: white;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+/* =====================================================
+   TABLE TOOLBAR
+===================================================== */
+
+.table-toolbar {
+
+    min-height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-bottom:
+        1px solid #f1f1f1;
+
+}
+
+
+.entries-control {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 14px;
+
+}
+
+
+.entries-control select {
+
+    width: 55px;
+
+    height: 30px;
+
+    border:
+        1px solid #ccd4dc;
+
+    border-radius: 3px;
+
+    background: white;
+
+    padding-left: 5px;
+
+}
+
+
+.search-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 14px;
+
+}
+
+
+.search {
+
+    width: 195px;
+
+    height: 30px;
+
+    border:
+        1px solid #cbd3dc;
+
+    border-radius: 4px;
+
+    padding: 5px 8px;
+
+    outline: none;
+
+}
+
+
+.search:focus {
+
+    border-color:
+        var(--danger);
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+
+    overflow-x: auto;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+
+}
+
+
+thead {
+
+    background: white;
+
+}
+
+
+th {
+
+    text-align: left;
+
+    padding: 19px 17px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+td {
+
+    padding: 22px 17px;
+
+    font-size: 14px;
+
+    color: #858585;
+
+    white-space: nowrap;
+
+}
+
+
+tbody tr {
+
+    border-top:
+        1px solid #f5eded;
+
+}
+
+
+tbody tr:nth-child(even) {
+
+    background: #fff;
+
+}
+
+
+tbody tr:nth-child(odd) {
+
+    background: #fff9f9;
+
+}
+
+
+tbody tr:hover {
+
+    background: #fff2f2;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+}
+
+
+.status.paid {
+
+    color: var(--success);
+
+}
+
+
+.status.debt {
+
+    color: #ff0000;
+
+}
+
+
+/* =====================================================
+   CLEAR DEFAULT
+===================================================== */
+
+.clear-default {
+
+    background: var(--danger);
+
+    border:
+        2px solid #ef8e9a;
+
+    color: white;
+
+    padding: 6px 11px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+    box-shadow:
+        0 1px 3px
+        rgba(0,0,0,.15);
+
+}
+
+
+.clear-default:hover {
+
+    background:
+        var(--danger-dark);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.clear-default:active {
+
+    transform:
+        scale(.97);
+
+}
+
+
+.clear-default:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading-row {
+
+    text-align: center;
+
+    padding: 40px !important;
+
+    color: #777;
+
+}
+
+
+.loading-spinner {
+
+    display: inline-block;
+
+    width: 22px;
+
+    height: 22px;
+
+    border:
+        3px solid #ddd;
+
+    border-top-color:
+        var(--danger);
+
+    border-radius: 50%;
+
+    animation:
+        spin .7s linear infinite;
+
+    vertical-align: middle;
+
+    margin-right: 8px;
+
+}
+
+
+@keyframes spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   EMPTY / ERROR
+===================================================== */
+
+.empty-row {
+
+    text-align: center;
+
+    padding: 40px !important;
+
+    color: #777;
+
+}
+
+
+.error-row {
+
+    text-align: center;
+
+    padding: 40px !important;
+
+    color: #d90018;
+
+}
+
+
+/* =====================================================
+   TABLE FOOTER
+===================================================== */
+
+.table-footer {
+
+    min-height: 68px;
+
+    background: white;
+
+    margin-top: 18px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.entries-info {
+
+    font-size: 14px;
+
+    color: #555;
+
+}
+
+
+.pagination {
+
+    display: flex;
+
+}
+
+
+.page-btn {
+
+    min-width: 44px;
+
+    height: 32px;
+
+    background: white;
+
+    border:
+        1px solid #d5dce3;
+
+    color: #69747e;
+
+    cursor: pointer;
+
+    padding: 0 10px;
+
+}
+
+
+.page-btn:first-child {
+
+    border-radius:
+        4px 0 0 4px;
+
+}
+
+
+.page-btn:last-child {
+
+    border-radius:
+        0 4px 4px 0;
+
+}
+
+
+.page-btn.active {
+
+    background:
+        var(--danger);
+
+    border-color:
+        var(--danger);
+
+    color: white;
+
+}
+
+
+.page-btn:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.mobile-menu {
+
+    display: none;
+
+    width: 42px;
+
+    height: 40px;
+
+    background: var(--danger);
+
+    border: none;
+
+    color: white;
+
+    border-radius: 4px;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+}
+
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+body.dark-mode {
+    background: #10131a;
+    color: #f1f1f1;
+}
+
+body.dark-mode .header {
+    background: #181c25;
+    color: #fff;
+}
+
+body.dark-mode .welcome-title {
+    color: #fff;
+}
+
+body.dark-mode .account-info {
+    color: #aeb4c0;
+}
+
+body.dark-mode .table-card {
+    background: #181c25;
+}
+
+body.dark-mode .table-toolbar {
+    background: #181c25;
+    border-bottom-color: #303641;
+}
+
+body.dark-mode .entries-control {
+    color: #ddd;
+}
+
+body.dark-mode .search-area {
+    color: #ddd;
+}
+
+body.dark-mode .entries-control select,
+body.dark-mode .search {
+    background: #222733;
+    border-color: #3a424f;
+    color: #fff;
+}
+
+body.dark-mode .search::placeholder {
+    color: #9da4af;
+}
+
+body.dark-mode table {
+    background: #181c25;
+}
+
+body.dark-mode thead {
+    background: #181c25;
+}
+
+body.dark-mode th {
+    color: #fff;
+}
+
+body.dark-mode td {
+    color: #b7bdc7;
+}
+
+body.dark-mode tbody tr {
+    border-top-color: #303641;
+}
+
+body.dark-mode tbody tr:nth-child(even) {
+    background: #181c25;
+}
+
+body.dark-mode tbody tr:nth-child(odd) {
+    background: #1d222c;
+}
+
+body.dark-mode tbody tr:hover {
+    background: #252b36;
+}
+
+body.dark-mode .table-footer {
+    background: #181c25;
+}
+
+body.dark-mode .entries-info {
+    color: #c2c7cf;
+}
+
+body.dark-mode .page-btn {
+    background: #222733;
+    border-color: #3a424f;
+    color: #c7ccd4;
+}
+
+body.dark-mode .page-btn.active {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: white;
+}
+
+body.dark-mode .empty-row,
+body.dark-mode .loading-row {
+    color: #b7bdc7;
+}
+
+body.dark-mode .error-row {
+    color: #ff6675;
+}
+
+body.dark-mode .user-name {
+    color: #fff;
+}
+
+body.dark-mode .user-account {
+    color: #aeb4c0;
+}
+
+body.dark-mode .toggle {
+    background: var(--danger);
+}
+
+body.dark-mode .toggle-ball {
+    left: 23px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width: 1100px) {
+
+    .sidebar {
+
+        width: 280px;
+
+    }
+
+    .main {
+
+        margin-left: 280px;
+
+    }
+
+    .content {
+
+        padding:
+            30px 25px;
+
+    }
+
+    .header {
+
+        padding:
+            12px 25px;
+
+    }
+
+}
+
+
+@media(max-width: 768px) {
+
+    .sidebar {
+
+        transform:
+            translateX(-100%);
+
+        width: 280px;
+
+    }
+
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    .main {
+
+        margin-left: 0;
+
+    }
+
+
+    .mobile-menu {
+
+        display: block;
+
+    }
+
+
+    .header {
+
+        height: auto;
+
+        min-height: 80px;
+
+        padding: 14px 18px;
+
+        gap: 15px;
+
+    }
+
+
+    .welcome-title {
+
+        font-size: 15px;
+
+    }
+
+
+    .account-info {
+
+        font-size: 10px;
+
+    }
+
+
+    .user-section {
+
+        display: none;
+
+    }
+
+
+    .content {
+
+        padding:
+            25px 12px;
+
+    }
+
+
+    .page-title {
+
+        font-size: 23px;
+
+    }
+
+
+    .table-toolbar {
+
+        height: auto;
+
+        padding: 20px;
+
+        gap: 18px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .search-area {
+
+        width: 100%;
+
+        justify-content:
+            space-between;
+
+    }
+
+
+    .search {
+
+        flex: 1;
+
+        max-width: 250px;
+
+    }
+
+
+    .table-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        padding: 15px;
+
+    }
+
+}
+
+
+@media(max-width: 480px) {
+
+    .welcome-title {
+
+        font-size: 14px;
+
+    }
+
+
+    .content {
+
+        padding:
+            20px 8px;
+
+    }
+
+
+    .page-title {
+
+        font-size: 21px;
+
+    }
+
+
+    .search {
+
+        width: 150px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+    style="background-color:#0f1733;"
+>
+
+
+    <div class="sidebar-logo">
+
+        <div class="logo-wrapper">
+
+            <img
+                src="assets/log.png"
+                height="60"
+                width="60"
+                alt="Bestwing"
+            >
+
+            BESTWING GLOBAL SERVICE
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+
+        <a
+            href="dashboard.html"
+            class="menu-item active"
+        >
+
+            <i
+                class="bi bi-grid-1x2-fill menu-icon"
+            ></i>
+
+            <span>
+                Dashboard
+            </span>
+
+            <i
+                class="bi bi-chevron-right menu-arrow"
+            ></i>
+
+        </a>
+
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MOBILE OVERLAY
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeSidebar()"
+></div>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================= -->
+
+    <header class="header">
+
+
+        <button
+            class="mobile-menu"
+            onclick="toggleSidebar()"
+        >
+            ☰
+        </button>
+
+
+        <div>
+
+            <div
+                class="welcome-title"
+                id="welcomeTitle"
+            >
+                Welcome
+            </div>
+
+
+            <div
+                class="account-info"
+                id="accountInfo"
+            >
+                Thrift Weekly History
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LOGGED-IN USER INFORMATION
+        ================================================= -->
+
+        <div class="user-section">
+
+
+            <div
+                class="toggle"
+                id="toggle"
+                onclick="toggleTheme()"
+            >
+
+                <div class="toggle-ball"></div>
+
+            </div>
+
+
+            <div>
+
+                <div
+                    class="user-name"
+                    id="userName"
+                >
+                    Loading...
+                </div>
+
+
+                <span
+                    class="user-account"
+                    id="userAccount"
+                >
+                    Loading account...
+                </span>
+
+
+                <span
+                    class="user-account"
+                    id="userEmail"
+                >
+                    -
+                </span>
+
+
+                <span
+                    class="user-account"
+                    id="userPhone"
+                >
+                    -
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <section class="content">
+
+
+        <h1 class="page-title">
+            Thrift Weekly
+        </h1>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================= -->
+
+        <div class="table-card">
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================= -->
+
+            <div class="table-toolbar">
+
+
+                <div class="entries-control">
+
+                    <span>
+                        Show
+                    </span>
+
+
+                    <select
+                        id="entriesSelect"
+                    >
+
+                        <option value="10">
+                            10
+                        </option>
+
+                        <option value="25">
+                            25
+                        </option>
+
+                        <option value="50">
+                            50
+                        </option>
+
+                    </select>
+
+
+                    <span>
+                        entries
+                    </span>
+
+                </div>
+
+
+                <div class="search-area">
+
+                    <label>
+                        Search:
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="search"
+                        class="search"
+                        placeholder="Search..."
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================= -->
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Thrift Week
+                            </th>
+
+
+                            <th>
+                                Thrift Status
+                            </th>
+
+
+                            <th>
+                                Action
+                            </th>
+
+
+                            <th>
+                                Created Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="weeklyTable">
+
+
+                        <tr>
+
+                            <td
+                                colspan="4"
+                                class="loading-row"
+                            >
+
+                                <span
+                                    class="loading-spinner"
+                                ></span>
+
+                                Loading weekly history...
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <div class="table-footer">
+
+
+            <div
+                class="entries-info"
+                id="entriesInfo"
+            >
+                Showing 0 to 0 of 0 entries
+            </div>
+
+
+            <div
+                class="pagination"
+                id="pagination"
+            >
+
+                <button
+                    class="page-btn"
+                    id="previousBtn"
+                    onclick="previousPage()"
+                >
+                    Previous
+                </button>
+
+
+                <button
+                    class="page-btn active"
+                    id="pageNumber"
+                >
+                    1
+                </button>
+
+
+                <button
+                    class="page-btn"
+                    id="nextBtn"
+                    onclick="nextPage()"
+                >
+                    Next
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_BASE =
+    "/api/thrift";
+
+
+/* =====================================================
+   GET THRIFT ID FROM URL
+===================================================== */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const thriftId =
+    urlParams.get("thrift_id");
+
+
+console.log(
+    "Selected Thrift ID:",
+    thriftId
+);
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let weeklyHistoryData = [];
+
+let filteredHistoryData = [];
+
+let currentPage = 1;
+
+let entriesPerPage = 10;
+
+
+/* =====================================================
+   GET JWT TOKEN
+===================================================== */
+
+function getToken() {
+
+    return (
+
+        localStorage.getItem("token") ||
+
+        sessionStorage.getItem("token") ||
+
+        localStorage.getItem("accessToken") ||
+
+        sessionStorage.getItem("accessToken") ||
+
+        localStorage.getItem("jwt") ||
+
+        sessionStorage.getItem("jwt")
+
+    );
+
+}
+
+
+/* =====================================================
+   CLEAR LOGIN TOKENS
+===================================================== */
+
+function clearTokens() {
+
+    localStorage.removeItem(
+        "token"
+    );
+
+    localStorage.removeItem(
+        "accessToken"
+    );
+
+    localStorage.removeItem(
+        "jwt"
+    );
+
+
+    sessionStorage.removeItem(
+        "token"
+    );
+
+    sessionStorage.removeItem(
+        "accessToken"
+    );
+
+    sessionStorage.removeItem(
+        "jwt"
+    );
+
+}
+
+
+/* =====================================================
+   LOAD LOGGED-IN USER DETAILS
+===================================================== */
+
+async function loadUserDetails() {
+
+    const token =
+        getToken();
+
+
+    if (!token) {
+
+        alert(
+            "Your session has expired. Please login again."
+        );
+
+
+        window.location.href =
+            "login.html";
+
+
+        return;
+
+    }
+
+
+    try {
+
+        /* =================================================
+           LOAD USER PROFILE
+        ================================================= */
+
+        const response =
+            await fetch(
+                "/api/auth/me",
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`,
+
+                        "Content-Type":
+                            "application/json"
+
+                    }
+
+                }
+            );
+
+
+        /* =================================================
+           SESSION EXPIRED
+        ================================================= */
+
+        if (
+            response.status === 401
+        ) {
+
+            clearTokens();
+
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Logged-in User Details:",
+            data
+        );
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+
+                data.message ||
+                "Unable to load user details."
+
+            );
+
+        }
+
+
+        /* =================================================
+           GET USER OBJECT
+        ================================================= */
+
+        const user =
+            data.user ||
+            data.data ||
+            data;
+
+
+        /* =================================================
+           FULL NAME
+        ================================================= */
+
+        const fullName =
+            user.full_name ||
+            user.fullName ||
+            user.name ||
+            "User";
+
+
+        document.getElementById(
+            "userName"
+        ).textContent =
+            fullName;
+
+
+        /* =================================================
+           EMAIL
+        ================================================= */
+
+        const email =
+            user.email ||
+            "-";
+
+
+        document.getElementById(
+            "userEmail"
+        ).textContent =
+            email;
+
+
+        /* =================================================
+           PHONE NUMBER
+        ================================================= */
+
+        const phone =
+            user.phone_number ||
+            user.phone ||
+            user.phoneNumber ||
+            "-";
+
+
+        document.getElementById(
+            "userPhone"
+        ).textContent =
+            phone;
+
+
+        /* =================================================
+           ACCOUNT NUMBER
+        ================================================= */
+
+        let accountNumber =
+            user.accountno ||
+            user.account_number ||
+            user.accountNo ||
+            "";
+
+
+        /* =================================================
+           LOAD FIRST VIRTUAL ACCOUNT IF /ME
+           DOES NOT RETURN ACCOUNT NUMBER
+        ================================================= */
+
+        if (!accountNumber) {
+
+            try {
+
+                const accountResponse =
+                    await fetch(
+                        "/api/dashboard/accounts",
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            }
+
+                        }
+                    );
+
+
+                if (
+                    accountResponse.status === 401
+                ) {
+
+                    clearTokens();
+
+
+                    alert(
+                        "Your session has expired. Please login again."
+                    );
+
+
+                    window.location.href =
+                        "login.html";
+
+
+                    return;
+
+                }
+
+
+                if (
+                    accountResponse.ok
+                ) {
+
+                    const accountData =
+                        await accountResponse.json();
+
+
+                    console.log(
+                        "Virtual Accounts:",
+                        accountData
+                    );
+
+
+                    const accounts =
+                        Array.isArray(
+                            accountData.accounts
+                        )
+                            ? accountData.accounts
+                            : Array.isArray(
+                                accountData.data
+                            )
+                                ? accountData.data
+                                : [];
+
+
+                    if (
+                        accounts.length > 0
+                    ) {
+
+                        accountNumber =
+                            accounts[0].accountno ||
+                            accounts[0].account_number ||
+                            accounts[0].accountNo ||
+                            "";
+
+                    }
+
+                }
+
+            } catch (
+                accountError
+            ) {
+
+                console.error(
+                    "ACCOUNT DETAILS ERROR:",
+                    accountError
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           DISPLAY ACCOUNT NUMBER
+        ================================================= */
+
+        document.getElementById(
+            "userAccount"
+        ).textContent =
+            accountNumber
+                ? `FC${accountNumber}`
+                : "No account";
+
+
+        /* =================================================
+           GREETING
+        ================================================= */
+
+        const hour =
+            new Date().getHours();
+
+
+        let greeting;
+
+
+        if (hour < 12) {
+
+            greeting =
+                "Good Morning";
+
+        }
+        else if (hour < 17) {
+
+            greeting =
+                "Good Afternoon";
+
+        }
+        else {
+
+            greeting =
+                "Good Evening";
+
+        }
+
+
+        document.getElementById(
+            "welcomeTitle"
+        ).textContent =
+            `${greeting}, ${fullName}`;
+
+
+        /* =================================================
+           HEADER ACCOUNT INFORMATION
+        ================================================= */
+
+        document.getElementById(
+            "accountInfo"
+        ).textContent =
+            accountNumber
+                ? `Thrift Weekly History • FC${accountNumber}`
+                : "Thrift Weekly History";
+
+
+        console.log(
+            "USER NAME:",
+            fullName
+        );
+
+        console.log(
+            "USER EMAIL:",
+            email
+        );
+
+        console.log(
+            "USER PHONE:",
+            phone
+        );
+
+        console.log(
+            "USER ACCOUNT:",
+            accountNumber
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "LOAD USER DETAILS ERROR:",
+            error
+        );
+
+
+        document.getElementById(
+            "userName"
+        ).textContent =
+            "User";
+
+
+        document.getElementById(
+            "userAccount"
+        ).textContent =
+            "-";
+
+
+        document.getElementById(
+            "userEmail"
+        ).textContent =
+            "-";
+
+
+        document.getElementById(
+            "userPhone"
+        ).textContent =
+            "-";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD WEEKLY HISTORY
+===================================================== */
+
+async function loadWeeklyHistory() {
+
+    const table =
+        document.getElementById(
+            "weeklyTable"
+        );
+
+
+    /* -------------------------------------------------
+       CHECK THRIFT ID
+    ------------------------------------------------- */
+
+    if (
+        !thriftId ||
+        Number(thriftId) <= 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="error-row"
+                >
+
+                    No valid thrift subscription
+                    was selected.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        updatePagination();
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       CHECK TOKEN
+    ------------------------------------------------- */
+
+    const token =
+        getToken();
+
+
+    if (!token) {
+
+        alert(
+            "Your session has expired. Please login again."
+        );
+
+
+        window.location.href =
+            "login.html";
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       LOADING
+    ------------------------------------------------- */
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="4"
+                class="loading-row"
+            >
+
+                <span
+                    class="loading-spinner"
+                ></span>
+
+                Loading weekly history...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    try {
+
+        /* -------------------------------------------------
+           REQUEST
+        ------------------------------------------------- */
+
+        const response =
+            await fetch(
+
+                `${API_BASE}/weekly-history/${encodeURIComponent(thriftId)}`,
+
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`,
+
+                        "Content-Type":
+                            "application/json"
+
+                    }
+
+                }
+
+            );
+
+
+        /* -------------------------------------------------
+           SESSION EXPIRED
+        ------------------------------------------------- */
+
+        if (
+            response.status === 401
+        ) {
+
+            clearTokens();
+
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+            return;
+
+        }
+
+
+        /* -------------------------------------------------
+           RESPONSE
+        ------------------------------------------------- */
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Weekly History Response:",
+            data
+        );
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+
+                data.message ||
+                "Unable to load weekly history."
+
+            );
+
+        }
+
+
+        /* -------------------------------------------------
+           SAVE DATA
+        ------------------------------------------------- */
+
+        weeklyHistoryData =
+            Array.isArray(data.history)
+                ? data.history
+                : [];
+
+
+        filteredHistoryData =
+            [...weeklyHistoryData];
+
+
+        currentPage = 1;
+
+
+        /* -------------------------------------------------
+           RENDER
+        ------------------------------------------------- */
+
+        renderWeeklyHistory();
+
+
+    } catch (error) {
+
+        console.error(
+            "WEEKLY HISTORY ERROR:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="error-row"
+                >
+
+                    Unable to load weekly history.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        document.getElementById(
+            "entriesInfo"
+        ).textContent =
+            "Showing 0 to 0 of 0 entries";
+
+
+        updatePagination();
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER WEEKLY HISTORY
+===================================================== */
+
+function renderWeeklyHistory() {
+
+    const table =
+        document.getElementById(
+            "weeklyTable"
+        );
+
+
+    const total =
+        filteredHistoryData.length;
+
+
+    /* -------------------------------------------------
+       EMPTY
+    ------------------------------------------------- */
+
+    if (!total) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="empty-row"
+                >
+
+                    No weekly history found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        document.getElementById(
+            "entriesInfo"
+        ).textContent =
+            "Showing 0 to 0 of 0 entries";
+
+
+        updatePagination();
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       CALCULATE PAGES
+    ------------------------------------------------- */
+
+    const totalPages =
+        Math.ceil(
+            total /
+            entriesPerPage
+        );
+
+
+    if (
+        currentPage >
+        totalPages
+    ) {
+
+        currentPage =
+            totalPages;
+
+    }
+
+
+    const startIndex =
+        (
+            currentPage - 1
+        ) *
+        entriesPerPage;
+
+
+    const endIndex =
+        Math.min(
+            startIndex +
+            entriesPerPage,
+            total
+        );
+
+
+    const pageRows =
+        filteredHistoryData.slice(
+            startIndex,
+            endIndex
+        );
+
+
+    /* -------------------------------------------------
+       BUILD TABLE
+    ------------------------------------------------- */
+
+    table.innerHTML =
+
+        pageRows.map(
+            function (row) {
+
+                const week =
+                    Number(
+                        row.week_number ||
+                        row.week ||
+                        row.thrift_week ||
+                        0
+                    );
+
+
+                const statusValue =
+                    String(
+
+                        row.status ||
+                        row.thrift_status ||
+                        ""
+
+                    ).toLowerCase();
+
+
+                const isPaid =
+                    (
+                        statusValue === "paid" ||
+                        statusValue === "success" ||
+                        statusValue === "successful"
+                    );
+
+
+                const statusText =
+                    isPaid
+                        ? "paid"
+                        : "debt";
+
+
+                const statusClass =
+                    isPaid
+                        ? "paid"
+                        : "debt";
+
+
+                const createdDate =
+                    formatDate(
+
+                        row.created_at ||
+                        row.processed_at ||
+                        row.created_date
+
+                    );
+
+
+                let action = "-";
+
+
+                /* -------------------------------------------------
+                   DEFAULT ACTION
+                ------------------------------------------------- */
+
+                if (!isPaid) {
+
+                    action = `
+
+                        <button
+                            type="button"
+                            class="clear-default"
+                            onclick="clearDefault(${week}, ${Number(thriftId)})"
+                        >
+
+                            Clear Default
+
+                        </button>
+
+                    `;
+
+                }
+
+
+                return `
+
+                    <tr
+                        id="week${week}"
+                    >
+
+                        <td>
+                            ${week || "-"}
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+
+                                ${statusText}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${action}
+
+                        </td>
+
+
+                        <td>
+
+                            ${createdDate}
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+        ).join("");
+
+
+    /* -------------------------------------------------
+       UPDATE FOOTER
+    ------------------------------------------------- */
+
+    const showingFrom =
+        total === 0
+            ? 0
+            : startIndex + 1;
+
+
+    const showingTo =
+        endIndex;
+
+
+    document.getElementById(
+        "entriesInfo"
+    ).textContent =
+
+        `Showing ${showingFrom} to ${showingTo} of ${total} entries`;
+
+
+    updatePagination();
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+
+        "en-GB",
+
+        {
+
+            weekday: "short",
+
+            day: "2-digit",
+
+            month: "short",
+
+            year: "numeric"
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        function () {
+
+            const search =
+                this.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!search) {
+
+                filteredHistoryData =
+                    [...weeklyHistoryData];
+
+            }
+            else {
+
+                filteredHistoryData =
+                    weeklyHistoryData.filter(
+
+                        function (row) {
+
+                            return (
+
+                                String(
+                                    row.week_number ||
+                                    row.week ||
+                                    row.thrift_week ||
+                                    ""
+                                )
+                                .toLowerCase()
+                                .includes(search)
+
+                                ||
+
+                                String(
+                                    row.status ||
+                                    row.thrift_status ||
+                                    ""
+                                )
+                                .toLowerCase()
+                                .includes(search)
+
+                                ||
+
+                                String(
+                                    row.created_at ||
+                                    row.processed_at ||
+                                    row.created_date ||
+                                    ""
+                                )
+                                .toLowerCase()
+                                .includes(search)
+
+                            );
+
+                        }
+
+                    );
+
+            }
+
+
+            currentPage = 1;
+
+            renderWeeklyHistory();
+
+        }
+
+    );
+
+
+/* =====================================================
+   ENTRIES SELECT
+===================================================== */
+
+document
+    .getElementById("entriesSelect")
+    .addEventListener(
+        "change",
+        function () {
+
+            entriesPerPage =
+                Number(
+                    this.value
+                );
+
+
+            currentPage = 1;
+
+            renderWeeklyHistory();
+
+        }
+
+    );
+
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+function updatePagination() {
+
+    const total =
+        filteredHistoryData.length;
+
+
+    const totalPages =
+        Math.max(
+
+            1,
+
+            Math.ceil(
+                total /
+                entriesPerPage
+            )
+
+        );
+
+
+    const previousBtn =
+        document.getElementById(
+            "previousBtn"
+        );
+
+
+    const nextBtn =
+        document.getElementById(
+            "nextBtn"
+        );
+
+
+    const pageNumber =
+        document.getElementById(
+            "pageNumber"
+        );
+
+
+    pageNumber.textContent =
+        currentPage;
+
+
+    previousBtn.disabled =
+        currentPage <= 1;
+
+
+    nextBtn.disabled =
+        currentPage >= totalPages;
+
+}
+
+
+/* =====================================================
+   PREVIOUS PAGE
+===================================================== */
+
+function previousPage() {
+
+    if (
+        currentPage <= 1
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage--;
+
+    renderWeeklyHistory();
+
+}
+
+
+/* =====================================================
+   NEXT PAGE
+===================================================== */
+
+function nextPage() {
+
+    const total =
+        filteredHistoryData.length;
+
+
+    const totalPages =
+        Math.ceil(
+            total /
+            entriesPerPage
+        );
+
+
+    if (
+        currentPage >= totalPages
+    ) {
+
+        return;
+
+    }
+
+
+    currentPage++;
+
+    renderWeeklyHistory();
+
+}
+
+
+/* =====================================================
+   CLEAR DEFAULT
+===================================================== */
+
+async function clearDefault(
+    weekNumber,
+    selectedThriftId
+) {
+
+    if (
+        !weekNumber ||
+        !selectedThriftId
+    ) {
+
+        alert(
+            "Invalid thrift week."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            `Are you sure you want to clear the default for Week ${weekNumber}?`
+
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    const token =
+        getToken();
+
+
+    if (!token) {
+
+        alert(
+            "Your session has expired. Please login again."
+        );
+
+
+        window.location.href =
+            "login.html";
+
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                `${API_BASE}/clear-default`,
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`,
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        thrift_id:
+                            Number(
+                                selectedThriftId
+                            ),
+
+                        week_number:
+                            Number(
+                                weekNumber
+                            )
+
+                    })
+
+                }
+
+            );
+
+
+        if (
+            response.status === 401
+        ) {
+
+            clearTokens();
+
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+
+                data.message ||
+                "Unable to clear default."
+
+            );
+
+        }
+
+
+        alert(
+            "Default cleared successfully."
+        );
+
+
+        /*
+        --------------------------------------------------
+        RELOAD HISTORY
+        --------------------------------------------------
+        */
+
+        await loadWeeklyHistory();
+
+
+    } catch (error) {
+
+        console.error(
+            "CLEAR DEFAULT ERROR:",
+            error
+        );
+
+
+        alert(
+
+            error.message ||
+            "Unable to clear default."
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle(
+            "open"
+        );
+
+
+    document
+        .getElementById("overlay")
+        .classList.toggle(
+            "active"
+        );
+
+}
+
+
+/* =====================================================
+   CLOSE SIDEBAR
+===================================================== */
+
+function closeSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.remove(
+            "open"
+        );
+
+
+    document
+        .getElementById("overlay")
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+/* =====================================================
+   HEADER THEME TOGGLE
+===================================================== */
+
+function toggleTheme() {
+
+    const body =
+        document.body;
+
+    const toggle =
+        document.getElementById(
+            "toggle"
+        );
+
+    body.classList.toggle(
+        "dark-mode"
+    );
+
+    const darkMode =
+        body.classList.contains(
+            "dark-mode"
+        );
+
+    if (toggle) {
+
+        toggle.classList.toggle(
+            "active",
+            darkMode
+        );
+
+    }
+
+    localStorage.setItem(
+        "theme",
+        darkMode
+            ? "dark"
+            : "light"
+    );
+
+}
+
+
+/* =====================================================
+   LOAD SAVED THEME
+===================================================== */
+
+function loadSavedTheme() {
+
+    const savedTheme =
+        localStorage.getItem(
+            "theme"
+        );
+
+    const toggle =
+        document.getElementById(
+            "toggle"
+        );
+
+    if (
+        savedTheme === "dark"
+    ) {
+
+        document.body.classList.add(
+            "dark-mode"
+        );
+
+        if (toggle) {
+
+            toggle.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+    else {
+
+        document.body.classList.remove(
+            "dark-mode"
+        );
+
+        if (toggle) {
+
+            toggle.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        /*
+        --------------------------------------------------
+        LOAD SAVED THEME
+        --------------------------------------------------
+        */
+
+        loadSavedTheme();
+
+
+        /*
+        --------------------------------------------------
+        DISPLAY SELECTED THRIFT ID
+        --------------------------------------------------
+        */
+
+        console.log(
+            "Loading thrift subscription:",
+            thriftId
+        );
+
+
+        /*
+        --------------------------------------------------
+        LOAD LOGGED-IN USER DETAILS
+        --------------------------------------------------
+        */
+
+        await loadUserDetails();
+
+
+        /*
+        --------------------------------------------------
+        LOAD WEEKLY HISTORY
+        --------------------------------------------------
+        */
+
+        loadWeeklyHistory();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

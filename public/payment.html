@@ -1,0 +1,613 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <!-- Character encoding -->
+    <meta charset="utf-8">
+
+
+    <!-- Responsive design -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+
+    <!-- Page title -->
+    <title>
+        Payment
+    </title>
+
+
+    <!-- Bootstrap 5.3.3 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Main container -->
+    <div class="container py-5">
+
+
+        <!-- Center content -->
+        <div class="row justify-content-center">
+
+
+            <!-- Payment card -->
+            <div class="col-lg-7">
+
+
+                <div class="card p-4 p-md-5">
+
+
+                    <!-- Page heading -->
+                    <h2>
+                        Complete Registration
+                    </h2>
+
+
+                    <!-- Registration fee -->
+                    <p>
+
+                        Registration fee:
+
+                        <strong>
+                            ₦3,000
+                        </strong>
+
+                    </p>
+
+
+                    <!-- Message area -->
+                    <div id="msg"></div>
+
+
+                    <!-- Paystack button -->
+                    <button
+                        id="paystack"
+                        class="btn btn-primary w-100 mb-3"
+						
+                    >
+
+                        Pay ₦3,000 with Paystack
+
+                    </button>
+					
+			
+
+
+
+                    <!-- Manual payment button -->
+                    <button
+                        id="manual"
+                        class="btn btn-outline-secondary w-100"
+                    >
+
+                        Choose Manual Payment
+
+                    </button>
+
+
+                    <!-- Manual payment information -->
+                    <div
+                        id="manualBox"
+                        class="alert alert-info mt-4 d-none"
+                    >
+
+
+                        <!-- Manual payment heading -->
+                        <h6>
+                            Manual payment instructions
+                        </h6>
+
+
+                        <!-- Bank name -->
+                        <div>
+
+                            Bank:
+
+                            <strong id="bank"></strong>
+
+                        </div>
+
+
+                        <!-- Account name -->
+                        <div>
+
+                            Account name:
+
+                            <strong id="aname"></strong>
+
+                        </div>
+
+
+                        <!-- Account number -->
+                        <div>
+
+                            Account number:
+
+                            <strong id="anum"></strong>
+
+                        </div>
+
+
+                        <!-- Submit manual payment -->
+                        <button
+                            id="submitManual"
+                            class="btn btn-success mt-3"
+                        >
+
+                            I Have Made Payment
+
+                        </button>
+
+
+                    </div>
+
+
+                    <!-- Login link -->
+                    <div class="text-center mt-3">
+
+                        <a href="login.html">
+
+                            Go to login
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /*
+        |--------------------------------------------------------------------------
+        | GET REGISTERED USER ID
+        |--------------------------------------------------------------------------
+        |
+        | register.js should save the user ID here after registration.
+        |
+        */
+
+        const uid =
+            localStorage.getItem(
+                'registration_user_id'
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | MESSAGE ELEMENT
+        |--------------------------------------------------------------------------
+        */
+
+        const msg =
+            document.getElementById(
+                'msg'
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK REGISTRATION SESSION
+        |--------------------------------------------------------------------------
+        */
+
+        if (!uid) {
+
+            msg.innerHTML =
+
+                '<div class="alert alert-warning">' +
+
+                'Registration session not found. ' +
+
+                'Please register first.' +
+
+                '</div>';
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PAYSTACK PAYMENT
+        |--------------------------------------------------------------------------
+        |
+        | No JWT / Authorization header is sent.
+        |
+        */
+
+        document.getElementById(
+            'paystack'
+        ).onclick = async () => {
+
+            try {
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | INITIALIZE PAYSTACK PAYMENT
+                |--------------------------------------------------------------------------
+                */
+
+                const r = await fetch(
+
+                    '/api/payments/registration/initialize',
+
+                    {
+
+                        method: 'POST',
+
+                        headers: {
+
+                            'Content-Type':
+                                'application/json'
+
+                        },
+
+                        body: JSON.stringify({
+
+                            user_id:
+                                Number(uid)
+
+                        })
+
+                    }
+
+                );
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | GET API RESPONSE
+                |--------------------------------------------------------------------------
+                */
+
+                const d =
+                    await r.json();
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | CHECK RESPONSE
+                |--------------------------------------------------------------------------
+                */
+
+                if (!r.ok) {
+
+                    throw new Error(
+                        d.message
+                    );
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | REDIRECT TO PAYSTACK
+                |--------------------------------------------------------------------------
+                */
+
+                location.href =
+                    d.authorization_url;
+
+
+            } catch (e) {
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SHOW ERROR
+                |--------------------------------------------------------------------------
+                */
+
+                msg.innerHTML =
+
+                    `
+                    <div class="alert alert-danger">
+                        ${e.message}
+                    </div>
+                    `;
+
+            }
+
+        };
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SHOW / HIDE MANUAL PAYMENT
+        |--------------------------------------------------------------------------
+        */
+
+        document.getElementById(
+            'manual'
+        ).onclick = () => {
+
+
+            document.getElementById(
+                'manualBox'
+            ).classList.toggle(
+                'd-none'
+            );
+
+        };
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | MANUAL BANK DETAILS
+        |--------------------------------------------------------------------------
+        |
+        | Replace these values with your real company bank details.
+        |
+        */
+
+        document.getElementById(
+            'bank'
+        ).textContent =
+            'FCMB — First City Monument Bank Plc';
+
+
+        document.getElementById(
+            'aname'
+        ).textContent =
+            'Best wing food concept';
+
+
+        document.getElementById(
+            'anum'
+        ).textContent =
+            '2009292218';
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUBMIT MANUAL PAYMENT
+        |--------------------------------------------------------------------------
+        |
+        | No JWT / Authorization header is required.
+        |
+        */
+
+		
+				document.getElementById("submitManual").onclick = async function () {
+				
+				    const button = this;
+				
+				    const uid =
+				        localStorage.getItem("registration_user_id");
+				
+				    if (!uid) {
+				
+				        msg.innerHTML = `
+				            <div class="alert alert-danger">
+				                Registration session not found.
+				                Please register again.
+				            </div>
+				        `;
+				
+				        return;
+				    }
+				
+				    try {
+				
+				        button.disabled = true;
+				        button.textContent = "Submitting Payment...";
+				
+				        const response = await fetch(
+				            "/api/payment/manual",
+				            {
+				                method: "POST",
+				
+				                headers: {
+				                    "Content-Type": "application/json"
+				                },
+				
+				                body: JSON.stringify({
+				                    user_id: Number(uid),
+				                    amount: 5000,
+				                    payment_method: "BANK_TRANSFER"
+				                })
+				            }
+				        );
+				
+				        const text = await response.text();
+				
+				        console.log(
+				            "MANUAL PAYMENT RESPONSE:",
+				            response.status,
+				            text
+				        );
+				
+				        let data;
+				
+				        try {
+				            data = JSON.parse(text);
+				        } catch (jsonError) {
+				
+				            console.error(
+				                "SERVER RETURNED NON-JSON:",
+				                text
+				            );
+				
+				            throw new Error(
+				                "Payment route is not returning JSON. HTTP " +
+				                response.status
+				            );
+				        }
+				
+				        if (!response.ok) {
+				
+				            throw new Error(
+				                data.message ||
+				                "Unable to submit payment."
+				            );
+				        }
+				
+				        msg.innerHTML = `
+				            <div class="alert alert-success">
+				
+				                <strong>Payment Submitted Successfully</strong>
+				
+				                <br><br>
+				
+				                Your ₦3,000 payment has been submitted
+				                for admin verification.
+				
+				                <br><br>
+				
+				                Please wait for approval.
+				
+				            </div>
+				        `;
+				
+				        button.disabled = true;
+				        button.textContent = "Payment Submitted";
+				
+				    } catch (error) {
+				
+				        console.error(
+				            "MANUAL PAYMENT ERROR:",
+				            error
+				        );
+				
+				        msg.innerHTML = `
+				            <div class="alert alert-danger">
+				                ${error.message}
+				            </div>
+				        `;
+				
+				        button.disabled = false;
+				        button.textContent = "I Have Made Payment";
+				    }
+				
+				};
+
+
+
+
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | READ URL PARAMETERS
+        |--------------------------------------------------------------------------
+        |
+        | Paystack redirects the user back with a reference.
+        |
+        */
+
+        const p =
+            new URLSearchParams(
+                location.search
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK IF PAYMENT NEEDS VERIFICATION
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+
+            p.get('verify') === '1' &&
+
+            p.get('reference')
+
+        ) {
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | VERIFY PAYSTACK PAYMENT
+            |--------------------------------------------------------------------------
+            */
+
+            fetch(
+
+                '/api/payment/paystack/verify/' +
+
+                encodeURIComponent(
+                    p.get('reference')
+                )
+
+            )
+
+                .then(
+
+                    r =>
+                        r.json()
+
+                )
+
+                .then(
+
+                    d => {
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | DISPLAY PAYMENT RESULT
+                        |--------------------------------------------------------------------------
+                        */
+
+                        msg.innerHTML =
+
+                            `
+                            <div class="alert ${
+                                d.success
+                                    ? 'alert-success'
+                                    : 'alert-danger'
+                            }">
+
+                                ${d.message}
+
+                                ${
+                                    d.account_number
+                                        ? ' Account number: ' +
+                                          d.account_number
+                                        : ''
+                                }
+
+                            </div>
+                            `;
+
+                    }
+
+                );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

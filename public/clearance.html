@@ -1,0 +1,3485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b132b"
+    >
+
+    <title>
+        Bestwing Global Service - Clearance
+    </title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets/logos.png"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+
+            --sidebar: #0b132b;
+            --sidebar-2: #111c3d;
+
+            --primary: #2563eb;
+
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --info: #0891b2;
+
+            --bg: #f4f7fb;
+            --card: #ffffff;
+
+            --text: #182230;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --shadow:
+                0 8px 28px rgba(15, 23, 42, .07);
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           APP
+        ===================================================== */
+
+        .app {
+
+            min-height: 100vh;
+
+            display: flex;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            width: 280px;
+
+            min-width: 280px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--sidebar),
+                    #080d1d
+                );
+
+            color: #fff;
+
+            position: fixed;
+
+            inset: 0 auto 0 0;
+
+            z-index: 1040;
+
+            overflow-y: auto;
+
+            transition:
+                transform .3s ease;
+
+        }
+
+
+        .brand {
+
+            height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 0 22px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+
+        }
+
+
+        .sidebar .nav-link {
+
+            color: #cbd5e1;
+
+            margin: 3px 10px;
+
+            border-radius: 10px;
+
+            padding: 10px 12px;
+
+            font-size: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            transition: .2s;
+
+        }
+
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+
+            color: #fff;
+
+            background:
+                rgba(37, 99, 235, .25);
+
+        }
+
+
+        .sidebar .nav-link i {
+
+            width: 20px;
+
+            font-size: 16px;
+
+        }
+
+
+        .sidebar .collapse .nav-link {
+
+            margin-left: 28px;
+
+            font-size: 12px;
+
+        }
+
+
+        .submenu-link {
+
+            padding-left: 45px !important;
+
+            font-size: 14px !important;
+
+            transition:
+                all .2s ease;
+
+        }
+
+
+        .submenu-link i {
+
+            margin-right: 10px;
+
+        }
+
+
+        .submenu-link:hover {
+
+            padding-left: 50px !important;
+
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                18px 14px 6px;
+
+            color: #718096;
+
+            text-transform: uppercase;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            font-weight: 800;
+
+        }
+
+
+        .profile-arrow,
+        .settlement-arrow,
+        .support-arrow {
+
+            transition:
+                transform .3s ease;
+
+        }
+
+
+        .nav-link[aria-expanded="true"]
+        .profile-arrow,
+        .nav-link[aria-expanded="true"]
+        .settlement-arrow,
+        .nav-link[aria-expanded="true"]
+        .support-arrow {
+
+            transform:
+                rotate(180deg);
+
+        }
+
+
+        #profileMenu .nav-link,
+        #supportMenu .nav-link {
+
+            font-size: 14px;
+
+            padding-top: 9px;
+
+            padding-bottom: 9px;
+
+            opacity: .9;
+
+        }
+
+
+        #profileMenu .nav-link:hover,
+        #supportMenu .nav-link:hover {
+
+            opacity: 1;
+
+            padding-left:
+                52px !important;
+
+        }
+
+
+        #settlementsMenu,
+        #thriftMenu,
+        #transactionMenu,
+        #supportMenu,
+        #profileMenu {
+
+            background:
+                rgba(0, 0, 0, .08);
+
+            border-radius: 8px;
+
+            margin:
+                3px 8px 8px 8px;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+
+            margin-left: 280px;
+
+            width:
+                calc(100% - 280px);
+
+            min-width: 0;
+
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+
+            height: 74px;
+
+            background:
+                rgba(255,255,255,.94);
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            backdrop-filter:
+                blur(10px);
+
+        }
+
+
+        .mobile-menu {
+
+            display: none;
+
+        }
+
+
+        .search-box {
+
+            width:
+                min(430px, 40vw);
+
+            position: relative;
+
+        }
+
+
+        .search-box input {
+
+            padding-left: 40px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid var(--border);
+
+            background: #f8fafc;
+
+            height: 42px;
+
+        }
+
+
+        .search-box i {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 12px;
+
+            color: #64748b;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            padding: 28px;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .welcome {
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #0b132b,
+                    #183d7a 55%,
+                    #0e7490
+                );
+
+            border-radius: 18px;
+
+            color: #fff;
+
+            padding: 26px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .welcome::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+
+            height: 240px;
+
+            right: -70px;
+
+            top: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.08);
+
+        }
+
+
+        .welcome h3 {
+
+            font-weight: 800;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .account-chip {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            background:
+                rgba(255,255,255,.1);
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            padding: 7px 11px;
+
+            border-radius: 30px;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .dashboard-card {
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: var(--card);
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .card-header-custom {
+
+            padding:
+                18px 20px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .section-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            margin: 0;
+
+        }
+
+
+        .section-subtitle {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .summary-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .summary-card {
+
+            padding: 20px;
+
+            min-height: 145px;
+
+        }
+
+
+        .summary-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 12px;
+
+            display: grid;
+
+            place-items: center;
+
+            font-size: 19px;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .summary-label {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .summary-value {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            margin-top: 4px;
+
+        }
+
+
+        .blue {
+
+            background: #dbeafe;
+
+            color: #1d4ed8;
+
+        }
+
+
+        .green {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .orange {
+
+            background: #fef3c7;
+
+            color: #b45309;
+
+        }
+
+
+        .red {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+        }
+
+
+        /* =====================================================
+           CLEARANCE FEE
+        ===================================================== */
+
+        .fee-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #ffffff
+                );
+
+            border:
+                1px solid #bfdbfe;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+        }
+
+
+        .fee-title {
+
+            font-size: 12px;
+
+            color: #64748b;
+
+            font-weight: 700;
+
+        }
+
+
+        .fee-amount {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            color: #1d4ed8;
+
+        }
+
+
+        /* =====================================================
+           ACCOUNT CARDS
+        ===================================================== */
+
+        .clearance-account {
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 13px;
+
+            padding: 18px;
+
+            background: #fff;
+
+            height: 100%;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .clearance-account:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(15,23,42,.08);
+
+        }
+
+
+        .account-number {
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            color: #182230;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .account-label {
+
+            font-size: 10px;
+
+            color: #64748b;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+        }
+
+
+        .account-value {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-top: 2px;
+
+        }
+
+
+        .badge-soft {
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 55px 20px;
+
+            color: #64748b;
+
+        }
+
+
+        .empty-state-icon {
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 50%;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            display: grid;
+
+            place-items: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 28px;
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table {
+
+            font-size: 12px;
+
+            margin: 0;
+
+        }
+
+
+        .table th {
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           MOBILE OVERLAY
+        ===================================================== */
+
+        .mobile-overlay {
+
+            display: none;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            padding:
+                20px 0 5px;
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1199px) {
+
+            .sidebar {
+
+                width: 245px;
+
+                min-width: 245px;
+
+            }
+
+
+            .main {
+
+                margin-left: 245px;
+
+                width:
+                    calc(100% - 245px);
+
+            }
+
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+        }
+
+
+        @media (max-width: 991px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+
+            .sidebar.show {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+
+            }
+
+
+            .mobile-menu {
+
+                display: inline-flex;
+
+            }
+
+
+            .mobile-overlay.show {
+
+                display: block;
+
+                position: fixed;
+
+                inset: 0;
+
+                background:
+                    rgba(15,23,42,.45);
+
+                z-index: 1030;
+
+            }
+
+
+            .topbar {
+
+                padding: 0 16px;
+
+            }
+
+
+            .search-box {
+
+                width: 45%;
+
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+        }
+
+
+        @media (max-width: 767px) {
+
+            .topbar {
+
+                height: 64px;
+
+            }
+
+
+            .search-box {
+
+                display: none;
+
+            }
+
+
+            .content {
+
+                padding: 14px;
+
+            }
+
+
+            .welcome {
+
+                padding: 20px;
+
+                border-radius: 14px;
+
+            }
+
+
+            .welcome h3 {
+
+                font-size: 20px;
+
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 12px;
+
+            }
+
+
+            .summary-card {
+
+                padding: 16px;
+
+                min-height: 135px;
+
+            }
+
+
+            .summary-value {
+
+                font-size: 21px;
+
+            }
+
+
+            .card-header-custom {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .clear-all-button {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .summary-grid {
+
+                gap: 10px;
+
+            }
+
+
+            .summary-card {
+
+                padding: 14px;
+
+            }
+
+
+            .summary-value {
+
+                font-size: 18px;
+
+            }
+
+
+            .summary-label {
+
+                font-size: 11px;
+
+            }
+
+
+            .topbar .btn {
+
+                padding:
+                    7px 9px;
+
+            }
+
+
+            .account-number {
+
+                font-size: 17px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div
+            class="brand"
+            style="
+                text-align:center;
+                display:flex;
+                justify-content:center;
+            "
+        >
+
+            <img
+                src="log.png"
+                height="80"
+                width="80"
+                alt="Logo"
+            >
+
+        </div>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <a
+            class="nav-link"
+            href="dashboard.html"
+        >
+
+            <i class="bi bi-grid-1x2-fill"></i>
+
+            Dashboard
+
+        </a>
+
+
+        <!-- =================================================
+             SETTLEMENTS
+        ================================================== -->
+
+        <a
+            class="nav-link d-flex align-items-center justify-content-between active"
+            data-bs-toggle="collapse"
+            href="#settlementsMenu"
+            role="button"
+            aria-expanded="true"
+            aria-controls="settlementsMenu"
+        >
+
+            <span>
+
+                <i class="bi bi-wallet2 me-2"></i>
+
+                <b>
+                    Settlements Account(s)
+                </b>
+
+            </span>
+
+
+            <i
+                class="bi bi-chevron-down settlement-arrow"
+            ></i>
+
+        </a>
+
+
+        <div
+            class="collapse show"
+            id="settlementsMenu"
+        >
+
+            <a
+                class="nav-link submenu-link active"
+                href="clearance.html"
+            >
+
+                <i class="bi bi-plus-circle"></i>
+
+                Due for Clearance
+
+            </a>
+
+
+        </div>
+
+     
+
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="mobile-overlay"
+        id="overlay"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div
+                class="d-flex align-items-center gap-3"
+            >
+
+                <button
+                    class="btn btn-light border mobile-menu"
+                    id="menuBtn"
+                    type="button"
+                >
+
+                    <i class="bi bi-list fs-5"></i>
+
+                </button>
+
+
+                <div class="search-box">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="search"
+                        class="form-control"
+                        id="globalSearch"
+                        placeholder="Search clearance..."
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="d-flex align-items-center gap-2"
+            >
+
+                <button
+                    class="btn btn-light border"
+                    type="button"
+                    title="Notifications"
+                >
+
+                    <i class="bi bi-bell"></i>
+
+                </button>
+
+
+                <a
+                    href="dashboard.html"
+                    class="btn btn-light border"
+                    title="Dashboard"
+                >
+
+                    <i class="bi bi-house"></i>
+
+                    <span class="d-none d-sm-inline ms-1">
+                        Dashboard
+                    </span>
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <section class="welcome mb-4">
+
+                <div
+                    class="position-relative"
+                    style="z-index:1;"
+                >
+
+                    <div
+                        class="
+                            d-flex
+                            flex-wrap
+                            justify-content-between
+                            align-items-center
+                            gap-3
+                        "
+                    >
+
+                        <div>
+
+                            <div
+                                class="
+                                    small
+                                    opacity-75
+                                    mb-1
+                                "
+                            >
+
+                                Settlements Account(s)
+
+                            </div>
+
+
+                            <h3>
+
+                                Thrift Clearance
+
+                            </h3>
+
+
+                            <div
+                                class="small opacity-75 mt-2"
+                            >
+
+                                Clear completed 50-week thrift
+                                subscriptions before receiving
+                                the applicable reward.
+
+                            </div>
+
+
+                            <div
+                                class="account-chip mt-3"
+                            >
+
+                                <i
+                                    class="bi bi-shield-check"
+                                ></i>
+
+                                Clearance Fee:
+
+                                <strong>
+                                    ₦2,000 per completed account
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="text-md-end"
+                        >
+
+                            <div
+                                class="small opacity-75"
+                            >
+
+                                Payment Source
+
+                            </div>
+
+
+                            <div
+                                class="account-chip mt-2"
+                                id="firstAccountDisplay"
+                            >
+
+                                <i class="bi bi-bank"></i>
+
+                                Loading...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <div class="dashboard-card summary-card">
+
+                    <div
+                        class="summary-icon orange"
+                    >
+
+                        <i class="bi bi-clock-history"></i>
+
+                    </div>
+
+
+                    <div class="summary-label">
+
+                        Completed Thrift Accounts
+
+                    </div>
+
+
+                    <div
+                        class="summary-value"
+                        id="completedAccountsCount"
+                    >
+
+                        0
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card summary-card">
+
+                    <div
+                        class="summary-icon blue"
+                    >
+
+                        <i class="bi bi-receipt"></i>
+
+                    </div>
+
+
+                    <div class="summary-label">
+
+                        Clearance Fee Per Account
+
+                    </div>
+
+
+                    <div
+                        class="summary-value"
+                    >
+
+                        ₦2,000.00
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card summary-card">
+
+                    <div
+                        class="summary-icon green"
+                    >
+
+                        <i class="bi bi-cash-stack"></i>
+
+                    </div>
+
+
+                    <div class="summary-label">
+
+                        Total Clearance Fee
+
+                    </div>
+
+
+                    <div
+                        class="summary-value"
+                        id="totalClearanceFee"
+                    >
+
+                        ₦0.00
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PAYMENT INFORMATION
+            ================================================== -->
+
+            <div
+                class="dashboard-card mb-4"
+            >
+
+                <div
+                    class="card-header-custom"
+                >
+
+                    <div>
+
+                        <h5 class="section-title">
+
+                            Clearance Payment
+
+                        </h5>
+
+
+                        <div
+                            class="section-subtitle"
+                        >
+
+                            The total fee will be deducted from
+                            your first virtual account.
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="
+                            badge-soft
+                            bg-warning-subtle
+                            text-warning
+                        "
+                    >
+
+                        <i
+                            class="bi bi-exclamation-circle me-1"
+                        ></i>
+
+                        Payment Required
+
+                    </span>
+
+                </div>
+
+
+                <div class="p-4">
+
+                    <div class="fee-box">
+
+                        <div class="row g-3 align-items-center">
+
+                            <div class="col-md-8">
+
+                                <div class="fee-title">
+
+                                    TOTAL AMOUNT REQUIRED
+
+                                </div>
+
+
+                                <div
+                                    class="fee-amount"
+                                    id="feeBoxAmount"
+                                >
+
+                                    ₦0.00
+
+                                </div>
+
+
+                                <div
+                                    class="
+                                        small
+                                        text-muted
+                                        mt-1
+                                    "
+                                >
+
+                                    ₦2,000 × completed thrift
+                                    account(s)
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <button
+                                    type="button"
+                                    class="
+                                        btn
+                                        btn-primary
+                                        btn-lg
+                                        w-100
+                                        clear-all-button
+                                    "
+                                    id="clearAllBtn"
+                                    disabled
+                                >
+
+                                    <i
+                                        class="
+                                            bi
+                                            bi-check2-circle
+                                            me-2
+                                        "
+                                    ></i>
+
+                                    Clear All
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETED ACCOUNTS
+            ================================================== -->
+
+            <div
+                class="dashboard-card mb-4"
+            >
+
+                <div
+                    class="card-header-custom"
+                >
+
+                    <div>
+
+                        <h5 class="section-title">
+
+                            Completed Thrift Accounts
+
+                        </h5>
+
+
+                        <div
+                            class="section-subtitle"
+                        >
+
+                            All thrift subscriptions that have
+                            completed 50 weeks and are awaiting
+                            clearance.
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="
+                            btn
+                            btn-sm
+                            btn-light
+                            border
+                        "
+                        id="refreshBtn"
+                    >
+
+                        <i
+                            class="bi bi-arrow-clockwise me-1"
+                        ></i>
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    id="loadingState"
+                    class="p-5 text-center"
+                >
+
+                    <div
+                        class="
+                            spinner-border
+                            text-primary
+                        "
+                        role="status"
+                    ></div>
+
+
+                    <div
+                        class="
+                            small
+                            text-muted
+                            mt-3
+                        "
+                    >
+
+                        Loading completed thrift accounts...
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    id="emptyState"
+                    class="empty-state d-none"
+                >
+
+                    <div class="empty-state-icon">
+
+                        <i class="bi bi-check-lg"></i>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        No Accounts Due for Clearance
+
+                    </h5>
+
+
+                    <p
+                        class="
+                            small
+                            text-muted
+                            mb-0
+                        "
+                    >
+
+                        You currently have no completed thrift
+                        subscription awaiting clearance.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ACCOUNT LIST -->
+
+                <div
+                    id="accountsContainer"
+                    class="
+                        p-3
+                        d-none
+                    "
+                >
+
+                    <div
+                        class="row g-3"
+                        id="accountsList"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 INFORMATION
+            ================================================== -->
+
+            <div
+                class="
+                    dashboard-card
+                    mb-4
+                "
+            >
+
+                <div
+                    class="p-4"
+                >
+
+                    <div
+                        class="
+                            d-flex
+                            gap-3
+                            align-items-start
+                        "
+                    >
+
+                        <div
+                            class="
+                                summary-icon
+                                blue
+                                mb-0
+                                flex-shrink-0
+                            "
+                        >
+
+                            <i class="bi bi-info-circle"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h6 class="fw-bold mb-2">
+
+                                Important Clearance Information
+
+                            </h6>
+
+
+                            <ul
+                                class="
+                                    small
+                                    text-muted
+                                    mb-0
+                                    ps-3
+                                "
+                            >
+
+                                <li class="mb-2">
+
+                                    A thrift subscription becomes
+                                    eligible for clearance after
+                                    completing 50 weeks.
+
+                                </li>
+
+
+                                <li class="mb-2">
+
+                                    The clearance fee is
+                                    <strong>
+                                        ₦2,000 per completed
+                                        thrift account
+                                    </strong>.
+
+                                </li>
+
+
+                                <li class="mb-2">
+
+                                    If you have multiple completed
+                                    thrift accounts, the fees are
+                                    combined into one payment.
+
+                                </li>
+
+
+                                <li>
+
+                                    The total clearance fee is
+                                    deducted from your
+                                    <strong>
+                                        first virtual account
+                                    </strong>.
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer">
+
+                © 2026 Bestwing Global Service
+                • Member Dashboard
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     CONFIRMATION MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="clearanceModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div
+        class="
+            modal-dialog
+            modal-dialog-centered
+        "
+    >
+
+        <div
+            class="
+                modal-content
+                border-0
+                shadow-lg
+            "
+        >
+
+            <div
+                class="
+                    modal-header
+                    bg-primary
+                    text-white
+                "
+            >
+
+                <div>
+
+                    <h5
+                        class="
+                            modal-title
+                            fw-bold
+                        "
+                    >
+
+                        <i
+                            class="
+                                bi
+                                bi-shield-check
+                                me-2
+                            "
+                        ></i>
+
+                        Confirm Clearance
+
+                    </h5>
+
+
+                    <small>
+
+                        Review your clearance payment
+
+                    </small>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <div
+                class="modal-body p-4"
+            >
+
+                <div
+                    class="
+                        alert
+                        alert-warning
+                    "
+                >
+
+                    <i
+                        class="
+                            bi
+                            bi-exclamation-triangle
+                            me-2
+                        "
+                    ></i>
+
+                    This action will clear all completed thrift
+                    accounts currently eligible for clearance.
+
+                </div>
+
+
+                <div
+                    class="
+                        d-flex
+                        justify-content-between
+                        border-bottom
+                        pb-3
+                        mb-3
+                    "
+                >
+
+                    <span>
+                        Completed Accounts
+                    </span>
+
+
+                    <strong
+                        id="modalAccountCount"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="
+                        d-flex
+                        justify-content-between
+                        border-bottom
+                        pb-3
+                        mb-3
+                    "
+                >
+
+                    <span>
+                        Fee Per Account
+                    </span>
+
+
+                    <strong>
+                        ₦2,000.00
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="
+                        d-flex
+                        justify-content-between
+                        mb-3
+                    "
+                >
+
+                    <span
+                        class="fw-bold"
+                    >
+                        Total Clearance Fee
+                    </span>
+
+
+                    <strong
+                        class="text-primary fs-5"
+                        id="modalTotalFee"
+                    >
+                        ₦0.00
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="
+                        alert
+                        alert-light
+                        border
+                        small
+                        mb-0
+                    "
+                >
+
+                    <i
+                        class="
+                            bi
+                            bi-bank
+                            me-2
+                        "
+                    ></i>
+
+                    Payment will be deducted from your first
+                    virtual account:
+
+                    <strong id="modalFirstAccount">
+                        Loading...
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="modal-footer"
+            >
+
+                <button
+                    type="button"
+                    class="btn btn-light border"
+                    data-bs-dismiss="modal"
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="confirmClearanceBtn"
+                >
+
+                    <i
+                        class="
+                            bi
+                            bi-check-circle
+                            me-2
+                        "
+                    ></i>
+
+                    Confirm & Pay
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="
+        position-fixed
+        bottom-0
+        end-0
+        p-3
+    "
+    style="z-index:2000"
+>
+
+    <div
+        id="appToast"
+        class="
+            toast
+            border-0
+            shadow
+        "
+        role="alert"
+    >
+
+        <div class="toast-header">
+
+            <i
+                id="toastIcon"
+                class="
+                    bi
+                    bi-check-circle-fill
+                    text-success
+                    me-2
+                "
+            ></i>
+
+
+            <strong class="me-auto">
+
+                Bestwing Global Service
+
+            </strong>
+
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="toast"
+            ></button>
+
+        </div>
+
+
+        <div
+            class="toast-body"
+            id="toastMessage"
+        >
+
+            Action completed.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   CONSTANTS
+========================================================= */
+
+const API_BASE = "/api";
+
+const CLEARANCE_FEE = 2000;
+
+
+/* =========================================================
+   TOKEN
+========================================================= */
+
+function getToken() {
+
+    return (
+        localStorage.getItem("token") ||
+        localStorage.getItem("jwt") ||
+        sessionStorage.getItem("token") ||
+        sessionStorage.getItem("jwt")
+    );
+
+}
+
+
+/* =========================================================
+   AUTHENTICATED FETCH
+========================================================= */
+
+async function apiFetch(
+    url,
+    options = {}
+) {
+
+    const token = getToken();
+
+
+    if (!token) {
+
+        window.location.href =
+            "/login.html";
+
+        throw new Error(
+            "Your session has expired. Please login again."
+        );
+
+    }
+
+
+    const headers = {
+
+        "Accept":
+            "application/json",
+
+        ...(options.headers || {}),
+
+        "Authorization":
+            "Bearer " + token
+
+    };
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers
+            }
+        );
+
+
+    if (
+        response.status === 401
+    ) {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("jwt");
+
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("jwt");
+
+        window.location.href =
+            "/login.html";
+
+        throw new Error(
+            "Your session has expired. Please login again."
+        );
+
+    }
+
+
+    return response;
+
+}
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(amount) {
+
+    const value =
+        Number(amount || 0);
+
+    return new Intl.NumberFormat(
+        "en-NG",
+        {
+            style: "currency",
+            currency: "NGN",
+            minimumFractionDigits: 2
+        }
+    ).format(value);
+
+}
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const loadingState =
+    document.getElementById("loadingState");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+const accountsContainer =
+    document.getElementById("accountsContainer");
+
+const accountsList =
+    document.getElementById("accountsList");
+
+const clearAllBtn =
+    document.getElementById("clearAllBtn");
+
+const refreshBtn =
+    document.getElementById("refreshBtn");
+
+const completedAccountsCount =
+    document.getElementById(
+        "completedAccountsCount"
+    );
+
+const totalClearanceFee =
+    document.getElementById(
+        "totalClearanceFee"
+    );
+
+const feeBoxAmount =
+    document.getElementById(
+        "feeBoxAmount"
+    );
+
+const firstAccountDisplay =
+    document.getElementById(
+        "firstAccountDisplay"
+    );
+
+const modalAccountCount =
+    document.getElementById(
+        "modalAccountCount"
+    );
+
+const modalTotalFee =
+    document.getElementById(
+        "modalTotalFee"
+    );
+
+const modalFirstAccount =
+    document.getElementById(
+        "modalFirstAccount"
+    );
+
+const confirmClearanceBtn =
+    document.getElementById(
+        "confirmClearanceBtn"
+    );
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+function closeSidebar() {
+
+    sidebar.classList.remove("show");
+
+    overlay.classList.remove("show");
+
+}
+
+
+function openSidebar() {
+
+    sidebar.classList.add("show");
+
+    overlay.classList.add("show");
+
+}
+
+
+menuBtn.addEventListener(
+    "click",
+    function () {
+
+        if (
+            sidebar.classList.contains("show")
+        ) {
+
+            closeSidebar();
+
+        } else {
+
+            openSidebar();
+
+        }
+
+    }
+);
+
+
+overlay.addEventListener(
+    "click",
+    closeSidebar
+);
+
+
+/* =========================================================
+   CLOSE SIDEBAR AFTER MOBILE LINK CLICK
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".sidebar a"
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        window.innerWidth <= 991
+                    ) {
+
+                        closeSidebar();
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    message,
+    success = true
+) {
+
+    const toast =
+        document.getElementById(
+            "appToast"
+        );
+
+    const toastMessage =
+        document.getElementById(
+            "toastMessage"
+        );
+
+    const toastIcon =
+        document.getElementById(
+            "toastIcon"
+        );
+
+
+    toastMessage.textContent =
+        message;
+
+
+    toastIcon.className =
+        success
+            ? "bi bi-check-circle-fill text-success me-2"
+            : "bi bi-exclamation-circle-fill text-danger me-2";
+
+
+    const instance =
+        bootstrap.Toast.getOrCreateInstance(
+            toast
+        );
+
+
+    instance.show();
+
+}
+
+
+/* =========================================================
+   CLEARANCE DATA
+========================================================= */
+
+let clearanceAccounts = [];
+
+let firstAccount = null;
+
+
+/* =========================================================
+   LOAD CLEARANCE ACCOUNTS
+========================================================= */
+
+async function loadClearanceAccounts() {
+
+    loadingState.classList.remove("d-none");
+
+    emptyState.classList.add("d-none");
+
+    accountsContainer.classList.add("d-none");
+
+    clearAllBtn.disabled = true;
+
+
+    try {
+
+        const response =
+            await apiFetch(
+                `${API_BASE}/thrift/clearance`
+            );
+
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if (
+            !contentType.includes(
+                "application/json"
+            )
+        ) {
+
+            throw new Error(
+                "Server returned an invalid response."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                data.error ||
+                "Unable to load clearance accounts."
+            );
+
+        }
+
+
+        clearanceAccounts =
+            Array.isArray(data.accounts)
+                ? data.accounts
+                : [];
+
+
+        firstAccount =
+            data.first_account || null;
+
+
+        renderClearanceAccounts();
+
+
+    } catch (error) {
+
+        console.error(
+            "GET CLEARANCE ACCOUNTS ERROR:",
+            error
+        );
+
+
+        loadingState.classList.add(
+            "d-none"
+        );
+
+
+        accountsList.innerHTML = "";
+
+
+        emptyState.classList.remove(
+            "d-none"
+        );
+
+
+        emptyState.innerHTML = `
+
+            <div class="empty-state-icon bg-danger-subtle text-danger">
+
+                <i class="bi bi-exclamation-triangle"></i>
+
+            </div>
+
+            <h5 class="fw-bold">
+
+                Unable to Load Clearance Accounts
+
+            </h5>
+
+            <p class="small text-muted mb-3">
+
+                ${escapeHtml(
+                    error.message ||
+                    "Please try again."
+                )}
+
+            </p>
+
+            <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                onclick="loadClearanceAccounts()"
+            >
+
+                <i class="bi bi-arrow-clockwise me-1"></i>
+
+                Try Again
+
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER ACCOUNTS
+========================================================= */
+
+function renderClearanceAccounts() {
+
+    loadingState.classList.add(
+        "d-none"
+    );
+
+
+    const count =
+        clearanceAccounts.length;
+
+
+    const total =
+        count * CLEARANCE_FEE;
+
+
+    completedAccountsCount.textContent =
+        count;
+
+
+    totalClearanceFee.textContent =
+        formatMoney(total);
+
+
+    feeBoxAmount.textContent =
+        formatMoney(total);
+
+
+    if (
+        firstAccount &&
+        firstAccount.accountno
+    ) {
+
+        firstAccountDisplay.innerHTML = `
+
+            <i class="bi bi-bank"></i>
+
+            First Account:
+            <strong>
+                ${escapeHtml(
+                    firstAccount.accountno
+                )}
+            </strong>
+
+        `;
+
+    } else {
+
+        firstAccountDisplay.innerHTML = `
+
+            <i class="bi bi-bank"></i>
+
+            First account not available
+
+        `;
+
+    }
+
+
+    if (count === 0) {
+
+        accountsContainer.classList.add(
+            "d-none"
+        );
+
+        emptyState.classList.remove(
+            "d-none"
+        );
+
+        clearAllBtn.disabled = true;
+
+        return;
+
+    }
+
+
+    emptyState.classList.add(
+        "d-none"
+    );
+
+
+    accountsContainer.classList.remove(
+        "d-none"
+    );
+
+
+    clearAllBtn.disabled = false;
+
+
+    accountsList.innerHTML =
+        clearanceAccounts
+            .map(
+                (account, index) =>
+                    createAccountCard(
+                        account,
+                        index
+                    )
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   ACCOUNT CARD
+========================================================= */
+
+function createAccountCard(
+    account,
+    index
+) {
+
+    const accountNo =
+        account.accountno ||
+        account.account_number ||
+        "-";
+
+
+    const amountPaid =
+        Number(
+            account.amount_paid ||
+            account.thrift_total_paid ||
+            0
+        );
+
+
+    const weeks =
+        Number(
+            account.current_weeks || 50
+        );
+
+
+    const startDate =
+        account.start_date
+            ? formatDate(
+                account.start_date
+            )
+            : "-";
+
+
+    const endDate =
+        account.end_date
+            ? formatDate(
+                account.end_date
+            )
+            : "-";
+
+
+    return `
+
+        <div class="col-12 col-md-6 col-xl-4">
+
+            <div class="clearance-account">
+
+                <div
+                    class="
+                        d-flex
+                        justify-content-between
+                        align-items-start
+                        gap-2
+                        mb-3
+                    "
+                >
+
+                    <div>
+
+                        <div class="account-label">
+                            Thrift Account
+                        </div>
+
+                        <div class="account-number">
+                            ${escapeHtml(accountNo)}
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="
+                            badge-soft
+                            bg-success-subtle
+                            text-success
+                        "
+                    >
+
+                        <i class="bi bi-check-circle me-1"></i>
+
+                        Completed
+
+                    </span>
+
+                </div>
+
+
+                <div class="row g-3">
+
+                    <div class="col-6">
+
+                        <div class="account-label">
+                            Weeks Completed
+                        </div>
+
+                        <div class="account-value">
+                            ${weeks} / 50
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="account-label">
+                            Clearance Fee
+                        </div>
+
+                        <div class="account-value text-primary">
+                            ${formatMoney(CLEARANCE_FEE)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="account-label">
+                            Amount Paid
+                        </div>
+
+                        <div class="account-value">
+                            ${formatMoney(amountPaid)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <div class="account-label">
+                            Status
+                        </div>
+
+                        <div class="account-value text-success">
+                            Due
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <div class="account-label">
+                            Start Date
+                        </div>
+
+                        <div class="account-value">
+                            ${escapeHtml(startDate)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <div class="account-label">
+                            Completion Date
+                        </div>
+
+                        <div class="account-value">
+                            ${escapeHtml(endDate)}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   OPEN CLEARANCE MODAL
+========================================================= */
+
+function openClearanceModal() {
+
+    const count =
+        clearanceAccounts.length;
+
+
+    const total =
+        count * CLEARANCE_FEE;
+
+
+    modalAccountCount.textContent =
+        count;
+
+
+    modalTotalFee.textContent =
+        formatMoney(total);
+
+
+    modalFirstAccount.textContent =
+        firstAccount &&
+        firstAccount.accountno
+            ? firstAccount.accountno
+            : "Not available";
+
+
+    const modal =
+        bootstrap.Modal.getOrCreateInstance(
+            document.getElementById(
+                "clearanceModal"
+            )
+        );
+
+
+    modal.show();
+
+}
+
+
+/* =========================================================
+   CLEAR ALL BUTTON
+========================================================= */
+
+clearAllBtn.addEventListener(
+    "click",
+    function () {
+
+        if (
+            clearanceAccounts.length === 0
+        ) {
+
+            showToast(
+                "There are no completed thrift accounts to clear.",
+                false
+            );
+
+            return;
+
+        }
+
+
+        openClearanceModal();
+
+    }
+);
+
+
+/* =========================================================
+   CONFIRM CLEARANCE PAYMENT
+========================================================= */
+
+confirmClearanceBtn.addEventListener(
+    "click",
+    async function () {
+
+        if (
+            clearanceAccounts.length === 0
+        ) {
+
+            showToast(
+                "There are no accounts awaiting clearance.",
+                false
+            );
+
+            return;
+
+        }
+
+
+        const originalText =
+            confirmClearanceBtn.innerHTML;
+
+
+        confirmClearanceBtn.disabled =
+            true;
+
+
+        confirmClearanceBtn.innerHTML = `
+
+            <span
+                class="
+                    spinner-border
+                    spinner-border-sm
+                    me-2
+                "
+            ></span>
+
+            Processing...
+
+        `;
+
+
+        try {
+
+            /*
+             * IMPORTANT:
+             *
+             * No subscription ID is sent.
+             *
+             * The backend must determine:
+             *
+             * 1. Current authenticated user
+             * 2. All completed thrift subscriptions
+             * 3. Total number of accounts
+             * 4. Total clearance fee
+             * 5. First virtual account
+             * 6. Deduct the total fee
+             * 7. Mark the completed subscriptions as cleared
+             */
+
+            const response =
+                await apiFetch(
+                    `${API_BASE}/thrift/clearance/pay`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({})
+                    }
+                );
+
+
+            const contentType =
+                response.headers.get(
+                    "content-type"
+                ) || "";
+
+
+            if (
+                !contentType.includes(
+                    "application/json"
+                )
+            ) {
+
+                throw new Error(
+                    "Server returned an invalid response."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    data.error ||
+                    "Clearance payment failed."
+                );
+
+            }
+
+
+            const modalElement =
+                document.getElementById(
+                    "clearanceModal"
+                );
+
+
+            const modal =
+                bootstrap.Modal.getInstance(
+                    modalElement
+                );
+
+
+            if (modal) {
+
+                modal.hide();
+
+            }
+
+
+            showToast(
+                data.message ||
+                "Clearance payment completed successfully.",
+                true
+            );
+
+
+            /*
+             * Reload after successful payment.
+             */
+
+            await loadClearanceAccounts();
+
+
+        } catch (error) {
+
+            console.error(
+                "CLEARANCE PAYMENT ERROR:",
+                error
+            );
+
+
+            showToast(
+                error.message ||
+                "Unable to complete clearance payment.",
+                false
+            );
+
+
+        } finally {
+
+            confirmClearanceBtn.disabled =
+                false;
+
+
+            confirmClearanceBtn.innerHTML =
+                originalText;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+refreshBtn.addEventListener(
+    "click",
+    async function () {
+
+        const originalText =
+            refreshBtn.innerHTML;
+
+
+        refreshBtn.disabled =
+            true;
+
+
+        refreshBtn.innerHTML = `
+
+            <span
+                class="
+                    spinner-border
+                    spinner-border-sm
+                    me-1
+                "
+            ></span>
+
+            Loading
+
+        `;
+
+
+        try {
+
+            await loadClearanceAccounts();
+
+        } finally {
+
+            refreshBtn.disabled =
+                false;
+
+            refreshBtn.innerHTML =
+                originalText;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+    .getElementById("globalSearch")
+    .addEventListener(
+        "input",
+        function () {
+
+            const search =
+                this.value
+                    .trim()
+                    .toLowerCase();
+
+
+            document
+                .querySelectorAll(
+                    ".clearance-account"
+                )
+                .forEach(
+                    card => {
+
+                        const text =
+                            card.textContent
+                                .toLowerCase();
+
+
+                        const column =
+                            card.closest(
+                                ".col-12"
+                            );
+
+
+                        if (!column) {
+                            return;
+                        }
+
+
+                        column.style.display =
+                            !search ||
+                            text.includes(search)
+                                ? ""
+                                : "none";
+
+                    }
+                );
+
+        }
+    );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+    .getElementById("sidebarLogout")
+    .addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "jwt"
+            );
+
+            sessionStorage.removeItem(
+                "token"
+            );
+
+            sessionStorage.removeItem(
+                "jwt"
+            );
+
+
+            window.location.href =
+                "/login.html";
+
+        }
+    );
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-NG",
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadClearanceAccounts();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

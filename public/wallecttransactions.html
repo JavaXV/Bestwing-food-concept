@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+<title>Wallet Transactions</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --primary: #0f1733;
+    --primary-light: #1d2b5a;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff8f8;
+    color: #292929;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 365px;
+    height: 100vh;
+
+    background: var(--primary);
+
+    z-index: 1000;
+
+    color: white;
+
+    transition: all .3s ease;
+}
+
+
+.sidebar-logo {
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-bottom: 1px solid rgba(255,255,255,.35);
+}
+
+
+.logo-wrapper {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.sidebar-menu {
+
+    padding: 28px 7px;
+}
+
+
+.menu-item {
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 28px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-radius: 4px;
+
+    margin-bottom: 5px;
+
+    transition: .2s ease;
+
+    cursor: pointer;
+}
+
+
+.menu-item:hover {
+
+    background: rgba(255,255,255,.12);
+}
+
+
+.menu-item.active {
+
+    background: var(--primary-light);
+}
+
+
+.menu-icon {
+
+    width: 28px;
+
+    font-size: 15px;
+}
+
+
+.menu-arrow {
+
+    margin-left: auto;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.sidebar-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.5);
+
+    z-index: 900;
+}
+
+
+.sidebar-overlay.active {
+
+    display: block;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left: 365px;
+
+    min-height: 100vh;
+
+    transition: .3s ease;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+
+    height: 95px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.25);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+.welcome h2 {
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+
+.account-info {
+
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+.primary-account {
+
+    color: #df001b;
+}
+
+
+/* =====================================================
+   USER AREA
+===================================================== */
+
+.user-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.user-photo {
+
+    width: 40px;
+
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+.user-details strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+
+.user-details span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.toggle {
+
+    width: 45px;
+
+    height: 23px;
+
+    border-radius: 20px;
+
+    background: #aaa;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+
+.toggle-ball {
+
+    width: 21px;
+
+    height: 21px;
+
+    position: absolute;
+
+    left: 1px;
+
+    top: 1px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition: .3s ease;
+}
+
+
+.toggle.active {
+
+    background: #d90018;
+}
+
+
+.toggle.active .toggle-ball {
+
+    left: 23px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    padding: 25px 45px;
+}
+
+
+.page-title {
+
+    font-size: 27px;
+
+    font-weight: 600;
+
+    margin-bottom: 42px;
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.table-card {
+
+    width: 100%;
+
+    background: #fff;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TABLE TOOLBAR
+===================================================== */
+
+.table-toolbar {
+
+    min-height: 87px;
+
+    padding: 26px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.show-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 14px;
+
+    color: #222;
+}
+
+
+.entries-select {
+
+    width: 55px;
+
+    height: 29px;
+
+    border: 1px solid #cbd3dc;
+
+    border-radius: 4px;
+
+    background: #fff;
+
+    color: #4e5a67;
+
+    padding-left: 6px;
+
+    outline: none;
+}
+
+
+.search-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 14px;
+}
+
+
+.search-input {
+
+    width: 195px;
+
+    height: 29px;
+
+    border: 1px solid #cbd3dc;
+
+    border-radius: 4px;
+
+    padding: 0 8px;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+
+.search-input:focus {
+
+    border-color: #d90018;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.transaction-table {
+
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+}
+
+
+.transaction-table thead th {
+
+    height: 66px;
+
+    padding: 0 18px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #161616;
+
+    white-space: nowrap;
+}
+
+
+.transaction-table tbody td {
+
+    height: 55px;
+
+    padding: 0 18px;
+
+    font-size: 13px;
+
+    color: #777;
+
+    border-top: 1px solid #f5f5f5;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+
+.status.success {
+
+    background: #e8f7ee;
+
+    color: #198754;
+}
+
+
+.status.pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+
+.status.failed {
+
+    background: #fde8e8;
+
+    color: #dc3545;
+}
+
+
+/* =====================================================
+   NO DATA
+===================================================== */
+
+.no-data {
+
+    height: 66px;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    color: #9aa0a6 !important;
+
+    font-size: 14px !important;
+}
+
+
+/* =====================================================
+   TABLE FOOTER
+===================================================== */
+
+.table-footer {
+
+    min-height: 66px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-top: 1px solid #f0f0f0;
+
+    background: #fff;
+}
+
+
+.entries-info {
+
+    font-size: 14px;
+
+    color: #333;
+}
+
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+.pagination {
+
+    display: flex;
+}
+
+
+.page-button {
+
+    height: 32px;
+
+    padding: 0 12px;
+
+    background: #fff;
+
+    border: 1px solid #d7dce1;
+
+    color: #68727c;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+
+.page-button:first-child {
+
+    border-radius: 4px 0 0 4px;
+}
+
+
+.page-button:last-child {
+
+    border-radius: 0 4px 4px 0;
+
+    margin-left: -1px;
+}
+
+
+.page-button:hover {
+
+    background: #f7f7f7;
+}
+
+
+.page-button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+.mobile-header {
+
+    display: none;
+
+    height: 60px;
+
+    background: white;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.12);
+}
+
+
+.menu-button {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #d90018;
+
+    color: white;
+
+    font-size: 21px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width: 1100px) {
+
+    .sidebar {
+
+        width: 280px;
+    }
+
+    .main {
+
+        margin-left: 280px;
+    }
+
+}
+
+
+@media(max-width: 768px) {
+
+    .sidebar {
+
+        width: 280px;
+
+        transform: translateX(-100%);
+    }
+
+
+    .sidebar.open {
+
+        transform: translateX(0);
+    }
+
+
+    .main {
+
+        margin-left: 0;
+    }
+
+
+    .mobile-header {
+
+        display: flex;
+    }
+
+
+    .topbar {
+
+        min-height: 80px;
+
+        height: auto;
+
+        padding: 15px 18px;
+    }
+
+
+    .welcome h2 {
+
+        font-size: 16px;
+    }
+
+
+    .account-info {
+
+        font-size: 10px;
+    }
+
+
+    .user-area {
+
+        display: none;
+    }
+
+
+    .content {
+
+        padding: 22px 15px;
+    }
+
+
+    .page-title {
+
+        font-size: 23px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .table-toolbar {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    .search-area {
+
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+
+    .search-input {
+
+        width: 70%;
+    }
+
+
+    .table-footer {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+}
+
+
+@media(max-width: 480px) {
+
+    .page-title {
+
+        font-size: 21px;
+    }
+
+
+    .content {
+
+        padding: 20px 10px;
+    }
+
+
+    .search-input {
+
+        width: 65%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+<div class="sidebar-logo">
+
+    <div class="logo-wrapper">
+
+        <img
+            src="assets/log.png"
+            height="60"
+            width="60"
+            alt="Bestwing"
+        >
+
+        BESTWING GLOBAL SERVICE
+
+    </div>
+
+</div>
+
+
+<nav class="sidebar-menu">
+
+    <a
+        href="dashboard.html"
+        class="menu-item"
+    >
+
+        <i class="bi bi-grid-1x2-fill menu-icon"></i>
+
+        <span>
+            Dashboard
+        </span>
+
+        <i class="bi bi-chevron-right menu-arrow"></i>
+
+    </a>
+
+
+    <a
+        href="https://bestwing.com.ng/wallecttransactions.html"
+        class="menu-item active"
+    >
+
+        <i class="bi bi-wallet2 menu-icon"></i>
+
+        <span>
+            Wallet Transactions
+        </span>
+
+        <i class="bi bi-chevron-right menu-arrow"></i>
+
+    </a>
+
+</nav>
+
+</aside>
+
+<!-- =====================================================
+     MOBILE OVERLAY
+===================================================== -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeSidebar()"
+></div>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+<!-- MOBILE HEADER -->
+
+<div class="mobile-header">
+
+    <button
+        class="menu-button"
+        onclick="toggleSidebar()"
+    >
+        ☰
+    </button>
+
+</div>
+
+
+<!-- =================================================
+     TOPBAR
+================================================== -->
+
+<header class="topbar">
+
+
+    <div class="welcome">
+
+        <h2 id="welcomeMessage">
+            Loading user...
+        </h2>
+
+
+        <div
+            class="account-info"
+            id="accountInfo"
+        >
+            Loading account...
+        </div>
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-area">
+
+
+        <div
+            class="toggle"
+            id="themeToggle"
+            onclick="toggleTheme()"
+        >
+
+            <div class="toggle-ball"></div>
+
+        </div>
+
+
+
+        <div class="user-details">
+
+            <strong id="userShortName">
+                Loading...
+            </strong>
+
+            <span id="userIdDisplay">
+                Loading...
+            </span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =================================================
+     CONTENT
+================================================== -->
+
+<section class="content">
+
+
+    <h1 class="page-title">
+        Wallet Transaction Details
+    </h1>
+
+
+    <!-- =================================================
+         TABLE CARD
+    ================================================== -->
+
+    <div class="table-card">
+
+
+        <!-- TOOLBAR -->
+
+        <div class="table-toolbar">
+
+
+            <div class="show-area">
+
+                <span>
+                    Show
+                </span>
+
+
+                <select
+                    class="entries-select"
+                    id="entriesSelect"
+                    onchange="changeEntries()"
+                >
+
+                    <option value="10">
+                        10
+                    </option>
+
+                    <option value="25">
+                        25
+                    </option>
+
+                    <option value="50">
+                        50
+                    </option>
+
+                    <option value="100">
+                        100
+                    </option>
+
+                </select>
+
+
+                <span>
+                    entries
+                </span>
+
+            </div>
+
+
+            <div class="search-area">
+
+                <label for="searchInput">
+                    Search:
+                </label>
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search-input"
+                    onkeyup="searchTable()"
+                    placeholder="Search transactions..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-wrapper">
+
+            <table
+                class="transaction-table"
+                id="transactionTable"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            S/N
+                        </th>
+
+                        <th>
+                            Transaction Ref
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Payment Status
+                        </th>
+
+                        <th>
+                            Payment Method
+                        </th>
+
+                        <th>
+                            Payment Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="transactionBody">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="no-data"
+                        >
+                            Loading transactions...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="table-footer">
+
+
+            <div
+                class="entries-info"
+                id="entriesInfo"
+            >
+                Showing 0 to 0 of 0 entries
+            </div>
+
+
+            <div class="pagination">
+
+                <button
+                    class="page-button"
+                    id="previousButton"
+                    onclick="previousPage()"
+                    disabled
+                >
+                    Previous
+                </button>
+
+
+                <button
+                    class="page-button"
+                    id="nextButton"
+                    onclick="nextPage()"
+                    disabled
+                >
+                    Next
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<script>
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+const API_BASE_URL = "/api";
+
+const API_BASE_URLS = "/api/wallet";
+	
+
+
+let currentUser = null;
+
+let transactions = [];
+
+let filteredTransactions = [];
+
+let currentPage = 1;
+
+let entriesPerPage = 10;
+
+
+/* =====================================================
+   GET JWT TOKEN
+===================================================== */
+
+function getToken() {
+
+    return (
+        localStorage.getItem("token") ||
+
+        localStorage.getItem("jwt") ||
+
+        sessionStorage.getItem("token") ||
+
+        sessionStorage.getItem("jwt") ||
+
+        null
+    );
+
+}
+
+
+/* =====================================================
+   AUTHENTICATED FETCH
+===================================================== */
+
+async function apiFetch(url, options = {}) {
+
+    const token = getToken();
+
+
+    if (!token) {
+
+        window.location.href = "login.html";
+
+        throw new Error(
+            "Authentication token not found."
+        );
+
+    }
+
+
+    const headers = {
+
+        ...(options.headers || {}),
+
+        Authorization:
+            `Bearer ${token}`,
+
+        "Content-Type":
+            "application/json"
+
+    };
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers
+            }
+        );
+
+
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
+
+        localStorage.removeItem("token");
+
+        localStorage.removeItem("jwt");
+
+        sessionStorage.removeItem("token");
+
+        sessionStorage.removeItem("jwt");
+
+        window.location.href = "login.html";
+
+        throw new Error(
+            "Session expired."
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.message ||
+            "Request failed."
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =====================================================
+   LOAD LOGGED-IN USER
+===================================================== */
+
+async function loadUser() {
+
+    try {
+
+        const data =
+            await apiFetch(
+                `${API_BASE_URL}/auth/me`
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | YOUR /auth/me RESPONSE
+        |--------------------------------------------------------------------------
+        |
+        | This supports both:
+        |
+        | { user: {...} }
+        |
+        | and
+        |
+        | { success: true, user: {...} }
+        |
+        |--------------------------------------------------------------------------
+        */
+
+        currentUser =
+            data.user ||
+            data.data ||
+            data;
+
+
+        if (!currentUser) {
+
+            throw new Error(
+                "Logged-in user information was not returned."
+            );
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | USER NAME
+        |--------------------------------------------------------------------------
+        */
+
+        const fullName =
+            currentUser.full_name ||
+            currentUser.name ||
+            "Member";
+
+
+        const firstName =
+            fullName
+            .trim()
+            .split(/\s+/)[0];
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOPBAR
+        |--------------------------------------------------------------------------
+        */
+
+        document
+        .getElementById("welcomeMessage")
+        .textContent =
+            `Good Evening, ${fullName}`;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | USER SHORT NAME
+        |--------------------------------------------------------------------------
+        */
+
+        document
+        .getElementById("userShortName")
+        .textContent =
+            firstName;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | USER ID
+        |--------------------------------------------------------------------------
+        */
+
+        document
+        .getElementById("userIdDisplay")
+        .textContent =
+            currentUser.user_id ||
+            currentUser.id ||
+            "N/A";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | LOAD TRANSACTIONS
+        |--------------------------------------------------------------------------
+        */
+
+        await loadWalletTransactions();
+
+    } catch (error) {
+
+        console.error(
+            "LOAD USER ERROR:",
+            error
+        );
+
+
+        document
+        .getElementById("welcomeMessage")
+        .textContent =
+            "Unable to load user";
+
+
+        showError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD WALLET TRANSACTIONS
+===================================================== */
+
+async function loadWalletTransactions() {
+
+    try {
+
+        const data =
+            await apiFetch(
+                `${API_BASE_URLS}/wallet-transactions`
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUPPORT COMMON API RESPONSE FORMATS
+        |--------------------------------------------------------------------------
+        */
+
+        transactions =
+            data.transactions ||
+            data.data ||
+            [];
+
+
+        filteredTransactions =
+            [...transactions];
+
+
+        currentPage = 1;
+
+
+        renderTransactions();
+
+    } catch (error) {
+
+        console.error(
+            "LOAD WALLET TRANSACTIONS ERROR:",
+            error
+        );
+
+
+        showError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER TRANSACTIONS
+===================================================== */
+
+function renderTransactions() {
+
+    const body =
+        document.getElementById(
+            "transactionBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    if (!filteredTransactions.length) {
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="no-data"
+                >
+                    No transaction records found
+                </td>
+
+            </tr>
+
+        `;
+
+
+        updatePagination();
+
+        return;
+
+    }
+
+
+    const start =
+        (currentPage - 1) *
+        entriesPerPage;
+
+
+    const end =
+        start +
+        entriesPerPage;
+
+
+    const pageTransactions =
+        filteredTransactions.slice(
+            start,
+            end
+        );
+
+
+    pageTransactions.forEach(
+        function(transaction, index) {
+
+            const serialNumber =
+                start +
+                index +
+                1;
+
+
+            const amount =
+                Number(
+                    transaction.amount || 0
+                );
+
+
+            const status =
+                String(
+                    transaction.paystack_status ||
+                    "pending"
+                ).toLowerCase();
+
+
+            const paymentMethod =
+                transaction.payment_method ||
+                "N/A";
+
+
+            const reference =
+                transaction.reference ||
+                "N/A";
+
+
+            const paymentDate =
+                transaction.created_at ||
+                transaction.payment_date ||
+                transaction.updated_at ||
+                "N/A";
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${serialNumber}
+                </td>
+
+                <td>
+                    ${escapeHtml(reference)}
+                </td>
+
+                <td>
+                    ₦${amount.toLocaleString(
+                        "en-NG",
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    )}
+                </td>
+
+                <td>
+
+                    <span
+                        class="status ${escapeHtml(status)}"
+                    >
+                        ${escapeHtml(status)}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${escapeHtml(paymentMethod)}
+                </td>
+
+                <td>
+                    ${formatDate(paymentDate)}
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+        }
+    );
+
+
+    updatePagination();
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        String(value ?? "");
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+
+        return "N/A";
+
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return escapeHtml(
+            dateValue
+        );
+
+    }
+
+
+    return date.toLocaleString(
+        "en-NG",
+        {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchTable() {
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    filteredTransactions =
+        transactions.filter(
+            function(transaction) {
+
+                return (
+
+                    String(
+                        transaction.reference || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        transaction.amount || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        transaction.status || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        transaction.payment_method || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
+
+
+    currentPage = 1;
+
+    renderTransactions();
+
+}
+
+
+/* =====================================================
+   ENTRIES
+===================================================== */
+
+function changeEntries() {
+
+    entriesPerPage =
+        Number(
+            document
+            .getElementById("entriesSelect")
+            .value
+        );
+
+
+    currentPage = 1;
+
+    renderTransactions();
+
+}
+
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+function previousPage() {
+
+    if (currentPage > 1) {
+
+        currentPage--;
+
+        renderTransactions();
+
+    }
+
+}
+
+
+function nextPage() {
+
+    const totalPages =
+        Math.ceil(
+            filteredTransactions.length /
+            entriesPerPage
+        );
+
+
+    if (
+        currentPage <
+        totalPages
+    ) {
+
+        currentPage++;
+
+        renderTransactions();
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE PAGINATION
+===================================================== */
+
+function updatePagination() {
+
+    const total =
+        filteredTransactions.length;
+
+
+    const start =
+        total === 0
+            ? 0
+            : (
+                (currentPage - 1) *
+                entriesPerPage
+            ) + 1;
+
+
+    const end =
+        Math.min(
+            currentPage *
+            entriesPerPage,
+            total
+        );
+
+
+    document
+    .getElementById("entriesInfo")
+    .textContent =
+        `Showing ${start} to ${end} of ${total} entries`;
+
+
+    const totalPages =
+        Math.ceil(
+            total /
+            entriesPerPage
+        );
+
+
+    document
+    .getElementById("previousButton")
+    .disabled =
+        currentPage <= 1;
+
+
+    document
+    .getElementById("nextButton")
+    .disabled =
+        currentPage >= totalPages;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showError(message) {
+
+    document
+    .getElementById("transactionBody")
+    .innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="6"
+                class="no-data"
+            >
+                ${escapeHtml(
+                    message ||
+                    "Unable to load transactions."
+                )}
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+
+    document
+    .getElementById("sidebarOverlay")
+    .classList.toggle("active");
+
+}
+
+
+function closeSidebar() {
+
+    document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+
+    document
+    .getElementById("sidebarOverlay")
+    .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme() {
+
+    document
+    .getElementById("themeToggle")
+    .classList.toggle("active");
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadUser();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

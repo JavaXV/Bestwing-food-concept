@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="assets/logos.png"
+>
+
+<title>Investment Details - Bestwing Collect</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    background: #eef7ef;
+
+    color: #292929;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.investment-card {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0, 0, 0, .12);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.investment-header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.investment-header img {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-bottom: 12px;
+
+}
+
+
+.investment-header h1 {
+
+    color: #198754;
+
+    font-size: 22px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.investment-header p {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   PLAN BOX
+===================================================== */
+
+.plan-box {
+
+    background: #f3fbf5;
+
+    border:
+        1px solid #d7eddd;
+
+    border-radius: 7px;
+
+    padding: 17px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.plan-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 7px 0;
+
+    font-size: 13px;
+
+}
+
+
+.plan-row span {
+
+    color: #777;
+
+}
+
+
+.plan-row strong {
+
+    color: #198754;
+
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #333;
+
+    margin-bottom: 8px;
+
+}
+
+
+.form-group select {
+
+    width: 100%;
+
+    height: 48px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 6px;
+
+    padding: 0 13px;
+
+    font-size: 14px;
+
+    background: #fff;
+
+    color: #333;
+
+    outline: none;
+
+}
+
+
+.form-group select:focus {
+
+    border-color: #198754;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(25,135,84,.10);
+
+}
+
+
+.form-help {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message {
+
+    display: none;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
+
+    margin-bottom: 18px;
+
+    line-height: 1.5;
+
+}
+
+
+.message.show {
+
+    display: block;
+
+}
+
+
+.message.error {
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    border-left:
+        3px solid #c62828;
+
+}
+
+
+.message.success {
+
+    background: #effaf2;
+
+    color: #198754;
+
+    border-left:
+        3px solid #198754;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.create-btn {
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #198754;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+
+.create-btn:hover {
+
+    background: #006400;
+
+}
+
+
+.create-btn:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.back-btn {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 17px;
+
+    color: #198754;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+}
+
+
+.back-btn:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:480px) {
+
+    .page {
+
+        padding: 15px;
+
+    }
+
+    .investment-card {
+
+        padding: 23px 18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <div class="investment-card">
+
+
+        <!-- HEADER -->
+
+        <div class="investment-header">
+
+            <img
+                src="assets/logos.png"
+                alt="Bestwing Logo"
+            >
+
+            <h1>
+                Create Thrift Package
+            </h1>
+
+            <p>
+                Select the virtual account you want
+                to use for your thrift subscription.
+            </p>
+
+        </div>
+
+
+        <!-- PLAN -->
+
+        <div class="plan-box">
+
+
+            <div class="plan-row">
+
+                <span>
+                    Plan
+                </span>
+
+                <strong id="planName">
+                    Elite
+                </strong>
+
+            </div>
+
+
+            <div class="plan-row">
+
+                <span>
+                    Amount
+                </span>
+
+                <strong id="planAmount">
+                    ₦1,500
+                </strong>
+
+            </div>
+
+
+            <div class="plan-row">
+
+                <span>
+                    Profit
+                </span>
+
+                <strong id="planProfit">
+                    100%
+                </strong>
+
+            </div>
+
+
+            <div class="plan-row">
+
+                <span>
+                    Duration
+                </span>
+
+                <strong id="planDuration">
+                    50 Weeks
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="form-group">
+
+            <label for="virtualAccount">
+
+                Select Thrift Account id
+
+            </label>
+
+
+            <select
+                id="virtualAccount"
+            >
+
+                <option value="">
+
+                    Loading Thrift accounts id...
+
+                </option>
+
+            </select>
+
+
+            <span class="form-help">
+
+                Only virtual accounts belonging to your
+                logged-in account will be displayed.
+
+            </span>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="errorMessage"
+            class="message error"
+        ></div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            id="successMessage"
+            class="message success"
+        ></div>
+
+
+        <!-- BUTTON -->
+
+        <button
+            type="button"
+            id="createBtn"
+            class="create-btn"
+            onclick="createThriftPackage()"
+            disabled
+        >
+
+            Create Thrift Package
+
+        </button>
+
+
+        <a
+            href="/thrift.html"
+            class="back-btn"
+        >
+
+            ← Back to Thrift Packages
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let selectedPackage = null;
+
+
+/* =====================================================
+   GET TOKEN
+===================================================== */
+
+const token =
+    localStorage.getItem("token");
+
+
+/* =====================================================
+   GET SELECTED PACKAGE
+===================================================== */
+
+function loadSelectedPackage() {
+
+    try {
+
+        const stored =
+            localStorage.getItem(
+                "selectedThriftPackage"
+            );
+
+
+        if (!stored) {
+
+            showError(
+                "No thrift package has been selected."
+            );
+
+            return false;
+
+        }
+
+
+        selectedPackage =
+            JSON.parse(stored);
+
+
+        document.getElementById(
+            "planName"
+        ).textContent =
+            selectedPackage.plan || "Elite";
+
+
+        document.getElementById(
+            "planAmount"
+        ).textContent =
+            "₦" +
+            Number(
+                selectedPackage.amounts || 1500
+            ).toLocaleString();
+
+
+        document.getElementById(
+            "planProfit"
+        ).textContent =
+            (
+                selectedPackage.profit || 0
+            ) + "%";
+
+
+        document.getElementById(
+            "planDuration"
+        ).textContent =
+            (
+                selectedPackage.duration_weeks || 0
+            ) +
+            " Weeks";
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "SELECTED PACKAGE ERROR:",
+            error
+        );
+
+        showError(
+            "Unable to load the selected thrift package."
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD VIRTUAL ACCOUNTS
+===================================================== */
+
+async function loadVirtualAccounts() {
+
+    const select = document.getElementById("virtualAccount");
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK TOKEN
+    |--------------------------------------------------------------------------
+    */
+
+    if (!token) {
+
+        select.innerHTML = `
+            <option value="">
+                Please login again
+            </option>
+        `;
+
+        showError(
+            "Your login session has expired. Please login again."
+        );
+
+        return;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SHOW LOADING
+    |--------------------------------------------------------------------------
+    */
+
+    select.innerHTML = `
+        <option value="">
+            Loading virtual account...
+        </option>
+    `;
+
+
+    try {
+
+        console.log("Loading virtual account...");
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GET VIRTUAL ACCOUNT
+        |--------------------------------------------------------------------------
+        |
+        | IMPORTANT:
+        | Use the virtual-account endpoint
+        |
+        */
+
+        const response = await fetch(
+            "/api/dashboard/accounts",
+            {
+                method: "GET",
+
+                headers: {
+
+                    "Authorization":
+                        "Bearer " + token,
+
+                    "Accept":
+                        "application/json"
+
+                }
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK HTTP RESPONSE
+        |--------------------------------------------------------------------------
+        */
+
+        if (!response.ok) {
+
+            const text = await response.text();
+
+            console.error(
+                "VIRTUAL ACCOUNT API ERROR:",
+                response.status,
+                text
+            );
+
+            throw new Error(
+                "Unable to load virtual account. Server returned HTTP " +
+                response.status
+            );
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | READ JSON
+        |--------------------------------------------------------------------------
+        */
+
+        const data = await response.json();
+
+        console.log(
+            "VIRTUAL ACCOUNT RESPONSE:",
+            data
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK API RESPONSE
+        |--------------------------------------------------------------------------
+        */
+
+        if (!data || data.success !== true) {
+
+            throw new Error(
+                data?.message ||
+                "Unable to load virtual account."
+            );
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GET ACCOUNTS
+        |--------------------------------------------------------------------------
+        */
+
+        const accounts = Array.isArray(data.accounts)
+            ? data.accounts
+            : [];
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CLEAR SELECT
+        |--------------------------------------------------------------------------
+        */
+
+        select.innerHTML = `
+            <option value="">
+                -- Select Thrift Account Id --
+            </option>
+        `;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | NO ACCOUNT
+        |--------------------------------------------------------------------------
+        */
+
+        if (accounts.length === 0) {
+
+            select.innerHTML = `
+                <option value="">
+                    No Thrift account found
+                </option>
+            `;
+
+            showError(
+                "No Thrift account is linked to your account."
+            );
+
+            return;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | ONLY USE FIRST ACCOUNT
+        |--------------------------------------------------------------------------
+        |
+        | You previously requested that the dropdown should only
+        | show ONE virtual account.
+        |
+        */
+
+        const account = accounts[0];
+
+
+        console.log(
+            "SELECTED THRIFT ACCOUNT:",
+            account
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK STATUS
+        |--------------------------------------------------------------------------
+        */
+
+        const status =
+            String(account.status || "")
+                .trim()
+                .toLowerCase();
+
+
+        if (status !== "active") {
+
+            select.innerHTML = `
+                <option value="">
+                    Virtual account is not active
+                </option>
+            `;
+
+            showError(
+                "Your thrift account is not active."
+            );
+
+            return;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CREATE OPTION
+        |--------------------------------------------------------------------------
+        */
+
+        const option =
+            document.createElement("option");
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATABASE ID
+        |--------------------------------------------------------------------------
+        |
+        | Use ID when submitting the transaction.
+        |
+        */
+
+        option.value = account.id;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DISPLAY FC + ACCOUNT NUMBER
+        |--------------------------------------------------------------------------
+        */
+
+        // option.textContent =
+        //     "FC" +
+        //     account.accountno +
+        //     (
+        //         account.account_name
+        //             ? " - " + account.account_name
+        //             : ""
+        //     );
+
+		    accounts.forEach(account => {
+
+		    const option =
+		        document.createElement("option");
+		
+		    option.value = account.id;
+		
+		    option.textContent =
+		        "FC" +
+		        account.accountno +
+		        (
+		            account.account_name
+		                ? " - " + account.account_name
+		                : ""
+		        );
+		
+		    select.appendChild(option);
+		});
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | ADD OPTION
+        |--------------------------------------------------------------------------
+        */
+
+        select.appendChild(option);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | AUTOMATICALLY SELECT FIRST ACCOUNT
+        |--------------------------------------------------------------------------
+        */
+
+        select.value = account.id;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | ENABLE CREATE BUTTON
+        |--------------------------------------------------------------------------
+        */
+
+        const createBtn =
+            document.getElementById("createBtn");
+
+        if (createBtn) {
+
+            createBtn.disabled = false;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUCCESS LOG
+        |--------------------------------------------------------------------------
+        */
+
+        console.log(
+            "THRIFT ACCOUNT LOADED:",
+            account.accountno
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "THRIFT ACCOUNT ERROR:",
+            error
+        );
+
+
+        select.innerHTML = `
+            <option value="">
+                Unable to load virtual account
+            </option>
+        `;
+
+
+        showError(
+            error.message ||
+            "Unable to load your virtual account."
+        );
+    }
+}
+
+
+/* =====================================================
+   CREATE THRIFT PACKAGE
+===================================================== */
+
+async function createThriftPackage() {
+
+    const button =
+        document.getElementById(
+            "createBtn"
+        );
+
+
+    const accountSelect =
+        document.getElementById(
+            "virtualAccount"
+        );
+
+
+    const virtualAccountId =
+        accountSelect.value;
+
+
+    hideMessages();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK PACKAGE
+    |--------------------------------------------------------------------------
+    */
+
+    if (!selectedPackage) {
+
+        showError(
+            "No thrift package selected."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK ACCOUNT
+    |--------------------------------------------------------------------------
+    */
+
+    if (!virtualAccountId) {
+
+        showError(
+            "Please select a virtual account."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK TOKEN
+    |--------------------------------------------------------------------------
+    */
+
+    if (!token) {
+
+        showError(
+            "Your login session has expired. Please login again."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DISABLE BUTTON
+    |--------------------------------------------------------------------------
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+        "Creating Thrift Package...";
+
+
+    try {
+
+        console.log(
+            "CREATING THRIFT:",
+            {
+                plan:
+                    selectedPackage.plan,
+
+                amount:
+                    selectedPackage.amount,
+
+                profit:
+                    selectedPackage.profit,
+
+                duration_weeks:
+                    selectedPackage.duration_weeks,
+
+                virtual_account_id:
+                    virtualAccountId
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SEND REQUEST
+        |--------------------------------------------------------------------------
+        */
+
+        const response =
+            await fetch(
+                "/api/thrift/subscribe",
+                {
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " + token,
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            plan:
+                                selectedPackage.plan,
+
+                            amount:
+                                selectedPackage.amount,
+
+                            profit:
+                                selectedPackage.profit,
+
+                            duration_weeks:
+                                selectedPackage.duration_weeks,
+
+                            virtual_account_id:
+                                virtualAccountId
+
+                        })
+
+                }
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | READ RESPONSE
+        |--------------------------------------------------------------------------
+        */
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "THRIFT RESPONSE:",
+            data
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CHECK RESPONSE
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                data.error ||
+                "Unable to create thrift package."
+            );
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SUCCESS
+        |--------------------------------------------------------------------------
+        */
+
+        showSuccess(
+            data.message ||
+            "Thrift package created successfully."
+        );
+
+
+        button.textContent =
+            "Thrift Package Created";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | REDIRECT
+        |--------------------------------------------------------------------------
+        */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "/dashboard.html";
+
+            },
+            1500
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "CREATE THRIFT ERROR:",
+            error
+        );
+
+
+        showError(
+            error.message ||
+            "Unable to create thrift package."
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "Create Thrift Package";
+
+    }
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showError(message) {
+
+    const element =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+function showSuccess(message) {
+
+    const element =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   HIDE MESSAGES
+===================================================== */
+
+function hideMessages() {
+
+    document
+        .getElementById(
+            "errorMessage"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "successMessage"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   INITIALIZE PAGE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        console.log(
+            "INVESTMENT DETAILS LOADED"
+        );
+
+
+        if (
+            loadSelectedPackage()
+        ) {
+
+            loadVirtualAccounts();
+
+        }
+
+    }
+);
+
+</script>
+</body>
+
+</html>

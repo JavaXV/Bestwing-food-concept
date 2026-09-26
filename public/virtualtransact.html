@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
+
+    <title>Virtual Transactions</title>
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================
+           GLOBAL
+        ===================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f8;
+            color: #252525;
+        }
+
+
+        /* =====================================
+           SIDEBAR
+        ===================================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 365px;
+            height: 100vh;
+
+            background: #0f1733;
+
+            z-index: 1000;
+
+            color: white;
+
+            transition: all .3s ease;
+        }
+
+
+        .sidebar-logo {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.35);
+        }
+
+
+        .logo-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            color: #fff;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .logo-wrapper img {
+
+            object-fit: contain;
+
+            flex-shrink: 0;
+        }
+
+
+        .sidebar-menu {
+
+            padding: 28px 7px;
+        }
+
+
+        .menu-item {
+
+            height: 54px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 28px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            border-radius: 4px;
+
+            margin-bottom: 5px;
+
+            transition: .2s ease;
+        }
+
+
+        .menu-item:hover {
+
+            background:
+                rgba(255,255,255,.12);
+        }
+
+
+        .menu-item.active {
+
+            background:
+                rgba(255,255,255,.12);
+        }
+
+
+        .menu-icon {
+
+            width: 28px;
+
+            font-size: 15px;
+        }
+
+
+        .menu-arrow {
+
+            margin-left: auto;
+
+            font-size: 18px;
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        .main {
+
+            margin-left: 365px;
+
+            min-height: 100vh;
+
+            width: calc(100% - 365px);
+        }
+
+
+        /* =====================================
+           TOP BAR
+        ===================================== */
+
+        .topbar {
+
+            min-height: 91px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 2px 5px #0005;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding:
+                15px 40px 15px 45px;
+        }
+
+
+        .welcome-title {
+
+            margin: 0;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        .welcome-subtitle {
+
+            margin-top: 5px;
+
+            color: #999999;
+
+            font-size: 13px;
+
+            word-break: break-word;
+        }
+
+
+        .primary {
+
+            color: #d9001b;
+        }
+
+
+        /* =====================================
+           USER AREA
+        ===================================== */
+
+        .user-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-shrink: 0;
+        }
+
+
+        .switch {
+
+            position: relative;
+
+            width: 46px;
+
+            height: 22px;
+
+            background: #999999;
+
+            border-radius: 20px;
+
+            flex-shrink: 0;
+        }
+
+
+        .switch::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 1px;
+
+            top: 1px;
+
+            width: 20px;
+
+            height: 20px;
+
+            background: #ffffff;
+
+            border-radius: 50%;
+        }
+
+
+        .user-name {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .account-no {
+
+            color: #aaaaaa;
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================
+           CONTENT
+        ===================================== */
+
+        .content {
+
+            padding: 28px 45px;
+
+            width: 100%;
+        }
+
+
+        .page-title {
+
+            margin:
+                0 0 38px;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            line-height: 1.25;
+        }
+
+
+        /* =====================================
+           TABLE CARD
+        ===================================== */
+
+        .table-card {
+
+            width: 100%;
+
+            background: #ffffff;
+
+            overflow: hidden;
+
+            border-radius: 4px;
+        }
+
+
+        /* =====================================
+           TABLE TOOLS
+        ===================================== */
+
+        .table-tools {
+
+            min-height: 88px;
+
+            padding: 27px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom:
+                1px solid #eeeeee;
+        }
+
+
+        .entries,
+        .search {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 15px;
+        }
+
+
+        .entries select,
+        .search input {
+
+            height: 31px;
+
+            border:
+                1px solid #cbd2d9;
+
+            border-radius: 3px;
+
+            background: #ffffff;
+
+            outline: none;
+        }
+
+
+        .entries select {
+
+            width: 55px;
+        }
+
+
+        .search input {
+
+            width: 195px;
+
+            padding:
+                5px 10px;
+        }
+
+
+        .search input:focus {
+
+            border-color:
+                #d9001b;
+        }
+
+
+        /* =====================================
+           TABLE WRAPPER
+        ===================================== */
+
+        .table-wrap {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 900px;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+
+            height: 68px;
+
+            padding:
+                0 18px;
+
+            text-align: left;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+
+            height: 67px;
+
+            padding:
+                0 18px;
+
+            color: #888888;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+        }
+
+
+        tbody tr:nth-child(odd) {
+
+            background: #fffafa;
+        }
+
+
+        /* =====================================
+           REFERENCE
+        ===================================== */
+
+        .reference {
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #555555;
+        }
+
+
+        /* =====================================
+           STATUS
+        ===================================== */
+
+        .success {
+
+            color: #0a9d18;
+
+            font-weight: 700;
+        }
+
+
+        .pending {
+
+            color: #e09a00;
+
+            font-weight: 700;
+        }
+
+
+        .failed {
+
+            color: #d9001b;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================
+           LOADING
+        ===================================== */
+
+        .loading {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #888;
+        }
+
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #999;
+        }
+
+
+        .error-message {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #d9001b;
+        }
+
+
+        /* =====================================
+           PAGINATION
+        ===================================== */
+
+        .pagination-area {
+
+            min-height: 66px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 0 18px;
+        }
+
+
+        .showing {
+
+            color: #777777;
+
+            font-size: 14px;
+        }
+
+
+        .pagination {
+
+            display: flex;
+
+            margin: 0;
+        }
+
+
+        .pagination button {
+
+            height: 32px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid #d8dfe5;
+
+            background: #ffffff;
+
+            color: #777777;
+
+            cursor: pointer;
+        }
+
+
+        .pagination button:disabled {
+
+            cursor: not-allowed;
+
+            opacity: .5;
+        }
+
+
+        .pagination .current {
+
+            background: #d9001b;
+
+            color: #ffffff;
+
+            border-color:
+                #d9001b;
+        }
+
+
+        /* =====================================
+           TABLET
+        ===================================== */
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+
+                width: 250px;
+            }
+
+
+            .main {
+
+                margin-left: 250px;
+
+                width:
+                    calc(100% - 250px);
+            }
+
+
+            .content {
+
+                padding:
+                    25px 20px;
+            }
+
+
+            .topbar {
+
+                padding:
+                    15px 20px;
+            }
+
+
+            .switch {
+
+                display: none;
+            }
+
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 650px) {
+
+            /* ---------------------------------
+               BODY
+            --------------------------------- */
+
+            body {
+
+                width: 100%;
+
+                overflow-x: hidden;
+            }
+
+
+            /* ---------------------------------
+               SIDEBAR
+            --------------------------------- */
+
+            .sidebar {
+
+                position: relative;
+
+                left: auto;
+
+                top: auto;
+
+                width: 100%;
+
+                height: auto;
+
+                min-height: 0;
+            }
+
+
+            .sidebar-logo {
+
+                height: 65px;
+
+                padding:
+                    5px 15px;
+            }
+
+
+            .logo-wrapper {
+
+                font-size: 11px;
+            }
+
+
+            .logo-wrapper img {
+
+                width: 50px;
+
+                height: 50px;
+            }
+
+
+            .sidebar-menu {
+
+                padding:
+                    5px 8px 8px;
+            }
+
+
+            .menu-item {
+
+                height: 44px;
+
+                padding:
+                    0 15px;
+
+                font-size: 12px;
+
+                margin-bottom: 0;
+            }
+
+
+            .menu-icon {
+
+                width: 25px;
+            }
+
+
+            /* ---------------------------------
+               MAIN
+            --------------------------------- */
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+
+                min-height: 0;
+            }
+
+
+            /* ---------------------------------
+               TOP BAR
+            --------------------------------- */
+
+            .topbar {
+
+                min-height: 0;
+
+                height: auto;
+
+                padding:
+                    17px 15px;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                justify-content: flex-start;
+
+                gap: 14px;
+            }
+
+
+            .welcome-title {
+
+                font-size: 18px;
+
+                line-height: 1.3;
+
+                word-break: break-word;
+            }
+
+
+            .welcome-subtitle {
+
+                margin-top: 7px;
+
+                font-size: 12px;
+
+                line-height: 1.5;
+            }
+
+
+            .primary {
+
+                white-space: nowrap;
+            }
+
+
+            .user-area {
+
+                width: 100%;
+
+                gap: 0;
+
+                justify-content: flex-start;
+            }
+
+
+            .user-details {
+
+                width: 100%;
+            }
+
+
+            .user-name {
+
+                font-size: 14px;
+
+                white-space: normal;
+
+                overflow-wrap: anywhere;
+            }
+
+
+            .account-no {
+
+                margin-top: 3px;
+
+                font-size: 12px;
+
+                white-space: normal;
+
+                overflow-wrap: anywhere;
+            }
+
+
+            /* ---------------------------------
+               CONTENT
+            --------------------------------- */
+
+            .content {
+
+                width: 100%;
+
+                padding:
+                    18px 10px;
+            }
+
+
+            .page-title {
+
+                margin:
+                    0 0 20px;
+
+                font-size: 21px;
+
+                line-height: 1.3;
+            }
+
+
+            /* ---------------------------------
+               TABLE CARD
+            --------------------------------- */
+
+            .table-card {
+
+                width: 100%;
+
+                border-radius: 4px;
+            }
+
+
+            /* ---------------------------------
+               TABLE TOOLS
+            --------------------------------- */
+
+            .table-tools {
+
+                min-height: 0;
+
+                width: 100%;
+
+                padding:
+                    15px 12px;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                justify-content: flex-start;
+
+                gap: 14px;
+            }
+
+
+            .entries {
+
+                width: 100%;
+
+                justify-content: flex-start;
+
+                font-size: 13px;
+            }
+
+
+            .entries select {
+
+                height: 34px;
+
+                width: 60px;
+            }
+
+
+            .search {
+
+                width: 100%;
+
+                display: flex;
+
+                align-items: center;
+
+                gap: 7px;
+
+                font-size: 13px;
+            }
+
+
+            .search label {
+
+                flex-shrink: 0;
+            }
+
+
+            .search input {
+
+                width: 100%;
+
+                height: 36px;
+
+                min-width: 0;
+
+                padding:
+                    6px 10px;
+
+                font-size: 13px;
+            }
+
+
+            /* ---------------------------------
+               TABLE
+            --------------------------------- */
+
+            .table-wrap {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                overflow-x: auto;
+
+                overflow-y: hidden;
+
+                border-top:
+                    1px solid #eeeeee;
+            }
+
+
+            table {
+
+                min-width: 900px;
+            }
+
+
+            th {
+
+                height: 52px;
+
+                padding:
+                    0 12px;
+
+                font-size: 12px;
+            }
+
+
+            td {
+
+                height: 55px;
+
+                padding:
+                    0 12px;
+
+                font-size: 12px;
+            }
+
+
+            .reference {
+
+                font-size: 11px;
+            }
+
+
+            /* ---------------------------------
+               MOBILE TABLE SCROLL HINT
+            --------------------------------- */
+
+            .table-wrap::after {
+
+                content:
+                    "Swipe left/right to view more";
+
+                display: block;
+
+                position: sticky;
+
+                left: 0;
+
+                bottom: 0;
+
+                width: 100%;
+
+                padding:
+                    6px 10px;
+
+                text-align: center;
+
+                font-size: 10px;
+
+                color: #999;
+
+                background:
+                    rgba(255,255,255,.95);
+            }
+
+
+            /* ---------------------------------
+               PAGINATION
+            --------------------------------- */
+
+            .pagination-area {
+
+                min-height: 0;
+
+                width: 100%;
+
+                padding:
+                    14px 12px;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                justify-content: flex-start;
+
+                gap: 12px;
+            }
+
+
+            .showing {
+
+                font-size: 12px;
+
+                text-align: center;
+
+                width: 100%;
+            }
+
+
+            .pagination {
+
+                width: 100%;
+
+                display: flex;
+
+                justify-content: center;
+            }
+
+
+            .pagination button {
+
+                height: 36px;
+
+                padding:
+                    0 13px;
+
+                font-size: 12px;
+            }
+
+
+            /* ---------------------------------
+               EMPTY / ERROR
+            --------------------------------- */
+
+            .loading,
+            .no-data,
+            .error-message {
+
+                padding:
+                    28px 15px;
+
+                font-size: 12px;
+            }
+
+        }
+
+
+        /* =====================================
+           VERY SMALL PHONES
+        ===================================== */
+
+        @media (max-width: 380px) {
+
+            .sidebar-logo {
+
+                height: 60px;
+            }
+
+
+            .logo-wrapper {
+
+                font-size: 10px;
+
+                gap: 5px;
+            }
+
+
+            .logo-wrapper img {
+
+                width: 45px;
+
+                height: 45px;
+            }
+
+
+            .menu-item {
+
+                height: 42px;
+
+                padding:
+                    0 12px;
+            }
+
+
+            .welcome-title {
+
+                font-size: 16px;
+            }
+
+
+            .welcome-subtitle {
+
+                font-size: 11px;
+            }
+
+
+            .page-title {
+
+                font-size: 19px;
+            }
+
+
+            .content {
+
+                padding:
+                    15px 8px;
+            }
+
+
+            .table-tools {
+
+                padding:
+                    13px 10px;
+            }
+
+
+            .pagination button {
+
+                padding:
+                    0 10px;
+
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-logo">
+
+            <div class="logo-wrapper">
+
+                <img
+                    src="assets/log.png"
+                    height="60"
+                    width="60"
+                    alt="Bestwing"
+                >
+
+                BESTWING GLOBAL SERVICE
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a
+                href="dashboard.html"
+                class="menu-item active"
+            >
+
+                <i class="bi bi-grid-1x2-fill menu-icon"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+                <i class="bi bi-chevron-right menu-arrow"></i>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================
+             TOP BAR
+        ================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1
+                    class="welcome-title"
+                    id="welcomeTitle"
+                >
+                    Loading user...
+                </h1>
+
+
+                <div class="welcome-subtitle">
+
+                    Virtual Account ID -
+
+                    <span id="primaryAccount">
+                        Loading...
+                    </span>
+
+                    <span class="primary">
+                        (Primary Account)
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- USER -->
+
+            <div class="user-area">
+
+                <div class="switch"></div>
+
+                <div class="user-details">
+
+                    <div
+                        class="user-name"
+                        id="userName"
+                    >
+                        Loading...
+                    </div>
+
+                    <div
+                        class="account-no"
+                        id="accountNo"
+                    >
+                        Loading...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================
+             PAGE CONTENT
+        ================================== -->
+
+        <section class="content">
+
+
+            <h2 class="page-title">
+
+                Manage All Virtual Transactions
+                (New Records)
+
+            </h2>
+
+
+            <!-- =================================
+                 TABLE CARD
+            ================================== -->
+
+            <div class="table-card">
+
+
+                <!-- TABLE TOOLS -->
+
+                <div class="table-tools">
+
+
+                    <div class="entries">
+
+                        <span>
+                            Show
+                        </span>
+
+
+                        <select id="entries">
+
+                            <option value="10">
+                                10
+                            </option>
+
+                            <option value="25">
+                                25
+                            </option>
+
+                            <option value="50">
+                                50
+                            </option>
+
+                            <option value="100">
+                                100
+                            </option>
+
+                        </select>
+
+
+                        <span>
+                            entries
+                        </span>
+
+                    </div>
+
+
+                    <div class="search">
+
+                        <label for="search">
+                            Search:
+                        </label>
+
+
+                        <input
+                            id="search"
+                            type="text"
+                            placeholder="Search transactions..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     TABLE
+                ================================== -->
+
+                <div class="table-wrap">
+
+                    <table id="transactionTable">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    S/N
+                                </th>
+
+                                <th>
+                                    Narration
+                                </th>
+
+                                <th>
+                                    Virtual Ref
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Payment Type
+                                </th>
+
+                                <th>
+                                    Payment Method
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Created Date
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="transactionBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="8"
+                                    class="loading"
+                                >
+                                    Loading virtual account payments...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =================================
+                     PAGINATION
+                ================================== -->
+
+                <div class="pagination-area">
+
+
+                    <div
+                        class="showing"
+                        id="showing"
+                    >
+                        Showing 0 to 0 of 0 entries
+                    </div>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            id="previousButton"
+                            disabled
+                        >
+                            Previous
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="current"
+                            id="pageNumber"
+                        >
+                            1
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="nextButton"
+                            disabled
+                        >
+                            Next
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script>
+
+        /* =====================================================
+           CONFIGURATION
+        ===================================================== */
+
+        const API_BASE_URL = "/api";
+
+
+        let allTransactions = [];
+
+        let filteredTransactions = [];
+
+        let currentPage = 1;
+
+        let entriesPerPage = 10;
+
+
+        /* =====================================================
+           GET LOGIN TOKEN
+        ===================================================== */
+
+        function getToken() {
+
+            return (
+                localStorage.getItem("token") ||
+                localStorage.getItem("jwt") ||
+                localStorage.getItem("accessToken") ||
+                localStorage.getItem("authToken")
+            );
+
+        }
+
+
+        /* =====================================================
+           GET GREETING
+        ===================================================== */
+
+        function getGreeting() {
+
+            const hour =
+                new Date().getHours();
+
+
+            if (hour >= 5 && hour < 12) {
+
+                return "Good Morning";
+
+            }
+
+
+            if (hour >= 12 && hour < 17) {
+
+                return "Good Afternoon";
+
+            }
+
+
+            return "Good Evening";
+
+        }
+
+
+        /* =====================================================
+           FORMAT CURRENCY
+        ===================================================== */
+
+        function formatCurrency(amount) {
+
+            const value =
+                Number(amount || 0);
+
+
+            return "₦" +
+                value.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+        }
+
+
+        /* =====================================================
+           FORMAT DATE
+        ===================================================== */
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+
+                return "-";
+
+            }
+
+
+            const date =
+                new Date(dateValue);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return dateValue;
+
+            }
+
+
+            return date.toLocaleString(
+                "en-NG",
+                {
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           STATUS CLASS
+        ===================================================== */
+
+        function getStatusClass(status) {
+
+            const value =
+                String(status || "")
+                    .toLowerCase();
+
+
+            if (
+                value === "success" ||
+                value === "successful" ||
+                value === "approved" ||
+                value === "completed"
+            ) {
+
+                return "success";
+
+            }
+
+
+            if (
+                value === "pending" ||
+                value === "processing"
+            ) {
+
+                return "pending";
+
+            }
+
+
+            if (
+                value === "failed" ||
+                value === "cancelled" ||
+                value === "canceled"
+            ) {
+
+                return "failed";
+
+            }
+
+
+            return "";
+
+        }
+
+
+        /* =====================================================
+           LOAD VIRTUAL TRANSACTIONS
+        ===================================================== */
+
+        async function loadVirtualTransactions() {
+
+            const token =
+                getToken();
+
+
+            if (!token) {
+
+                showError(
+                    "Your login session has expired. Please login again."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/payments/virtual-transactions`,
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            }
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "VIRTUAL TRANSACTIONS RESPONSE:",
+                    data
+                );
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to load virtual transactions."
+                    );
+
+                }
+
+
+                /* =============================================
+                   USER INFORMATION
+                ============================================= */
+
+                const user =
+                    data.user || {};
+
+
+                const fullName =
+                    user.full_name ||
+                    "User";
+
+
+                document
+                    .getElementById(
+                        "welcomeTitle"
+                    )
+                    .textContent =
+                        `${getGreeting()}, ${fullName}`;
+
+
+                document
+                    .getElementById(
+                        "userName"
+                    )
+                    .textContent =
+                        fullName;
+
+
+                /* =============================================
+                   PRIMARY VIRTUAL ACCOUNT
+                ============================================= */
+
+                const accounts =
+                    Array.isArray(
+                        data.accounts
+                    )
+                        ? data.accounts
+                        : [];
+
+
+                const primaryAccount =
+                    accounts.length
+                        ? accounts[0]
+                        : null;
+
+
+                if (primaryAccount) {
+
+                    document
+                        .getElementById(
+                            "primaryAccount"
+                        )
+                        .textContent =
+                            primaryAccount.accountno ||
+                            "-";
+
+
+                    document
+                        .getElementById(
+                            "accountNo"
+                        )
+                        .textContent =
+                            primaryAccount.accountno ||
+                            "-";
+
+                } else {
+
+                    document
+                        .getElementById(
+                            "primaryAccount"
+                        )
+                        .textContent =
+                            "No virtual account";
+
+
+                    document
+                        .getElementById(
+                            "accountNo"
+                        )
+                        .textContent =
+                            "No account";
+
+                }
+
+
+                /* =============================================
+                   TRANSACTIONS
+                ============================================= */
+
+                allTransactions =
+                    Array.isArray(
+                        data.payments
+                    )
+                        ? data.payments
+                        : [];
+
+
+                filteredTransactions =
+                    [...allTransactions];
+
+
+                currentPage = 1;
+
+
+                renderTransactions();
+
+
+            } catch (error) {
+
+                console.error(
+                    "LOAD VIRTUAL TRANSACTIONS ERROR:",
+                    error
+                );
+
+
+                showError(
+                    error.message ||
+                    "Unable to load virtual account payments."
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           RENDER TRANSACTIONS
+        ===================================================== */
+
+        function renderTransactions() {
+
+            const tbody =
+                document.getElementById(
+                    "transactionBody"
+                );
+
+
+            const total =
+                filteredTransactions.length;
+
+
+            if (!total) {
+
+                tbody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="no-data"
+                        >
+                            No virtual account payments found.
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                updatePagination(0);
+
+                return;
+
+            }
+
+
+            const startIndex =
+                (currentPage - 1) *
+                entriesPerPage;
+
+
+            const endIndex =
+                Math.min(
+                    startIndex +
+                    entriesPerPage,
+                    total
+                );
+
+
+            const pageTransactions =
+                filteredTransactions.slice(
+                    startIndex,
+                    endIndex
+                );
+
+
+            tbody.innerHTML =
+                pageTransactions
+                    .map(
+                        (payment, index) => {
+
+                            const status =
+                                payment.status ||
+                                "pending";
+
+
+                            const statusClass =
+                                getStatusClass(
+                                    status
+                                );
+
+
+                            /* =================================
+                               NARRATION
+                            ================================= */
+
+                            const narration =
+                                payment.account_name ||
+                                "Virtual Account Payment";
+
+
+                            /* =================================
+                               PAYMENT TYPE
+                               Backend returns ONLINE
+                            ================================= */
+
+                            const paymentType =
+                                payment.payment_type ||
+                                "online";
+
+
+                            /* =================================
+                               PAYMENT METHOD
+                               Backend returns VIRTUAL
+                            ================================= */
+
+                            const paymentMethod =
+                                payment.payment_method ||
+                                "virtual";
+
+
+                            return `
+
+                                <tr>
+
+                                    <td>
+                                        ${
+                                            startIndex +
+                                            index +
+                                            1
+                                        }
+                                    </td>
+
+
+                                    <td>
+                                        ${
+                                            escapeHTML(
+                                                narration
+                                            )
+                                        }
+                                    </td>
+
+
+                                    <td>
+
+                                        <span
+                                            class="reference"
+                                        >
+                                            ${
+                                                escapeHTML(
+                                                    payment.reference ||
+                                                    "-"
+                                                )
+                                            }
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        ${
+                                            formatCurrency(
+                                                payment.amount
+                                            )
+                                        }
+                                    </td>
+
+
+                                    <td>
+                                        ${
+                                            escapeHTML(
+                                                paymentType
+                                            )
+                                        }
+                                    </td>
+
+
+                                    <td>
+                                        ${
+                                            escapeHTML(
+                                                paymentMethod
+                                            )
+                                        }
+                                    </td>
+
+
+                                    <td
+                                        class="${statusClass}"
+                                    >
+                                        ${
+                                            escapeHTML(
+                                                status
+                                            )
+                                        }
+                                    </td>
+
+
+                                    <td>
+                                        ${
+                                            formatDate(
+                                                payment.created_at
+                                            )
+                                        }
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+
+            updatePagination(total);
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        function filterTable() {
+
+            const query =
+                document
+                    .getElementById(
+                        "search"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!query) {
+
+                filteredTransactions =
+                    [...allTransactions];
+
+            } else {
+
+                filteredTransactions =
+                    allTransactions.filter(
+                        payment => {
+
+                            const text = [
+
+                                payment.reference,
+
+                                payment.amount,
+
+                                payment.status,
+
+                                payment.method,
+
+                                payment.payment_type,
+
+                                payment.payment_method,
+
+                                payment.accountno,
+
+                                payment.account_name,
+
+                                payment.full_name,
+
+                                payment.phone_number
+
+                            ]
+                            .filter(Boolean)
+                            .join(" ")
+                            .toLowerCase();
+
+
+                            return text.includes(
+                                query
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            currentPage = 1;
+
+
+            renderTransactions();
+
+        }
+
+
+        /* =====================================================
+           SEARCH EVENT
+        ===================================================== */
+
+        document
+            .getElementById(
+                "search"
+            )
+            .addEventListener(
+                "input",
+                filterTable
+            );
+
+
+        /* =====================================================
+           ENTRIES EVENT
+        ===================================================== */
+
+        document
+            .getElementById(
+                "entries"
+            )
+            .addEventListener(
+                "change",
+                function () {
+
+                    entriesPerPage =
+                        Number(
+                            this.value
+                        );
+
+
+                    currentPage = 1;
+
+
+                    renderTransactions();
+
+                }
+            );
+
+
+        /* =====================================================
+           PAGINATION
+        ===================================================== */
+
+        function updatePagination(total) {
+
+            const totalPages =
+                Math.ceil(
+                    total /
+                    entriesPerPage
+                );
+
+
+            const previousButton =
+                document.getElementById(
+                    "previousButton"
+                );
+
+
+            const nextButton =
+                document.getElementById(
+                    "nextButton"
+                );
+
+
+            const pageNumber =
+                document.getElementById(
+                    "pageNumber"
+                );
+
+
+            const showing =
+                document.getElementById(
+                    "showing"
+                );
+
+
+            if (!total) {
+
+                showing.textContent =
+                    "Showing 0 to 0 of 0 entries";
+
+
+                pageNumber.textContent =
+                    "1";
+
+
+                previousButton.disabled =
+                    true;
+
+
+                nextButton.disabled =
+                    true;
+
+
+                return;
+
+            }
+
+
+            const start =
+                (
+                    (currentPage - 1) *
+                    entriesPerPage
+                ) + 1;
+
+
+            const end =
+                Math.min(
+                    currentPage *
+                    entriesPerPage,
+                    total
+                );
+
+
+            showing.textContent =
+                `Showing ${start} to ${end} of ${total} entries`;
+
+
+            pageNumber.textContent =
+                currentPage;
+
+
+            previousButton.disabled =
+                currentPage <= 1;
+
+
+            nextButton.disabled =
+                currentPage >= totalPages;
+
+        }
+
+
+        /* =====================================================
+           PREVIOUS PAGE
+        ===================================================== */
+
+        function previousPage() {
+
+            if (currentPage > 1) {
+
+                currentPage--;
+
+                renderTransactions();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           NEXT PAGE
+        ===================================================== */
+
+        function nextPage() {
+
+            const totalPages =
+                Math.ceil(
+                    filteredTransactions.length /
+                    entriesPerPage
+                );
+
+
+            if (
+                currentPage <
+                totalPages
+            ) {
+
+                currentPage++;
+
+                renderTransactions();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PAGINATION EVENTS
+        ===================================================== */
+
+        document
+            .getElementById(
+                "previousButton"
+            )
+            .addEventListener(
+                "click",
+                previousPage
+            );
+
+
+        document
+            .getElementById(
+                "nextButton"
+            )
+            .addEventListener(
+                "click",
+                nextPage
+            );
+
+
+        /* =====================================================
+           SHOW ERROR
+        ===================================================== */
+
+        function showError(message) {
+
+            const tbody =
+                document.getElementById(
+                    "transactionBody"
+                );
+
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="error-message"
+                    >
+                        ${
+                            escapeHTML(
+                                message
+                            )
+                        }
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            document
+                .getElementById(
+                    "showing"
+                )
+                .textContent =
+                    "Showing 0 to 0 of 0 entries";
+
+        }
+
+
+        /* =====================================================
+           PAGE LOAD
+        ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadVirtualTransactions();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

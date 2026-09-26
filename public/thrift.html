@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="assets/logos.png"
+>
+
+<title>Bestwing Collect - Thrift</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #eef7ef;
+
+    color: #292929;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 360px;
+
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #080F23,
+        #080F23
+    );
+
+    color: #fff;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    transition: transform .3s ease;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo-area {
+
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.35);
+}
+
+.logo-container {
+
+    text-align: center;
+}
+
+.logo-preview {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    vertical-align: middle;
+
+    margin-right: 8px;
+}
+
+.company-name {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.navigation {
+
+    padding-top: 28px;
+}
+
+.nav-item {
+
+    height: 55px;
+
+    padding: 0 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: .2s ease;
+}
+
+.nav-item:hover {
+
+    background:
+        rgba(255,255,255,.10);
+}
+
+.nav-item.active {
+
+    background: #198754;
+
+    border-left:
+        4px solid #ffffff;
+
+    border-radius:
+        0 5px 5px 0;
+}
+
+.nav-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.nav-icon {
+
+    width: 20px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+.nav-arrow {
+
+    font-size: 25px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left: 360px;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar {
+
+    height: 95px;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.12);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.welcome h2 {
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    margin-bottom: 4px;
+
+    color: #222;
+}
+
+.account-info {
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.primary-account {
+
+    color: #198754;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   USER AREA
+===================================================== */
+
+.user-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.user-photo {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        2px solid #198754;
+}
+
+.user-details strong {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #222;
+}
+
+.user-details span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #777;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.toggle {
+
+    width: 45px;
+
+    height: 23px;
+
+    background: #aaa;
+
+    border-radius: 20px;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.toggle-ball {
+
+    position: absolute;
+
+    width: 21px;
+
+    height: 21px;
+
+    top: 1px;
+
+    left: 1px;
+
+    background: #fff;
+
+    border-radius: 50%;
+
+    transition: .3s ease;
+}
+
+.toggle.active {
+
+    background: #198754;
+}
+
+.toggle.active .toggle-ball {
+
+    left: 23px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    padding: 25px 45px;
+}
+
+.page-title {
+
+    font-size: 27px;
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+
+    color: #222;
+}
+
+.page-description {
+
+    color: #777;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    margin-bottom: 42px;
+}
+
+
+/* =====================================================
+   THRIFT PACKAGE
+===================================================== */
+
+.package-container {
+
+    width: 685px;
+
+    max-width: 100%;
+}
+
+.package-card {
+
+    width: 100%;
+
+    min-height: 140px;
+
+    background: #fff;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
+    padding: 25px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border .2s ease;
+
+    border:
+        2px solid transparent;
+
+    border-radius: 6px;
+}
+
+.package-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.15);
+
+    border-color: #198754;
+}
+
+
+/* =====================================================
+   PACKAGE IMAGE
+===================================================== */
+
+.package-image {
+
+    width: 72px;
+
+    height: 72px;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #dff3e5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #198754;
+}
+
+.package-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =====================================================
+   PACKAGE CONTENT
+===================================================== */
+
+.package-content {
+
+    flex: 1;
+}
+
+.package-name {
+
+    font-size: 16px;
+
+    color: #198754;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.package-price {
+
+    font-size: 14px;
+
+    color: #198754;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.package-profit {
+
+    font-size: 14px;
+
+    color: #222;
+
+    margin-bottom: 5px;
+}
+
+.package-terms {
+
+    color: #198754;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.package-read-more {
+
+    display: inline-block;
+
+    color: #198754;
+
+    font-size: 13px;
+
+    text-decoration: underline;
+
+    margin-top: 1px;
+}
+
+
+/* =====================================================
+   PACKAGE SELECTED
+===================================================== */
+
+.package-card.selected {
+
+    border-color: #198754;
+
+    background: #f3fbf5;
+}
+
+
+/* =====================================================
+   SELECTION MESSAGE
+===================================================== */
+
+.selection-message {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border-left:
+        4px solid #198754;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.10);
+
+    font-size: 14px;
+
+    border-radius: 5px;
+}
+
+.selection-message.show {
+
+    display: block;
+}
+
+.selection-message strong {
+
+    color: #198754;
+}
+
+.continue-btn {
+
+    margin-top: 12px;
+
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #198754;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.continue-btn:hover {
+
+    background: #006400;
+}
+
+
+/* =====================================================
+   MOBILE HEADER
+===================================================== */
+
+.mobile-header {
+
+    display: none;
+
+    height: 60px;
+
+    background: #fff;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.12);
+}
+
+.menu-button {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #198754;
+
+    color: #fff;
+
+    font-size: 21px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.sidebar-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+
+    display: block;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px) {
+
+    .sidebar {
+
+        width: 280px;
+    }
+
+    .main {
+
+        margin-left: 280px;
+    }
+
+    .package-container {
+
+        width: 685px;
+    }
+
+}
+
+
+@media(max-width:768px) {
+
+    .sidebar {
+
+        width: 280px;
+
+        transform:
+            translateX(-100%);
+    }
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+    }
+
+    .main {
+
+        margin-left: 0;
+    }
+
+    .mobile-header {
+
+        display: flex;
+    }
+
+    .topbar {
+
+        height: auto;
+
+        min-height: 80px;
+
+        padding: 15px 18px;
+    }
+
+    .welcome h2 {
+
+        font-size: 16px;
+    }
+
+    .account-info {
+
+        font-size: 10px;
+    }
+
+    .user-area {
+
+        display: none;
+    }
+
+    .content {
+
+        padding: 22px 15px;
+    }
+
+    .page-title {
+
+        font-size: 23px;
+    }
+
+    .page-description {
+
+        font-size: 13px;
+
+        margin-bottom: 30px;
+    }
+
+    .package-card {
+
+        min-height: 125px;
+
+        padding: 18px 14px;
+    }
+
+}
+
+
+@media(max-width:480px) {
+
+    .page-title {
+
+        font-size: 21px;
+    }
+
+    .package-card {
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .package-image {
+
+        width: 62px;
+
+        height: 62px;
+    }
+
+    .package-name {
+
+        font-size: 15px;
+    }
+
+    .package-price,
+    .package-profit {
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =====================================================
+   THRIFT MODAL
+===================================================== */
+
+.thrift-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, .60);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 5000;
+}
+
+
+.thrift-modal-overlay.show {
+
+    display: flex;
+
+}
+
+
+.thrift-modal {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    background: #fff;
+
+    border-radius: 10px;
+
+    padding: 30px;
+
+    position: relative;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, .25);
+
+    animation:
+        thriftModalIn .25s ease;
+}
+
+
+@keyframes thriftModalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* CLOSE */
+
+.thrift-modal-close {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 15px;
+
+    width: 34px;
+
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1f1f1;
+
+    color: #555;
+
+    font-size: 23px;
+
+    line-height: 30px;
+
+    cursor: pointer;
+
+}
+
+
+.thrift-modal-close:hover {
+
+    background: #198754;
+
+    color: #fff;
+
+}
+
+
+/* HEADER */
+
+.thrift-modal-header {
+
+    padding-right: 30px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.thrift-modal-header h2 {
+
+    color: #198754;
+
+    font-size: 21px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.thrift-modal-header p {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* SELECTED PLAN */
+
+.selected-plan-box {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    padding: 15px;
+
+    background: #f3fbf5;
+
+    border:
+        1px solid #d7eddd;
+
+    border-radius: 7px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.selected-plan-box span {
+
+    display: block;
+
+    color: #777;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.selected-plan-box strong {
+
+    color: #198754;
+
+    font-size: 14px;
+
+}
+
+
+/* FORM */
+
+.form-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #333;
+
+    margin-bottom: 8px;
+
+}
+
+
+.form-group select {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+
+.form-group select:focus {
+
+    border-color: #198754;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(25, 135, 84, .10);
+
+}
+
+
+.form-group small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ERROR */
+
+.thrift-modal-error {
+
+    display: none;
+
+    padding: 11px 13px;
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    border-left:
+        3px solid #c62828;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.thrift-modal-error.show {
+
+    display: block;
+
+}
+
+
+/* SUCCESS */
+
+.thrift-modal-success {
+
+    display: none;
+
+    padding: 11px 13px;
+
+    background: #effaf2;
+
+    color: #198754;
+
+    border-left:
+        3px solid #198754;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.thrift-modal-success.show {
+
+    display: block;
+
+}
+
+
+/* ACTIONS */
+
+.modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+
+.modal-actions button {
+
+    border: none;
+
+    border-radius: 5px;
+
+    padding:
+        11px 18px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.modal-cancel-btn {
+
+    background: #eee;
+
+    color: #555;
+
+}
+
+
+.modal-cancel-btn:hover {
+
+    background: #ddd;
+
+}
+
+
+.modal-confirm-btn {
+
+    background: #198754;
+
+    color: #fff;
+
+}
+
+
+.modal-confirm-btn:hover {
+
+    background: #006400;
+
+}
+
+
+.modal-confirm-btn:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px) {
+
+    .thrift-modal {
+
+        padding: 23px 18px;
+
+    }
+
+
+    .selected-plan-box {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .modal-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .modal-actions button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+<div class="logo-area">
+
+    <div class="logo-container">
+
+        <img
+            src="assets/logos.png"
+            id="logoPreview"
+            class="logo-preview"
+            alt="Company Logo"
+        >
+
+        <span class="company-name">
+            BESTWING GLOBAL SERVICES
+        </span>
+
+    </div>
+
+</div>
+
+
+<nav class="navigation">
+
+
+    <a
+        href="/dashboard.html"
+        class="nav-item"
+    >
+
+        <span class="nav-left">
+
+            <span class="nav-icon">
+                ▦
+            </span>
+
+            Dashboard
+
+        </span>
+
+        <span class="nav-arrow">
+            ›
+        </span>
+
+    </a>
+
+
+   
+
+    <a
+        href="#"
+        class="nav-item"
+        onclick="logoutUser(event)"
+    >
+
+        <span class="nav-left">
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            Logout
+
+        </span>
+
+    </a>
+
+
+</nav>
+
+</aside>
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeSidebar()"
+></div>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+<!-- MOBILE HEADER -->
+
+<div class="mobile-header">
+
+    <button
+        class="menu-button"
+        onclick="toggleSidebar()"
+    >
+        ☰
+    </button>
+
+</div>
+
+
+<!-- =================================================
+     TOP BAR
+================================================= -->
+
+<header class="topbar">
+
+
+    <div class="welcome">
+
+        <h2 id="welcomeMessage">
+            Good Day
+        </h2>
+
+
+        <div class="account-info">
+
+            <span>
+                Logged In Account ID -
+            </span>
+
+            <strong id="accountNumber">
+                Loading...
+            </strong>
+
+            <span
+                class="primary-account"
+                id="primaryAccount"
+            >
+                (Primary Account)
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- USER -->
+
+    <div class="user-area">
+
+
+        <div
+            class="toggle"
+            id="themeToggle"
+            onclick="toggleTheme()"
+        >
+
+            <div class="toggle-ball"></div>
+
+        </div>
+
+
+        <div class="user-details">
+
+            <strong id="userName">
+                Loading...
+            </strong>
+
+            <!-- <span id="userId">
+                Loading...
+            </span> -->
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =================================================
+     CONTENT
+================================================= -->
+
+<section class="content">
+
+
+    <h1 class="page-title">
+        Thrift Packages
+    </h1>
+
+
+    <p class="page-description">
+        Please Select any thrift package from the packages below
+    </p>
+
+
+    <div class="package-container">
+
+
+        <!-- ELITE PACKAGE -->
+
+        <div
+            class="package-card"
+            id="elitePackage"
+            onclick="selectElite()"
+            role="button"
+            tabindex="0"
+        >
+
+
+            <div class="package-image">
+
+                <img
+                    src="money-bag.png"
+                    alt="Elite Package"
+                    onerror="
+                        this.style.display='none';
+                        this.parentElement.innerHTML='💰';
+                        this.parentElement.style.fontSize='40px';
+                    "
+                >
+
+            </div>
+
+
+            <div class="package-content">
+
+
+                <div class="package-name">
+                    Elite
+                </div>
+
+
+                <div class="package-price">
+                    <!-- ₦1,500 -->
+                    <span>
+                        (which is now ₦1,500)
+                    </span>
+                </div>
+
+
+                <div class="package-profit">
+
+                    100% profit after 50 weeks.
+
+                    <a
+                        href="https://bestwing.com.ng/terms-and-conditions"
+                        class="package-terms"
+                        onclick="event.stopPropagation();"
+                        target="_blank"
+                    >
+                        Terms &amp; Conditions Apply
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="https://bestwing.com.ng/users/investment-details?plan_id=MQ=="
+                    class="package-read-more"
+                    onclick="event.stopPropagation();"
+                    target="_blank"
+                >
+                    Read More
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- SELECTION MESSAGE -->
+
+        <div
+            class="selection-message"
+            id="selectionMessage"
+        >
+
+            <strong>
+                Elite Package Selected
+            </strong>
+
+            <br><br>
+
+            You have selected the Elite Thrift Package
+            at <strong>₦1,500</strong>.
+
+            <br>
+
+            The package provides
+            <strong>100% profit after 50 weeks.</strong>
+
+
+            <br>
+
+            <button
+                type="button"
+                class="continue-btn"
+                onclick="continueElite(event)"
+            >
+                Continue
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     THRIFT ACCOUNT SELECTION MODAL
+===================================================== -->
+
+<div
+    class="thrift-modal-overlay"
+    id="thriftModal"
+>
+
+    <div
+        class="thrift-modal"
+    >
+
+        <button
+            type="button"
+            class="thrift-modal-close"
+            onclick="closeThriftModal()"
+        >
+            &times;
+        </button>
+
+
+        <div class="thrift-modal-header">
+
+            <h2>
+                Select Virtual Account
+            </h2>
+
+            <p>
+                Select the virtual account you want to use
+                for this thrift package.
+            </p>
+
+        </div>
+
+
+        <!-- SELECTED PACKAGE -->
+
+        <div
+            class="selected-plan-box"
+        >
+
+            <div>
+                <span>
+                    Plan
+                </span>
+
+                <strong
+                    id="modalPlanName"
+                >
+                    Elite
+                </strong>
+            </div>
+
+
+            <div>
+                <span>
+                    Amount
+                </span>
+
+                <strong
+                    id="modalPlanAmount"
+                >
+                    ₦1,500
+                </strong>
+            </div>
+
+
+            <div>
+                <span>
+                    Profit
+                </span>
+
+                <strong
+                    id="modalPlanProfit"
+                >
+                    100%
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div
+            class="form-group"
+        >
+
+            <label
+                for="virtualAccountSelect"
+            >
+                Virtual Account Number
+            </label>
+
+
+            <select
+                id="virtualAccountSelect"
+            >
+
+                <option value="">
+                    Loading virtual accounts...
+                </option>
+
+            </select>
+
+
+            <small
+                id="accountHelpText"
+            >
+                Only virtual accounts belonging to your
+                logged-in account are displayed.
+            </small>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            class="thrift-modal-error"
+            id="thriftModalError"
+        ></div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            class="thrift-modal-success"
+            id="thriftModalSuccess"
+        ></div>
+
+
+        <!-- BUTTONS -->
+
+        <div
+            class="modal-actions"
+        >
+
+            <button
+                type="button"
+                class="modal-cancel-btn"
+                onclick="closeThriftModal()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-confirm-btn"
+                id="confirmThriftBtn"
+                onclick="confirmThriftSubscription()"
+            >
+                Confirm Subscription
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =====================================================
+   GET LOGGED-IN USER
+===================================================== */
+
+let loggedInUser = null;
+
+
+try {
+
+    const storedUser =
+        localStorage.getItem("user");
+
+
+    if (storedUser) {
+
+        loggedInUser =
+            JSON.parse(storedUser);
+
+    }
+
+} catch (error) {
+
+    console.error(
+        "Unable to read logged-in user:",
+        error
+    );
+
+}
+
+
+/* =====================================================
+   HELPER
+===================================================== */
+
+function getUserValue(...keys) {
+
+    if (!loggedInUser) {
+        return "";
+    }
+
+
+    for (const key of keys) {
+
+        if (
+            loggedInUser[key] !== undefined &&
+            loggedInUser[key] !== null &&
+            String(loggedInUser[key]).trim() !== ""
+        ) {
+
+            return String(
+                loggedInUser[key]
+            ).trim();
+
+        }
+
+    }
+
+
+    return "";
+}
+
+
+/* =====================================================
+   LOAD USER INFORMATION
+===================================================== */
+
+function loadUserInformation() {
+
+    if (!loggedInUser) {
+
+        document.getElementById(
+            "welcomeMessage"
+        ).textContent =
+            "Welcome";
+
+        document.getElementById(
+            "accountNumber"
+        ).textContent =
+            "Account unavailable";
+
+        document.getElementById(
+            "userName"
+        ).textContent =
+            "User";
+
+        document.getElementById(
+            "userId"
+        ).textContent =
+            "";
+
+        return;
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | FULL NAME
+    |--------------------------------------------------------------------------
+    */
+
+    const fullName =
+        getUserValue(
+            "full_name",
+            "fullname",
+            "FullName",
+            "name",
+            "username"
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACCOUNT NUMBER
+    |--------------------------------------------------------------------------
+    */
+
+    const accountNumber =
+        getUserValue(
+            "account_number",
+            "accountNumber",
+            "AccountNo",
+            "account_no",
+            "accountNo"
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CUSTOMER / USER ID
+    |--------------------------------------------------------------------------
+    */
+
+    const customerId =
+        getUserValue(
+            "customer_id",
+            "customerId",
+            "user_id",
+            "userId",
+            "id"
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROFILE PHOTO
+    |--------------------------------------------------------------------------
+    */
+
+    const profilePhoto =
+        getUserValue(
+            "profile_photo",
+            "profilePhoto",
+            "photo",
+            "image",
+            "avatar"
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | WELCOME MESSAGE
+    |--------------------------------------------------------------------------
+    */
+
+    const firstName =
+        fullName
+            ? fullName.split(" ")[0]
+            : "User";
+
+
+    document.getElementById(
+        "welcomeMessage"
+    ).textContent =
+        "Good Day, " + firstName;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACCOUNT NUMBER
+    |--------------------------------------------------------------------------
+    */
+
+    document.getElementById(
+        "accountNumber"
+    ).textContent =
+        accountNumber ||
+        "Account unavailable";
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | USER NAME
+    |--------------------------------------------------------------------------
+    */
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        fullName ||
+        "User";
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | USER ID
+    |--------------------------------------------------------------------------
+    */
+
+    document.getElementById(
+        "userId"
+    ).textContent =
+        customerId ||
+        "";
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROFILE PHOTO
+    |--------------------------------------------------------------------------
+    */
+
+    if (profilePhoto) {
+
+        document.getElementById(
+            "userPhoto"
+        ).src =
+            profilePhoto;
+
+    }
+
+}
+
+
+/* =====================================================
+   SELECT ELITE
+===================================================== */
+
+function selectElite() {
+
+    const card =
+        document.getElementById(
+            "elitePackage"
+        );
+
+
+    const selectionMessage =
+        document.getElementById(
+            "selectionMessage"
+        );
+
+
+    card.classList.add(
+        "selected"
+    );
+
+
+    selectionMessage.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   KEYBOARD ACCESS
+===================================================== */
+
+document
+.getElementById("elitePackage")
+.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
+
+            event.preventDefault();
+
+            selectElite();
+
+        }
+
+    }
+);
+
+
+
+
+/* =====================================================
+   CONTINUE
+===================================================== */
+
+function continueElite(event) {
+
+    event.stopPropagation();
+
+    /*
+    |--------------------------------------------------------------------------
+    | SAVE SELECTED THRIFT PACKAGE
+    |--------------------------------------------------------------------------
+    */
+
+    localStorage.setItem(
+        "selectedThriftPackage",
+        JSON.stringify({
+
+            plan: "Elite",
+
+            amount: 1391,
+
+            profit: 100,
+
+            duration_weeks: 50
+
+        })
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | GO TO INVESTMENT DETAILS
+    |--------------------------------------------------------------------------
+    */
+
+    window.location.href =
+        "/investment-details.html";
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("active");
+
+}
+
+
+function closeSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   THEME TOGGLE
+===================================================== */
+
+function toggleTheme() {
+
+    document
+        .getElementById("themeToggle")
+        .classList.toggle("active");
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logoutUser(event) {
+
+    event.preventDefault();
+
+
+    localStorage.removeItem(
+        "token"
+    );
+
+
+    localStorage.removeItem(
+        "user"
+    );
+
+
+    localStorage.removeItem(
+        "selectedThriftPackage"
+    );
+
+
+    window.location.href =
+        "/login.html";
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadUserInformation();
+
+</script>
+
+</body>
+
+</html>
